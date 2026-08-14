@@ -1,0 +1,6 @@
+site_name: PT Data Quality Repository
+site_description: Generated Rule Specification Repository and Data Quality Profile documentation
+docs_dir: generated/docs
+site_dir: site
+theme:
+  name: material

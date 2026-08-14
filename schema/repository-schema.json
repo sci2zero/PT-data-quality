@@ -1,0 +1,39 @@
+{
+  "repository_schema_version": "1.0.0",
+  "sheets": {
+    "repository_metadata": {"name": "Repository Metadata", "key_field": "property", "required": ["property", "value"]},
+    "domains": {"name": "Domains", "key_field": "domain_id", "required": ["domain_id", "name", "status"]},
+    "governance_sources": {"name": "Governance Sources", "key_field": "governance_source_id", "required": ["governance_source_id", "title", "source_type", "status"]},
+    "governance_dimensions": {"name": "Governance Dimensions", "key_field": "dimension_id", "required": ["dimension_id", "name", "metric_id", "governance_source_id", "status"]},
+    "governance_requirements": {"name": "Governance Requirements", "key_field": "requirement_id", "required": ["requirement_id", "metric_id", "dimension_id", "title", "governance_source_id", "status"]},
+    "validation_targets": {"name": "Validation Targets", "key_field": "validation_target_id", "required": ["domain_id", "validation_target_id", "object_name", "target_category", "status"]},
+    "rules": {"name": "Rules", "key_field": "rule_id", "required": ["domain_id", "rule_id", "validation_target_id", "name", "status"]},
+    "constraints": {"name": "Constraints", "key_field": "constraint_id", "required": ["domain_id", "constraint_id", "rule_id", "validation_target_id", "constraint_type", "weight_key", "assessment_dimension", "message_id", "status"]},
+    "constraint_parameters": {"name": "Constraint Parameters", "key_field": "constraint_id", "required": ["domain_id", "constraint_id", "parameter_name", "parameter_value", "value_type", "status"]},
+    "messages": {"name": "Messages", "key_field": "message_id", "required": ["domain_id", "message_id", "constraint_id", "language", "title", "message_text", "status"]},
+    "resolvers": {"name": "Resolvers", "key_field": "resolver_id", "required": ["resolver_id", "name", "resolver_type", "status"]},
+    "vocabularies": {"name": "Vocabularies", "key_field": "vocabulary_id", "required": ["vocabulary_id", "name", "status"]},
+    "vocabulary_terms": {"name": "Vocabulary Terms", "key_field": "term_code", "required": ["vocabulary_id", "term_code", "status"]},
+    "governance_mappings": {"name": "Governance Mappings", "key_field": "artifact_id", "required": ["domain_id", "requirement_id", "artifact_type", "artifact_id", "relation", "profile_id", "mapping_status"]},
+    "profiles": {"name": "Profiles", "key_field": "profile_id", "required": ["profile_id", "name", "version", "status", "repository_id", "minimum_required_score"]},
+    "profile_target_settings": {"name": "Profile Target Settings", "key_field": "validation_target_id", "required": ["profile_id", "domain_id", "validation_target_id", "enabled", "importance", "requirement_level", "blocking_on_failure", "status"]},
+    "profile_constraint_defaults": {"name": "Profile Constraint Defaults", "key_field": "weight_key", "required": ["profile_id", "weight_key", "include_in_score", "status"]},
+    "profile_overrides": {"name": "Profile Overrides", "key_field": "artifact_id", "required": ["profile_id", "artifact_type", "artifact_id", "property", "value", "value_type", "status"]},
+    "implementation_bindings": {"name": "Implementation Bindings", "key_field": "binding_id", "required": ["domain_id", "binding_id", "implementation_id", "profile_scope", "artifact_type", "artifact_id", "representation", "binding_mode", "status"]}
+  },
+  "enums": {
+    "target_category": ["FIELD", "LOGICAL_GROUP", "BUSINESS", "CROSS_FIELD", "RELATIONSHIP"],
+    "requirement_level": ["MANDATORY", "RECOMMENDED", "OPTIONAL"],
+    "constraint_type": ["PRESENCE", "MIN_LENGTH", "MAX_LENGTH", "MIN_VALUE", "MAX_VALUE", "MIN_CARDINALITY", "MAX_CARDINALITY", "MIN_DATE", "MAX_DATE", "MIN_VALUE_OR_LENGTH", "MAX_VALUE_OR_LENGTH", "REGEX", "UNIQUENESS", "VOCABULARY", "RESOLVABLE", "CUSTOM"],
+    "weight_key": ["PRESENCE", "MINIMUM", "MAXIMUM", "REGEX", "UNIQUENESS", "VOCABULARY", "RESOLVABLE", "CUSTOM"],
+    "assessment_dimension": ["COMPLETENESS", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "ACCURACY", "OTHER"],
+    "status": ["DRAFT", "UNDER_REVIEW", "APPROVED", "ACTIVE", "RETIRED", "ARCHIVED", "DEPRECATED"]
+  },
+  "implementations": {
+    "pt_master": {
+      "implementation_id": "PT_MASTER",
+      "runtime_representation": "RUNTIME_JSON",
+      "runtime_filename_template": "{version}.json"
+    }
+  }
+}

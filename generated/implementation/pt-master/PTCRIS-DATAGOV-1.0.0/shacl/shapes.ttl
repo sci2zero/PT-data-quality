@@ -1,0 +1,10 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptq: <urn:ptcris:data-quality:> .
+
+# Generated from profile PTCRIS-DATAGOV-1.0.0.
+# Only targets with RDF_SHACL bindings are emitted.
+
+# No RDF_SHACL target bindings are currently defined in the XLSX source.
+# Add rows to Implementation Bindings with representation=RDF_SHACL,
+# entity_selector=<RDF class> and value_selector=<RDF property/path>.

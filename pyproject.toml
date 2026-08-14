@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pt-data-quality"
+version = "0.1.0"
+description = "Generator, validation and publication tooling for the PT Data Quality Rule Specification Repository"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs>=1.6,<2",
+  "mkdocs-material>=9,<10",
+]
+
+[project.scripts]
+pt-data-quality = "pt_data_quality.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.unittest]
+start-directory = "tests"

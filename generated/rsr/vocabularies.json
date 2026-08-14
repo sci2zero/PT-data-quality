@@ -1,0 +1,222 @@
+[
+  {
+    "vocabulary_id": "VOC.BOOLEAN",
+    "name": "Boolean values",
+    "description": "Internal closed vocabulary",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "TRUE/FALSE."
+  },
+  {
+    "vocabulary_id": "VOC.CEFR_LANGUAGE_LEVEL",
+    "name": "CEFR language levels",
+    "description": "Common European Framework of Reference language proficiency levels.",
+    "vocabulary_type": "STANDARD",
+    "source_uri": null,
+    "version_or_standard": "CEFR",
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comments: A1, A2, B1, B2, C1, C2."
+  },
+  {
+    "vocabulary_id": "VOC.CURRENCY_SYMBOL",
+    "name": "Currency symbols",
+    "description": "Currency symbol vocabulary referenced by the legacy workbook.",
+    "vocabulary_type": "EXTERNAL",
+    "source_uri": "https://www.newbridgefx.com/currency-codes-symbols/",
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "External reference from legacy comment; authoritative status should be reviewed."
+  },
+  {
+    "vocabulary_id": "VOC.FOS",
+    "name": "Fields of Science",
+    "description": "Fields of Science vocabulary referenced by the legacy workbook.",
+    "vocabulary_type": "EXTERNAL",
+    "source_uri": "https://explore.openaire.eu/fields-of-science",
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "External FOS reference."
+  },
+  {
+    "vocabulary_id": "VOC.ISO3166_1_ALPHA2",
+    "name": "ISO 3166-1 alpha-2 country codes",
+    "description": "Two-letter country-code standard.",
+    "vocabulary_type": "STANDARD",
+    "source_uri": null,
+    "version_or_standard": "ISO 3166-1 alpha-2",
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": null
+  },
+  {
+    "vocabulary_id": "VOC.ISO4217_CURRENCY_CODE",
+    "name": "ISO 4217 currency codes",
+    "description": "Three-letter currency codes.",
+    "vocabulary_type": "STANDARD",
+    "source_uri": null,
+    "version_or_standard": "ISO 4217",
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": null
+  },
+  {
+    "vocabulary_id": "VOC.ISO639_LANGUAGE_CODE",
+    "name": "ISO 639 language codes",
+    "description": "Two-letter language codes used by the legacy workbook.",
+    "vocabulary_type": "STANDARD",
+    "source_uri": null,
+    "version_or_standard": "ISO 639",
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": null
+  },
+  {
+    "vocabulary_id": "VOC.PT.DEGREE_TYPE",
+    "name": "Degree Type",
+    "description": "Degree type vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.EDUCATION_STATUS",
+    "name": "Education Status",
+    "description": "Education status vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.EMPLOYMENT_POSITION_HIERARCHY",
+    "name": "Employment Position Hierarchy",
+    "description": "Employment-position hierarchy vocabulary adopted from CIÊNCIAVITAE.",
+    "vocabulary_type": "EXTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy workbook identifies CIÊNCIAVITAE as the source but does not specify a version/URI."
+  },
+  {
+    "vocabulary_id": "VOC.PT.INVOLVEMENT_TYPE",
+    "name": "Involvement Type",
+    "description": "Person involvement type vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.MEMBERSHIP_TYPE",
+    "name": "Membership Type",
+    "description": "Membership role vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.METADATA_ACCESS_LEVEL",
+    "name": "Metadata Access Level",
+    "description": "Platform-level metadata access vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy workbook states this is defined at platform/CrisContextInformation level; concrete vocabulary not provided."
+  },
+  {
+    "vocabulary_id": "VOC.PT.METADATA_LICENSE",
+    "name": "Metadata License",
+    "description": "Platform-level metadata license vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy workbook states this is defined at platform/CrisContextInformation level; concrete vocabulary not provided."
+  },
+  {
+    "vocabulary_id": "VOC.PT.ORGANISATION_SECTOR",
+    "name": "Organisation Sector",
+    "description": "Organisation sector vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.PERSON_NAME_TYPE",
+    "name": "Person Name Type",
+    "description": "Person name representation type vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.PRIZE_TYPE",
+    "name": "Prize Type",
+    "description": "Prize/recognition type vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Terms migrated from legacy comment."
+  },
+  {
+    "vocabulary_id": "VOC.PT.RESEARCH_AREAS_FOS",
+    "name": "PT Research Areas",
+    "description": "Portuguese research-area vocabulary based on Fields of Science.",
+    "vocabulary_type": "EXTERNAL",
+    "source_uri": "https://explore.openaire.eu/fields-of-science",
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Project legacy comment mentions adding a 'Not informed' value; exact PT vocabulary/version should be confirmed."
+  },
+  {
+    "vocabulary_id": "VOC.PT.SEX",
+    "name": "Sex",
+    "description": "Sex classification vocabulary.",
+    "vocabulary_type": "INTERNAL",
+    "source_uri": null,
+    "version_or_standard": null,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy workbook contains FEMALE and MALE and notes possible future introduction of Other."
+  },
+  {
+    "vocabulary_id": "VOC.RFC5646_LANGUAGE_TAG",
+    "name": "Language Tag",
+    "description": "Language tag standard referenced by the legacy workbook.",
+    "vocabulary_type": "STANDARD",
+    "source_uri": null,
+    "version_or_standard": "RFC 5646",
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy regex uses underscore-based examples while RFC 5646 normally uses hyphens; review implementation binding."
+  }
+]

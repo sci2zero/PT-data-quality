@@ -1,0 +1,54 @@
+[
+  {
+    "resolver_id": "RES.DOI",
+    "name": "DOI Resolver",
+    "resolver_type": "HTTP",
+    "uri_template": "https://doi.org/{value}",
+    "http_method": "HEAD",
+    "accepted_status_codes": "200;301;302",
+    "accept_header": null,
+    "timeout_seconds": 10,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Migrated from legacy resolver explanation."
+  },
+  {
+    "resolver_id": "RES.RAID",
+    "name": "RAID Resolver",
+    "resolver_type": "HTTP",
+    "uri_template": "https://raid.org/{value}",
+    "http_method": "HEAD",
+    "accepted_status_codes": "200;301;302",
+    "accept_header": null,
+    "timeout_seconds": 10,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Migrated from legacy resolver explanation."
+  },
+  {
+    "resolver_id": "RES.ORCID",
+    "name": "ORCID Resolver",
+    "resolver_type": "HTTP",
+    "uri_template": "https://orcid.org/{value}",
+    "http_method": "GET",
+    "accepted_status_codes": "200",
+    "accept_header": "application/json",
+    "timeout_seconds": 10,
+    "status": "ACTIVE",
+    "review_required": false,
+    "notes": "Migrated from legacy resolver explanation."
+  },
+  {
+    "resolver_id": "RES.HANDLE",
+    "name": "Handle Resolver",
+    "resolver_type": "HTTP",
+    "uri_template": "https://hdl.handle.net/{value}",
+    "http_method": "HEAD",
+    "accepted_status_codes": "200;301;302",
+    "accept_header": null,
+    "timeout_seconds": 10,
+    "status": "ACTIVE",
+    "review_required": true,
+    "notes": "Legacy workbook contained 'HEAD HEAD'; normalized to one HEAD method."
+  }
+]
