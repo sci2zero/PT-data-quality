@@ -1,54 +1,222 @@
-# ORGANISATION_UNIT — PTCRIS-DATAGOV-1.0.0
+# ORGANISATION_UNIT
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.ORGANISATION_UNIT.OrganisationUnit.Active | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Active.vocabulary | VOCABULARY | VALIDITY | 3.0 | True | allowedValues=TRUE\|FALSE |  | The active value "{value}" in organisation unit record {recordId} is invalid. Allowed values are TRUE, FALSE. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.CreateDate | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.CreateDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The createDate field is missing in OrganisationUnit record {recordId}. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.DateDissolved | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date + 10 years) |  | The date dissolved ({value1}) in organisation unit record {recordId} can be only in the near future (+10 years from right now). | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.DateDissolved | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=dateEstablished |  | The date dissolved ({value1}) in organisation unit record {recordId} can't be before the establishment date ({value2}). | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.DateEstablished | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date + 3 years) |  | The date established ({value1}) in organisation unit record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.DateEstablished | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.presence | PRESENCE | COMPLETENESS | — | False |  |  | The date established field is missing in organisation unit record {recordId}. Although the date established field is not mandatory, it is recommended. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Description | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Description.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=100 | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description "{value}" in OrganisationUnit record {recordId} must contain at least {minLength} characters. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Description | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Description.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description field is missing in OrganisationUnit record {recordId}. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Fundref | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Fundref.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=9 |  | The fundref "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 9 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Fundref | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Fundref.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=6 |  | The fundref "{value}" in organisation unit record {recordId} must contain at least 6 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Fundref | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Fundref.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[0-9]{6,9}$ |  | The fundref "{value}" in OrganisationUnit record {recordId} is not in a valid format. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Fundref | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Fundref.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The fundref value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Grid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Grid.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=14 |  | The grid "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 14 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Grid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Grid.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=11 |  | The grid "{value}" in organisation unit record {recordId} must contain at least 11 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Grid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Grid.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^grid\\.\\d{4,6}\\.[0-9a-f]{1,2}$ |  | The grid "{value}" in organisation unit record {recordId} is not in a valid format according to the configured regular expression. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Grid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Grid.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The grid value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Isni | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Isni.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=16 |  | The isni "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 16 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Isni | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Isni.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=16 |  | The isni "{value}" in organisation unit record {recordId} must contain at least 16 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Isni | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Isni.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[0-9]{15}[0-9X]$ |  | The isni "{value}" in OrganisationUnit record {recordId} is not in a valid format. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Isni | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Isni.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The isni value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The lastModificationDate field is missing in OrganisationUnit record {recordId}. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel field is missing in OrganisationUnit record {recordId}. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel value "{value}" in OrganisationUnit record {recordId} is not contained in the configured vocabulary. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense field is missing in OrganisationUnit record {recordId}. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense value "{value}" in OrganisationUnit record {recordId} is not contained in the configured vocabulary. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Name | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Name.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The name "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Name | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Name.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The name "{value}" in organisation unit record {recordId} must contain at least 1 character. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Name | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Name.presence | PRESENCE | COMPLETENESS | — | True |  |  | The name field is missing in organisation unit record {recordId}. The name field is mandatory. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Name | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.Name.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[\p{L}\p{N}][\p{L}\p{N}\s\-_.,:/()&+]{1,254}$ |  | The name "{value}" in organisation unit record {recordId} contains invalid characters. Only letters, numbers, spaces, dots, underscores, commas, slashes, ampersands, brackets and hyphens are allowed. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=16 |  | The open alex id "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 16 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=6 |  | The open alex id "{value}" in organisation unit record {recordId} must contain at least 6 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^I[0-9]{5,15}$ |  | The open alex id "{value}" in organisation unit record {recordId} is not in a valid format. Expected format: I followed by 5 to 15 digits. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The open alex id value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ringgold | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=9 |  | The ringgold "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 9 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ringgold | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The ringgold "{value}" in organisation unit record {recordId} must contain at least 1 character. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ringgold | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[0-9]{1,9}$ |  | The ringgold "{value}" in OrganisationUnit record {recordId} is not in a valid format. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ringgold | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The ringgold value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ror | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Ror.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=9 |  | The ror "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 9 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ror | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Ror.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=9 |  | The ror "{value}" in organisation unit record {recordId} must contain at least 9 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ror | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Ror.presence | PRESENCE | COMPLETENESS | — | False |  |  | The ror field is missing in organisation unit record {recordId}. Although the ror field is not mandatory, it is recommended. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ror | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Ror.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^0[0-9a-z]{8}$ |  | The ror "{value}" in OrganisationUnit record {recordId} is not in a valid format. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Ror | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Ror.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The ror value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.RorIsni | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.presence | PRESENCE | COMPLETENESS | — | True |  |  | The organisation unit record {recordId} must contain at least one identifier: ROR or ISNI. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.RorIsni | 5 | MANDATORY | C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The ror, isni value "{value}" in OrganisationUnit record {recordId} must be unique. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=12 |  | The scopus afid "{value}" in organisation unit record {recordId} exceeds the maximum allowed length of 12 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=6 |  | The scopus afid "{value}" in organisation unit record {recordId} must contain at least 6 characters. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[0-9]{6,12}$ |  | The scopusAfid "{value}" in OrganisationUnit record {recordId} is not in a valid format. | True |
-| VT.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid | 1 | OPTIONAL | C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The scopus afid value "{value}" in organisation unit record {recordId} must be unique. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Sector | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Sector.presence | PRESENCE | COMPLETENESS | — | False |  |  | The sector field is missing in organisation unit record {recordId}. Although the sector field is not mandatory, it is recommended. | False |
-| VT.ORGANISATION_UNIT.OrganisationUnit.Sector | 3 | RECOMMENDED | C.ORGANISATION_UNIT.OrganisationUnit.Sector.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The sector value "{value}" in organisation unit record {recordId} is not aligned with the configured controlled vocabulary. | False |
+## `OrganisationUnit.active`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Active`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Active.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.active must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `OrganisationUnit.createDate`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.CreateDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.createDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `OrganisationUnit.dateDissolved`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.DateDissolved`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateDissolved is later than allowed by the configured date constraints. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.dateDissolved is earlier than allowed by the configured date constraints. | UNMAPPED |
+
+## `OrganisationUnit.dateEstablished`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.DateEstablished`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateEstablished is later than allowed by the configured date constraints. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.dateEstablished is recommended. | UNMAPPED |
+
+## `OrganisationUnit.description`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Description`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Description.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.description is shorter than the minimum allowed length. | PTCRIS-FsF-F2-01M |
+| C.ORGANISATION_UNIT.OrganisationUnit.Description.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.description is required. | PTCRIS-FsF-F2-01M |
+
+## `OrganisationUnit.fundref`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Fundref`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.fundref exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.fundref must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.grid`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Grid`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.grid exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.grid is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.grid does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.grid must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.isni`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Isni`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.isni exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.isni is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.isni does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.isni must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.lastModificationDate`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `OrganisationUnit.metadataAccessLevel`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.metadataAccessLevel is required. | PTCRIS-FsF-A1-01M |
+| C.ORGANISATION_UNIT.OrganisationUnit.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.metadataAccessLevel must belong to the configured controlled vocabulary. | PTCRIS-FsF-A1-01M |
+
+## `OrganisationUnit.metadataLicense`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.metadataLicense is required. | PTCRIS-FsF-R1.1-01M |
+| C.ORGANISATION_UNIT.OrganisationUnit.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.metadataLicense must belong to the configured controlled vocabulary. | PTCRIS-FsF-R1.1-01M |
+
+## `OrganisationUnit.name`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Name`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.name exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.name is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.name is required. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.name does not match the required format. | UNMAPPED |
+
+## `OrganisationUnit.openAlexId`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.openAlexId exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.openAlexId must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.postalAddress`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.PostalAddress`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+
+## `OrganisationUnit.ringgold`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Ringgold`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ringgold exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ringgold must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.ror`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Ror`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ror exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ror is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.ror is recommended. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The ROR identifier must contain exactly 9 characters, start with 0, and be followed by eight lowercase letters or digits. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.ror, isni`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.RorIsni`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.ror, isni is required. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror, isni must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.scopusAfid`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.scopusAfid exceeds the maximum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid is shorter than the minimum allowed length. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.scopusAfid must be unique within the repository. | UNMAPPED |
+
+## `OrganisationUnit.sector`
+
+Validation Target: `VT.ORGANISATION_UNIT.OrganisationUnit.Sector`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ORGANISATION_UNIT.OrganisationUnit.Sector.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.sector is recommended. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Sector.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.sector must belong to the configured controlled vocabulary. | UNMAPPED |

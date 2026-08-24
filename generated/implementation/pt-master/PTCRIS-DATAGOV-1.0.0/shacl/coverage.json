@@ -33,7 +33,7 @@
     "VT.FUNDING.Funding.MetadataLicense",
     "VT.FUNDING.Funding.Name",
     "VT.FUNDING.Funding.ProjectInvolvement",
-    "VT.FUNDING.Funding.ProjectReferenceIdGrantAgreementId",
+    "VT.FUNDING.Funding.ProjectReferenceId",
     "VT.FUNDING.Funding.ResearchAreas",
     "VT.FUNDING.Funding.ToDate",
     "VT.ORGANISATION_UNIT.OrganisationUnit.Active",

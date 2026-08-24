@@ -1,77 +1,335 @@
-# OUTPUT — PTCRIS-DATAGOV-1.0.0
+# OUTPUT
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.OUTPUT.Document.Contributors | 5 | MANDATORY | C.OUTPUT.Document.Contributors.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=At least one managed person should be linked with Document, with the exception if it is source for other document (for instance proceedings, edited monograph, etc.) |  | At least one managed person should be linked with output record {recordId}, taking into account it is not a source for other document (for instance proceedings, edited monograph, etc.) | True |
-| VT.OUTPUT.Document.Contributors | 5 | MANDATORY | C.OUTPUT.Document.Contributors.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The contributors target in Document record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.OUTPUT.Document.Contributors | 5 | MANDATORY | C.OUTPUT.Document.Contributors.presence | PRESENCE | COMPLETENESS | — | True |  |  | The contributors field is missing in output record {recordId}. The contributors field is mandatory. | False |
-| VT.OUTPUT.Document.CreateDate | 5 | MANDATORY | C.OUTPUT.Document.CreateDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The createDate field is missing in Document record {recordId}. | True |
-| VT.OUTPUT.Document.Description | 5 | MANDATORY | C.OUTPUT.Document.Description.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=100 | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description "{value}" in Document record {recordId} must contain at least {minLength} characters. | True |
-| VT.OUTPUT.Document.Description | 5 | MANDATORY | C.OUTPUT.Document.Description.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description field is missing in Document record {recordId}. | True |
-| VT.OUTPUT.Document.DocumentDate | 5 | MANDATORY | C.OUTPUT.Document.DocumentDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(currentDate + 3 years) |  | The output publication date ({value1}) in output record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.OUTPUT.Document.DocumentDate | 5 | MANDATORY | C.OUTPUT.Document.DocumentDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=18264 |  | The output publication date ({value1}) in output record {recordId} can't be before the year 1950. | False |
-| VT.OUTPUT.Document.DocumentDate | 5 | MANDATORY | C.OUTPUT.Document.DocumentDate.presence | PRESENCE | COMPLETENESS | — | True |  |  | The output publication date is missing in output record {recordId}. The publication (document) date field is mandatory. | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in output record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=9 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in output record {recordId} must contain at least 9 characters. | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI field is missing in output record {recordId}. Although the doi field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^10\.\d{4,9}/[-._;()/:A-Za-z0-9]+$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in output record {recordId} is not in a valid format. Expected format: DOI identifier in the form 10.<registrant>/<suffix> (e.g., 10.1000/182). The value must start with 10., followed by a registrant code (4–9 digits), a slash (/), and a non-empty suffix. | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in output record {recordId} must be resolvable (https://doi.org/{value}). | False |
-| VT.OUTPUT.Document.Doi | 3 | RECOMMENDED | C.OUTPUT.Document.Doi.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in output record {recordId1} must be unique. There is already a record {recordId2} with the same value of DOI. | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle "{value}" in output record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=8 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle "{value}" in output record {recordId} must contain at least 8 characters. | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle field is missing in output record {recordId}. Although the Handle field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\d{2}\.\d{3,5}(\.\d+)?\/\S+$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle "{value}" in output record {recordId} is not in a valid format. Expected format: Handle identifier in the form <prefix>/<suffix> (e.g., 20.500.12345/abcde). The prefix may contain numeric segments separated by dots, and the suffix must be non-empty. | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle value "{value}" in output record {recordId} must be resolvable (https://hdl.handle.net/{value}). | False |
-| VT.OUTPUT.Document.Handle | 3 | RECOMMENDED | C.OUTPUT.Document.Handle.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation, GR.PTCRIS_F1_01DSTRUCT.handle_format_verification, GR.PTCRIS_F1_A1.resolvable_handle | The Handle value "{value}" in output record {recordId1} must be unique. There is already a record {recordId2} with the same value of DOI. | False |
-| VT.OUTPUT.Document.Identifiers | 5 | MANDATORY | C.OUTPUT.Document.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The doi, handle, other identifiers target in Document record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.OUTPUT.Document.Identifiers | 5 | MANDATORY | C.OUTPUT.Document.Identifiers.presence | PRESENCE | COMPLETENESS | — | True |  |  | The output record {recordId} must contain at least one identifier. | False |
-| VT.OUTPUT.Document.Identifiers | 5 | MANDATORY | C.OUTPUT.Document.Identifiers.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The doi, handle, other identifiers value "{value}" in Document record {recordId} must be unique. | True |
-| VT.OUTPUT.Document.LastModificationDate | 5 | MANDATORY | C.OUTPUT.Document.LastModificationDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The lastModificationDate field is missing in Document record {recordId}. | True |
-| VT.OUTPUT.Document.MetadataAccessLevel | 5 | MANDATORY | C.OUTPUT.Document.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel field is missing in Document record {recordId}. | True |
-| VT.OUTPUT.Document.MetadataAccessLevel | 5 | MANDATORY | C.OUTPUT.Document.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel value "{value}" in Document record {recordId} is not contained in the configured vocabulary. | True |
-| VT.OUTPUT.Document.MetadataLicense | 5 | MANDATORY | C.OUTPUT.Document.MetadataLicense.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense field is missing in Document record {recordId}. | True |
-| VT.OUTPUT.Document.MetadataLicense | 5 | MANDATORY | C.OUTPUT.Document.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense value "{value}" in Document record {recordId} is not contained in the configured vocabulary. | True |
-| VT.OUTPUT.Document.OpenAccess | 3 | RECOMMENDED | C.OUTPUT.Document.OpenAccess.presence | PRESENCE | COMPLETENESS | — | False |  |  | The open access field is missing in output record {recordId}. Although the open access field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.Document.OpenAccess | 3 | RECOMMENDED | C.OUTPUT.Document.OpenAccess.vocabulary | VOCABULARY | VALIDITY | 3.0 | True | allowedValues=TRUE\|FALSE |  | The open access value "{value}" in output record {recordId} is invalid. Allowed values are TRUE, FALSE. | False |
-| VT.OUTPUT.Document.ResearchAreas | 5 | MANDATORY | C.OUTPUT.Document.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | True |  |  | There is no any research area linked with the output record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.OUTPUT.Document.ResearchAreas | 5 | MANDATORY | C.OUTPUT.Document.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in Document record {recordId} is not contained in the configured vocabulary. | True |
-| VT.OUTPUT.Document.Title | 5 | MANDATORY | C.OUTPUT.Document.Title.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=255 |  | The title "{value}" in output record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.OUTPUT.Document.Title | 5 | MANDATORY | C.OUTPUT.Document.Title.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The title target in Document record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.OUTPUT.Document.Title | 5 | MANDATORY | C.OUTPUT.Document.Title.presence | PRESENCE | COMPLETENESS | — | True |  |  | The title field is missing in output record {recordId}. The title field is mandatory. | False |
-| VT.OUTPUT.Document.Title | 5 | MANDATORY | C.OUTPUT.Document.Title.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[\p{L}\p{N}][\p{L}\p{N}\s\-_.,:/()&+]{1,254}$ |  | The title "{value}" in output record {recordId} contains invalid characters. Only letters, numbers, spaces, dots, underscores, commas, slashes, ampersends, brackets and hyphens are allowed. | False |
-| VT.OUTPUT.IntellectualProperty.DateEndTerm | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateEndTerm.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(1950-01-01, dateFilingPriority) |  | The date end term ({value1}) in intellectual property record {recordId} can't be before the year 1950. | False |
-| VT.OUTPUT.IntellectualProperty.DateEndTerm | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateEndTerm.presence | PRESENCE | COMPLETENESS | — | False |  |  | The date end term field is missing in intellectual property record {recordId}. Although the date end term field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.IntellectualProperty.DateFilingPriority | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateFilingPriority.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=dateRequested |  | The date filing priority ({value1}) in intellectual property record {recordId} can't be after the request date ({value2}). | False |
-| VT.OUTPUT.IntellectualProperty.DateFilingPriority | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateFilingPriority.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=18264 |  | The date filing priority ({value1}) in intellectual property record {recordId} can't be before the year 1950. | False |
-| VT.OUTPUT.IntellectualProperty.DateFilingPriority | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateFilingPriority.presence | PRESENCE | COMPLETENESS | — | False |  |  | The date filing priority field is missing in intellectual property record {recordId}. Although the date filing priority field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.IntellectualProperty.DateRequested | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateRequested.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=currentDate |  | The date requested ({value1}) in intellectual property record {recordId} can't be after the current date. | False |
-| VT.OUTPUT.IntellectualProperty.DateRequested | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateRequested.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(1950-01-01, dateFilingPriority) |  | The date requested ({value1}) in intellectual property record {recordId} can't be before the year 1950. | False |
-| VT.OUTPUT.IntellectualProperty.DateRequested | 3 | RECOMMENDED | C.OUTPUT.IntellectualProperty.DateRequested.presence | PRESENCE | COMPLETENESS | — | False |  |  | The date requested field is missing in intellectual property record {recordId}. Although the date requested field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.PublicationSeriesPublisher.FromDate | 3 | RECOMMENDED | C.OUTPUT.PublicationSeriesPublisher.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(currentDate + 3 years) |  | The from date ({value1}) in publication series record {recordId} relation with publisher can be only in the near future (+3 years from right now). | False |
-| VT.OUTPUT.PublicationSeriesPublisher.FromDate | 3 | RECOMMENDED | C.OUTPUT.PublicationSeriesPublisher.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=2 |  | The start date ({value1}) in publication series record {recordId} relation with publisher can't be before the year 1990. | False |
-| VT.OUTPUT.PublicationSeriesPublisher.FromDate | 3 | RECOMMENDED | C.OUTPUT.PublicationSeriesPublisher.FromDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The start date field is missing in publication series record {recordId} relation with publisher. Although the start date field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.PublicationSeriesPublisher.ToDate | 1 | OPTIONAL | C.OUTPUT.PublicationSeriesPublisher.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=fromDate |  | The end date ({value1}) in publication series record {recordId} relation with publisher can't be before the start date ({value2}). | False |
-| VT.OUTPUT.PublicationUnit.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.PublicationUnit.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=5000 |  | The number of pages "{value}" in publication unit record {recordId} must be less than or equal to 5000. | False |
-| VT.OUTPUT.PublicationUnit.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.PublicationUnit.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of pages "{value}" in publication unit record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.PublicationUnitPart.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.PublicationUnitPart.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=200 |  | The number of pages "{value}" in publication unit part record {recordId} must be less than or equal to 200. | False |
-| VT.OUTPUT.PublicationUnitPart.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.PublicationUnitPart.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of pages "{value}" in publication unit part record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.Thesis.ThesisDefenceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.ThesisDefenceDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(currentDate + 1 year) |  | The thesis defence date ({value1}) in thesis record {recordId} can be only in the near future (+1 year from right now). | False |
-| VT.OUTPUT.Thesis.ThesisDefenceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.ThesisDefenceDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=topicAcceptanceDate |  | The thesis defence date ({value1}) in thesis record {recordId} can't be before the topic acceptance date ({value2}). | False |
-| VT.OUTPUT.Thesis.ThesisDefenceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.ThesisDefenceDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The thesis defence date field is missing in thesis record {recordId}. Although the thesis defence date field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.Thesis.TopicAcceptanceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.TopicAcceptanceDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=currentDate |  | The topic acceptance date ({value1}) in thesis record {recordId} can't be in the future (after the current date). | False |
-| VT.OUTPUT.Thesis.TopicAcceptanceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.TopicAcceptanceDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=18264 |  | The topic acceptance date ({value1}) in thesis record {recordId} can't be before the year 1950. | False |
-| VT.OUTPUT.Thesis.TopicAcceptanceDate | 3 | RECOMMENDED | C.OUTPUT.Thesis.TopicAcceptanceDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The topic acceptance date field is missing in thesis record {recordId}. Although the topic acceptance date field is not mandatory, it is recommended. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=30 |  | The number of appendices "{value}" in thesis record {recordId} must be less than or equal to 30. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of appendices "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfChapters | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfChapters.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=30 |  | The number of chapters "{value}" in thesis record {recordId} must be less than or equal to 30. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfChapters | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfChapters.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of chapters "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=200 |  | The number of graphs "{value}" in thesis record {recordId} must be less than or equal to 200. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of graphs "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=200 |  | The number of ilustrations "{value}" in thesis record {recordId} must be less than or equal to 200. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of ilustrations "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=5000 |  | The number of pages "{value}" in thesis record {recordId} must be less than or equal to 5000. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfPages | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of pages "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfReferences | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfReferences.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=5000 |  | The number of references "{value}" in thesis record {recordId} must be less than or equal to 5000. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfReferences | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfReferences.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of references "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfTables | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfTables.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=200 |  | The number of tables "{value}" in thesis record {recordId} must be less than or equal to 200. | False |
-| VT.OUTPUT.ThesisPhysicalDescription.NumberOfTables | 1 | OPTIONAL | C.OUTPUT.ThesisPhysicalDescription.NumberOfTables.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The number of tables "{value}" in thesis record {recordId} must be greater than or equal to 1. | False |
+## `Document.contributors`
+
+Validation Target: `VT.OUTPUT.Document.Contributors`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Contributors.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | At least one managed person must be linked to the research output, except when the output is a source/container for another document type. | UNMAPPED |
+| C.OUTPUT.Document.Contributors.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Document.contributors is below the minimum allowed cardinality. | UNMAPPED |
+| C.OUTPUT.Document.Contributors.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.contributors is required. | UNMAPPED |
+
+## `Document.createDate`
+
+Validation Target: `VT.OUTPUT.Document.CreateDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.createDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Document.description`
+
+Validation Target: `VT.OUTPUT.Document.Description`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Description.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Document.description is shorter than the minimum allowed length. | PTCRIS-FsF-F2-01M |
+| C.OUTPUT.Document.Description.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.description is required. | PTCRIS-FsF-F2-01M |
+
+## `Document.documentDate`
+
+Validation Target: `VT.OUTPUT.Document.DocumentDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.DocumentDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Document.documentDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Document.DocumentDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Document.documentDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Document.DocumentDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.documentDate is required. | UNMAPPED |
+
+## `Document.doi`
+
+Validation Target: `VT.OUTPUT.Document.Doi`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Doi.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Document.doi exceeds the maximum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Doi.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Document.doi is shorter than the minimum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Doi.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Document.doi is recommended. | UNMAPPED |
+| C.OUTPUT.Document.Doi.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Document.doi does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.doi_format_verification |
+| C.OUTPUT.Document.Doi.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Document.doi must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_doi |
+| C.OUTPUT.Document.Doi.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Document.doi must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation |
+
+## `Document.doi, handle, other identifiers`
+
+Validation Target: `VT.OUTPUT.Document.Identifiers`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Document.doi, handle, other identifiers is below the minimum allowed cardinality. | UNMAPPED |
+| C.OUTPUT.Document.Identifiers.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.doi, handle, other identifiers is required. | UNMAPPED |
+| C.OUTPUT.Document.Identifiers.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Document.doi, handle, other identifiers must be unique within the repository. | UNMAPPED |
+
+## `Document.handle`
+
+Validation Target: `VT.OUTPUT.Document.Handle`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Handle.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Document.handle exceeds the maximum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Handle.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Document.handle is shorter than the minimum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Handle.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Document.handle is recommended. | UNMAPPED |
+| C.OUTPUT.Document.Handle.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Document.handle does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.handle_format_verification |
+| C.OUTPUT.Document.Handle.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Document.handle must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_handle |
+| C.OUTPUT.Document.Handle.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Document.handle must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_handle_allocation |
+
+## `Document.lastModificationDate`
+
+Validation Target: `VT.OUTPUT.Document.LastModificationDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Document.metadataAccessLevel`
+
+Validation Target: `VT.OUTPUT.Document.MetadataAccessLevel`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.metadataAccessLevel is required. | PTCRIS-FsF-A1-01M |
+| C.OUTPUT.Document.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Document.metadataAccessLevel must belong to the configured controlled vocabulary. | PTCRIS-FsF-A1-01M |
+
+## `Document.metadataLicense`
+
+Validation Target: `VT.OUTPUT.Document.MetadataLicense`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.MetadataLicense.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.metadataLicense is required. | PTCRIS-FsF-R1.1-01M |
+| C.OUTPUT.Document.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Document.metadataLicense must belong to the configured controlled vocabulary. | PTCRIS-FsF-R1.1-01M |
+
+## `Document.openAccess`
+
+Validation Target: `VT.OUTPUT.Document.OpenAccess`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.OpenAccess.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Document.openAccess is recommended. | UNMAPPED |
+| C.OUTPUT.Document.OpenAccess.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Document.openAccess must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Document.researchAreas`
+
+Validation Target: `VT.OUTPUT.Document.ResearchAreas`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.ResearchAreas.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.researchAreas is required. | UNMAPPED |
+| C.OUTPUT.Document.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Document.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Document.title`
+
+Validation Target: `VT.OUTPUT.Document.Title`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Document.Title.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Document.title exceeds the maximum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Title.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Document.title is shorter than the minimum allowed length. | UNMAPPED |
+| C.OUTPUT.Document.Title.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Document.title is required. | UNMAPPED |
+| C.OUTPUT.Document.Title.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Document.title does not match the required format. | UNMAPPED |
+
+## `IntellectualProperty.dateEndTerm`
+
+Validation Target: `VT.OUTPUT.IntellectualProperty.DateEndTerm`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.IntellectualProperty.DateEndTerm.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of IntellectualProperty.dateEndTerm is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.IntellectualProperty.DateEndTerm.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for IntellectualProperty.dateEndTerm is recommended. | UNMAPPED |
+
+## `IntellectualProperty.dateFilingPriority`
+
+Validation Target: `VT.OUTPUT.IntellectualProperty.DateFilingPriority`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.IntellectualProperty.DateFilingPriority.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of IntellectualProperty.dateFilingPriority is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.IntellectualProperty.DateFilingPriority.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of IntellectualProperty.dateFilingPriority is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.IntellectualProperty.DateFilingPriority.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for IntellectualProperty.dateFilingPriority is recommended. | UNMAPPED |
+
+## `IntellectualProperty.dateRequested`
+
+Validation Target: `VT.OUTPUT.IntellectualProperty.DateRequested`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.IntellectualProperty.DateRequested.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of IntellectualProperty.dateRequested is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.IntellectualProperty.DateRequested.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of IntellectualProperty.dateRequested is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.IntellectualProperty.DateRequested.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for IntellectualProperty.dateRequested is recommended. | UNMAPPED |
+
+## `PublicationSeriesPublisher.fromDate`
+
+Validation Target: `VT.OUTPUT.PublicationSeriesPublisher.FromDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.PublicationSeriesPublisher.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of PublicationSeriesPublisher.fromDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.PublicationSeriesPublisher.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of PublicationSeriesPublisher.fromDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.PublicationSeriesPublisher.FromDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for PublicationSeriesPublisher.fromDate is recommended. | UNMAPPED |
+
+## `PublicationSeriesPublisher.toDate`
+
+Validation Target: `VT.OUTPUT.PublicationSeriesPublisher.ToDate`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.PublicationSeriesPublisher.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of PublicationSeriesPublisher.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+
+## `PublicationUnit.numberOfPages`
+
+Validation Target: `VT.OUTPUT.PublicationUnit.NumberOfPages`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.PublicationUnit.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of PublicationUnit.numberOfPages exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.PublicationUnit.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of PublicationUnit.numberOfPages is below the minimum allowed value. | UNMAPPED |
+
+## `PublicationUnitPart.numberOfPages`
+
+Validation Target: `VT.OUTPUT.PublicationUnitPart.NumberOfPages`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.PublicationUnitPart.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of PublicationUnitPart.numberOfPages exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.PublicationUnitPart.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of PublicationUnitPart.numberOfPages is below the minimum allowed value. | UNMAPPED |
+
+## `Thesis.thesisDefenceDate`
+
+Validation Target: `VT.OUTPUT.Thesis.ThesisDefenceDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Thesis.ThesisDefenceDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Thesis.thesisDefenceDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Thesis.ThesisDefenceDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Thesis.thesisDefenceDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Thesis.ThesisDefenceDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Thesis.thesisDefenceDate is recommended. | UNMAPPED |
+
+## `Thesis.topicAcceptanceDate`
+
+Validation Target: `VT.OUTPUT.Thesis.TopicAcceptanceDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.Thesis.TopicAcceptanceDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Thesis.topicAcceptanceDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Thesis.TopicAcceptanceDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Thesis.topicAcceptanceDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.OUTPUT.Thesis.TopicAcceptanceDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Thesis.topicAcceptanceDate is recommended. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfAppendices`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfAppendices exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfAppendices.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfAppendices is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfChapters`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfChapters`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfChapters.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfChapters exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfChapters.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfChapters is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfGraphs`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfGraphs exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfGraphs.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfGraphs is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfIlustrations`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfIlustrations exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfIlustrations.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfIlustrations is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfPages`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfPages`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfPages.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfPages exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfPages.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfPages is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfReferences`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfReferences`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfReferences.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfReferences exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfReferences.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfReferences is below the minimum allowed value. | UNMAPPED |
+
+## `ThesisPhysicalDescription.numberOfTables`
+
+Validation Target: `VT.OUTPUT.ThesisPhysicalDescription.NumberOfTables`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfTables.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ThesisPhysicalDescription.numberOfTables exceeds the maximum allowed value. | UNMAPPED |
+| C.OUTPUT.ThesisPhysicalDescription.NumberOfTables.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ThesisPhysicalDescription.numberOfTables is below the minimum allowed value. | UNMAPPED |

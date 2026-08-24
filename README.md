@@ -10,51 +10,140 @@ source/rsr.xlsx
 
 Everything below `generated/` is derived from that workbook and should not be edited manually.
 
-## Architecture
+## RSR schema 2.0
+
+The core model is intentionally simple:
 
 ```text
-XLSX Rule Specification Repository
-        |
-        +--> canonical RSR JSON
-        +--> effective Data Quality Profile JSON
-        +--> PT Master runtime JSON
-        +--> profile-based Markdown documentation
-        +--> validation / coverage / traceability reports
-        +--> SHACL (when RDF bindings exist)
-        +--> Schematron (when XML bindings exist)
+Validation Target
+      |
+      +--> Constraint 1
+      +--> Constraint 2
+      +--> ...
 ```
 
-The workbook separates reusable RSR artefacts from profile-specific decisions. A Constraint can therefore be reused by several Data Quality Profiles without duplication. Profile versions inherit through `base_profile_id`, while `Profile Target Settings`, `Profile Constraint Defaults`, and `Profile Overrides` carry the differences.
+The former one-to-one **Rule** layer has been removed. A Validation Target identifies what is assessed; each Constraint represents one reusable executable validation condition such as presence, minimum/maximum length, minimum/maximum date, regex, uniqueness, vocabulary membership, resolvability or a custom business rule.
 
-## Current profile
+Each Constraint can have:
 
-The initial workbook contains:
+- typed Constraint Parameters;
+- one logical multilingual message (`en`, `sr`, `sr-cyr`, `pt`);
+- zero or more authoritative governance mappings;
+- implementation-specific bindings.
+
+Operational assessment dimensions (`COMPLETENESS`, `VALIDITY`, `UNIQUENESS`, `CONSISTENCY`, `TIMELINESS`, `ACCURACY`, `CONFORMITY`, `INTEGRITY`) are maintained separately from PTCRIS Governance Dimensions.
+
+## Two generated JSON projections
+
+The generator deliberately produces two different JSON representations.
+
+### Canonical RSR JSON
+
+```text
+generated/rsr/rsr.json
+```
+
+This is the full-fidelity machine-readable projection of `source/rsr.xlsx`. It preserves Validation Targets, Constraints, typed parameter rows, multilingual messages, governance hierarchy/mappings, profiles and implementation bindings.
+
+### PT Master runtime JSON
+
+```text
+generated/implementation/pt-master/
+  PTCRIS-DATAGOV-1.0.0/
+  1.0.0.json
+```
+
+This is a compatibility-oriented projection for the current Java/PT Master evaluator. Its high-level shape intentionally remains close to the deployed configuration:
+
+```json
+{
+  "minimumRequiredScore": 60,
+  "dimensionDefinitions": {},
+  "targetWeights": {},
+  "dataQualityRemarks": {}
+}
+```
+
+The runtime generator resolves profile-specific target importance, Constraint weights, severity/blocking behaviour, typed parameter values and implementation bindings. Existing `dataQualityRemarks` keys are reused where an explicit confident legacy binding exists; otherwise a deterministic key is generated.
+
+`runtime-config.json` is the richer PT Master projection and retains canonical Constraint/Validation Target IDs and governance traceability.
+
+## Governance model
+
+Governance mapping is Constraint-centric:
+
+```text
+Constraint
+   -> Governance Dimension
+      -> Governance Metric
+         -> Governance Requirement
+```
+
+Partial mappings are valid. An active Constraint may therefore be mapped only to a Dimension, to Dimension + Metric, or to a complete Requirement. Constraints with no authoritative mapping yet are represented explicitly as `UNMAPPED`; the generator never invents governance semantics.
+
+## Constraint Parameters
+
+Constraint Parameters include an explicit `value_type`, so JSON types are deterministic. For example:
+
+```text
+maxLength = 255, value_type = INTEGER
+```
+
+becomes:
+
+```json
+"maxLength": 255
+```
+
+rather than a string.
+
+Multiple rows with the same parameter name are supported. `MIN`/`MAX` combinations are projected into expressions already understood by the PT Master runtime, for example:
+
+```text
+minDate = funding.dateSubmitted
+minDate = 1950-01-01
+combine_operator = MAX
+```
+
+becomes:
+
+```json
+"minDate": "max(funding.dateSubmitted, 1950-01-01)"
+```
+
+## Messages
+
+There is exactly one logical message row per Constraint. Titles and messages are maintained in:
+
+```text
+en
+sr
+sr-cyr
+pt
+```
+
+User-facing messages are intentionally generic and do not contain legacy runtime placeholders such as `{value}` or `{recordId}`. Record context is supplied by the application/UI.
+
+## Data Quality Profiles
+
+The current profile is:
 
 ```text
 PTCRIS-DATAGOV-1.0.0
 ```
 
-It represents the current PTCRIS Data Governance configuration migrated from the previous domain-based Constraints workbook.
+Profile-specific configuration is maintained in:
 
-## Domain-based implementation
+- `Data Quality Profiles`
+- `Profile Target Settings`
+- `Profile Constraint Defaults`
+- `Profile Overrides`
 
-Although reusable rules are now stored in normalized sheets, every Validation Target, Rule and Constraint has a `domain_id`. Generated profile documentation is split into implementation-friendly domain pages:
-
-```text
-PERSON
-ORGANISATION_UNIT
-PROJECT
-FUNDING
-OUTPUT
-ACTIVITY
-SHARED_COMPONENTS
-```
-
-This allows different developers to work on different domains while keeping one normalized source of truth.
+Weights, severity, blocking behaviour and validity policy are profile-level decisions rather than intrinsic properties of reusable Constraints.
 
 ## Setup
 
-Python 3.11+ is sufficient for the generator. The XLSX reader is dependency-free and read-only; it uses Python's standard library and does not require Excel or LibreOffice.
+Python 3.11+ is sufficient for the generator. The XLSX reader is dependency-free and read-only.
 
 ```bash
 python -m venv .venv
@@ -64,43 +153,17 @@ source .venv/Scripts/activate      # Git Bash on Windows
 python -m pip install -e .
 ```
 
-Check the CLI:
-
-```bash
-pt-data-quality --help
-```
-
-## Build
-
-```bash
-pt-data-quality build
-```
-
-Equivalent explicit command:
-
-```bash
-pt-data-quality build source/rsr.xlsx --output generated
-```
-
-To build one profile only:
-
-```bash
-pt-data-quality build --profile PTCRIS-DATAGOV-1.0.0
-```
-
-## Validate
+## Validate and build
 
 ```bash
 pt-data-quality validate
+pt-data-quality build
+python -m unittest discover -s tests -v
 ```
 
-The command exits with a non-zero status when validation **errors** exist. Review markers and intentionally unresolved migration items are warnings and remain visible in `generated/reports/validation.md`.
-
-Current warnings are intentional migration/review work, not silent failures.
+Validation errors fail CI. Review markers, intentionally unresolved governance mappings and explicitly reported legacy-runtime collisions remain warnings while curation continues.
 
 ## Generated artefacts
-
-For the current profile the important outputs are:
 
 ```text
 generated/
@@ -110,15 +173,6 @@ generated/
 │   └── vocabularies.json
 ├── profiles/
 │   └── PTCRIS-DATAGOV-1.0.0.json
-├── docs/
-│   └── profiles/
-│       └── ptcris-datagov-1-0-0/
-│           ├── index.md
-│           ├── scoring.md
-│           ├── governance.md
-│           ├── implementation.md
-│           ├── review-required.md
-│           └── domains/
 ├── implementation/
 │   └── pt-master/
 │       └── PTCRIS-DATAGOV-1.0.0/
@@ -126,96 +180,45 @@ generated/
 │           ├── runtime-config.json
 │           ├── shacl/
 │           └── schematron/
+├── docs/
 └── reports/
+    ├── validation.md
+    ├── governance-traceability-PTCRIS-DATAGOV-1.0.0.md
+    ├── coverage-PTCRIS-DATAGOV-1.0.0.json
+    └── pt-master-compatibility-PTCRIS-DATAGOV-1.0.0.md
 ```
 
-### `1.0.0.json`
+## Legacy-runtime compatibility
 
-This is the compatibility-oriented PT Master projection using the same high-level structure as the existing hand-written configuration:
+`tests/fixtures/pt-master-legacy-1.0.0.json` is a compatibility fixture containing the JSON currently used by the Java system. It is **not** the source of truth for current values.
 
-```json
-{
-  "minimumRequiredScore": 60,
-  "targetWeights": {},
-  "dataQualityRemarks": {}
-}
-```
-
-The important difference is that **weights are never copied from the old hand-written JSON**. Target importance and constraint weights are resolved from the active Data Quality Profile in the XLSX.
-
-Presence constraints are currently excluded from scoring because `Profile Constraint Defaults` defines `PRESENCE` with `include_in_score = false`; their generated `points` value is therefore `0`.
-
-`runtime-config.json` is the richer projection and additionally retains Constraint, Rule, Validation Target and governance traceability identifiers.
-
-## Profile inheritance
-
-A future profile can reuse the same Constraints:
+The build creates:
 
 ```text
-PTCRIS-DATAGOV-1.0.0
-        |
-        +--> PTCRIS-DATAGOV-1.1.0
-        +--> INSTITUTION-X-1.0.0
+generated/reports/
+  pt-master-compatibility-PTCRIS-DATAGOV-1.0.0.md
 ```
 
-Create a new row in `Profiles`, set `base_profile_id`, and enter only changed values in the profile-specific sheets. The generator resolves the effective configuration deterministically.
+The report classifies runtime keys as `PRESERVED`, `CHANGED`, `REMOVED` or `ADDED` and identifies changes in target, severity, dimension, blocking, points and Constraint parameters. This makes intentional profile changes distinguishable from generator regressions.
 
-## SHACL
+## SHACL and Schematron
 
-SHACL generation is implemented, but the generator intentionally does **not** invent RDF semantics.
-
-To emit SHACL shapes, add `Implementation Bindings` rows with:
-
-```text
-representation = RDF_SHACL
-artifact_type = VALIDATION_TARGET
-entity_selector = RDF class IRI/CURIE
-value_selector = RDF property/path IRI/CURIE
-```
-
-The current automatic renderer supports common SHACL Core equivalents such as presence/cardinality, min/max length, regex, numeric min/max and local vocabulary membership. Resolver, repository-wide uniqueness and arbitrary custom constraints remain explicitly reported as unsupported unless a future custom binding mechanism is added.
-
-## Schematron
-
-Schematron follows the same principle. Add bindings with:
-
-```text
-representation = XML_SCHEMATRON
-entity_selector = rule context XPath
-value_selector = relative value XPath
-```
-
-The generator emits XPath 2.0 assertions for the constraint types it can represent safely and reports the remainder in the coverage file.
-
-## PT Master runtime-target collisions
-
-The migrated source currently contains two reused PT Master runtime paths (`Involvement.fromDate` and `Involvement.toDate`) across PERSON and ACTIVITY contexts. This is reported by validation. The legacy `targetWeights` JSON shape cannot represent two contextual weights for the same runtime path, so the compatibility renderer deterministically uses the maximum configured importance while the richer `runtime-config.json` retains traceability. This should eventually be resolved either by unifying the underlying Validation Target or by introducing context-aware implementation bindings.
-
-## Documentation site
-
-Install documentation dependencies:
-
-```bash
-python -m pip install -e ".[docs]"
-mkdocs serve
-```
-
-The site uses the generated Markdown directly.
+SHACL and Schematron remain binding-driven optional projections. The generator does not invent RDF or XML semantics. Only explicitly bound and safely representable Constraints are emitted; unsupported Constraints are reported in coverage files.
 
 ## Normal development workflow
 
 ```bash
-git checkout -b dq-change
+git checkout -b rsr-v2
 
-# edit source/rsr.xlsx
+# edit source/rsr.xlsx and/or generator code
 pt-data-quality validate
 pt-data-quality build
 python -m unittest discover -s tests -v
 
 git status
-git add source/rsr.xlsx generated/
-git commit -m "Update PTCRIS data quality rules"
+git add source/rsr.xlsx src schema tests generated README.md CHANGELOG.md CONTRIBUTING.md
+git commit -m "Upgrade data quality repository to RSR schema 2.0"
 git push
 ```
 
-CI regenerates the artefacts and fails if the committed generated output is stale.
+CI regenerates the artefacts and fails if committed generated output is stale.

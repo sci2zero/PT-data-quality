@@ -23,9 +23,10 @@ class Repository:
     domains: list[Row] = field(default_factory=list)
     governance_sources: list[Row] = field(default_factory=list)
     governance_dimensions: list[Row] = field(default_factory=list)
+    governance_metrics: list[Row] = field(default_factory=list)
     governance_requirements: list[Row] = field(default_factory=list)
+    assessment_dimensions: list[Row] = field(default_factory=list)
     validation_targets: list[Row] = field(default_factory=list)
-    rules: list[Row] = field(default_factory=list)
     constraints: list[Row] = field(default_factory=list)
     constraint_parameters: list[Row] = field(default_factory=list)
     messages: list[Row] = field(default_factory=list)
@@ -51,16 +52,24 @@ class Repository:
         return self.index(self.validation_targets, "validation_target_id")
 
     @property
-    def rules_by_id(self) -> dict[str, Row]:
-        return self.index(self.rules, "rule_id")
-
-    @property
     def constraints_by_id(self) -> dict[str, Row]:
         return self.index(self.constraints, "constraint_id")
 
     @property
+    def governance_dimensions_by_id(self) -> dict[str, Row]:
+        return self.index(self.governance_dimensions, "dimension_id")
+
+    @property
+    def governance_metrics_by_id(self) -> dict[str, Row]:
+        return self.index(self.governance_metrics, "metric_id")
+
+    @property
     def requirements_by_id(self) -> dict[str, Row]:
         return self.index(self.governance_requirements, "requirement_id")
+
+    @property
+    def assessment_dimensions_by_id(self) -> dict[str, Row]:
+        return self.index(self.assessment_dimensions, "assessment_dimension_id")
 
     @property
     def profiles_by_id(self) -> dict[str, Row]:
@@ -91,7 +100,7 @@ class EffectiveProfile:
     profile: dict[str, Any]
     target_settings: dict[str, dict[str, Any]]
     constraint_defaults: dict[str, dict[str, Any]]
-    overrides: dict[tuple[str, str], dict[str, Any]]
+    overrides: dict[str, dict[str, Any]]
 
-    def override_for(self, artifact_type: str, artifact_id: str) -> dict[str, Any]:
-        return self.overrides.get((artifact_type.upper(), artifact_id), {})
+    def override_for(self, constraint_id: str) -> dict[str, Any]:
+        return self.overrides.get(constraint_id, {})

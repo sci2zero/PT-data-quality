@@ -1,57 +1,207 @@
-# PROJECT — PTCRIS-DATAGOV-1.0.0
+# PROJECT
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.PROJECT.Project.Costs | 1 | OPTIONAL | C.PROJECT.Project.Costs.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Sum of linked fundings.amount.amount is lower or equal to project.costs.amount. | GR.PTCRIS_F1_01DCONSIST.sum_of_linked_fundings_amounts | Sum of linked fundings' amounts ({value1}{currency}) is higher than project costs ({value2}{currency}) for the project record {recordId}. | True |
-| VT.PROJECT.Project.CreateDate | 5 | MANDATORY | C.PROJECT.Project.CreateDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The createDate field is missing in Project record {recordId}. | True |
-| VT.PROJECT.Project.Description | 5 | MANDATORY | C.PROJECT.Project.Description.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=100 | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description "{value}" in Project record {recordId} must contain at least {minLength} characters. | True |
-| VT.PROJECT.Project.Description | 5 | MANDATORY | C.PROJECT.Project.Description.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description field is missing in Project record {recordId}. | True |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in project record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=9 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in project record {recordId} must contain at least 9 characters. | False |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI field is missing in project record {recordId}. Although the doi field is not mandatory, it is recommended. | False |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^10\.\d{4,9}/[-._;()/:A-Za-z0-9]+$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in project record {recordId} is not in a valid format. Expected format: DOI identifier in the form 10.<registrant>/<suffix> (e.g., 10.1000/182). The value must start with 10., followed by a registrant code (4–9 digits), a slash (/), and a non-empty suffix. | False |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in project record {recordId} must be resolvable (https://doi.org/{value}). | False |
-| VT.PROJECT.Project.Doi | 3 | RECOMMENDED | C.PROJECT.Project.Doi.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in project record {recordId1} must be unique. There is already a record {recordId2} with the same value of DOI. | False |
-| VT.PROJECT.Project.FromDate | 5 | MANDATORY | C.PROJECT.Project.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date + 3 year) | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project start date ({value1}) in project record {recordId} has to be in the near future (+3 years from right now). | False |
-| VT.PROJECT.Project.FromDate | 5 | MANDATORY | C.PROJECT.Project.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=1950-01-01 | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project start date ({value1}) in project record {recordId} can't be before the year 1950. | False |
-| VT.PROJECT.Project.FromDate | 5 | MANDATORY | C.PROJECT.Project.FromDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project start date is missing in project record {recordId}. The start date field is mandatory. | False |
-| VT.PROJECT.Project.Fundings | 5 | MANDATORY | C.PROJECT.Project.Fundings.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=In the ETL process, the funding ID registered at the project level should be compared with the ID registered in the associated funding entity, values must match perfectly in order to establish relation. | GR.PTCRIS_F1_01DCONSIST.different_funding_ids_in_project_and_funding | The linked funding with the project record {recordId} contains funding identifier which is different from project funding identifier. | True |
-| VT.PROJECT.Project.Fundings | 5 | MANDATORY | C.PROJECT.Project.Fundings.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=10 | GR.PTCRIS_F1_01DCONSIST.different_funding_ids_in_project_and_funding | The fundings target in Project record {recordId} must contain at most {maxCardinality} value(s). | True |
-| VT.PROJECT.Project.Fundings | 5 | MANDATORY | C.PROJECT.Project.Fundings.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 | GR.PTCRIS_F1_01DCONSIST.different_funding_ids_in_project_and_funding | The fundings target in Project record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.PROJECT.Project.Fundings | 5 | MANDATORY | C.PROJECT.Project.Fundings.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCONSIST.different_funding_ids_in_project_and_funding | There is no any funding linked with the project record {recordId}. At least one funding should be linked to the project, it is mandatory. | False |
-| VT.PROJECT.Project.Identifiers | 5 | MANDATORY | C.PROJECT.Project.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 | GR.PTCRIS_F1_01DACURR.project_without_at_least_one_identifier | The doi, raid, projectReference, other identifiers target in Project record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.PROJECT.Project.Identifiers | 5 | MANDATORY | C.PROJECT.Project.Identifiers.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DACURR.project_without_at_least_one_identifier | The project record {recordId} must contain at least one identifier. | False |
-| VT.PROJECT.Project.Identifiers | 5 | MANDATORY | C.PROJECT.Project.Identifiers.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.project_without_at_least_one_identifier | The doi, raid, projectReference, other identifiers value "{value}" in Project record {recordId} must be unique. | True |
-| VT.PROJECT.Project.LastModificationDate | 5 | MANDATORY | C.PROJECT.Project.LastModificationDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The lastModificationDate field is missing in Project record {recordId}. | True |
-| VT.PROJECT.Project.MetadataAccessLevel | 5 | MANDATORY | C.PROJECT.Project.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel field is missing in Project record {recordId}. | True |
-| VT.PROJECT.Project.MetadataAccessLevel | 5 | MANDATORY | C.PROJECT.Project.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel value "{value}" in Project record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PROJECT.Project.MetadataLicense | 5 | MANDATORY | C.PROJECT.Project.MetadataLicense.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense field is missing in Project record {recordId}. | True |
-| VT.PROJECT.Project.MetadataLicense | 5 | MANDATORY | C.PROJECT.Project.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense value "{value}" in Project record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PROJECT.Project.Name | 5 | MANDATORY | C.PROJECT.Project.Name.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DCONSIST.project_title_presence_requirement | The name "{value}" in project record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.PROJECT.Project.Name | 5 | MANDATORY | C.PROJECT.Project.Name.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 | GR.PTCRIS_F1_01DCONSIST.project_title_presence_requirement | The name "{value}" in Project record {recordId} must contain at least {minLength} characters. | True |
-| VT.PROJECT.Project.Name | 5 | MANDATORY | C.PROJECT.Project.Name.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCONSIST.project_title_presence_requirement | The name field is missing in project record {recordId}. The name field is mandatory. | False |
-| VT.PROJECT.Project.Name | 5 | MANDATORY | C.PROJECT.Project.Name.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[\p{L}\p{N}][\p{L}\p{N}\s\-_.,:/()&+]{1,254}$ | GR.PTCRIS_F1_01DCONSIST.project_title_presence_requirement | The name "{value}" in project record {recordId} contains invalid characters. Only letters, numbers, spaces, dots, underscores, commas, slashes, ampersends, brackets and hyphens are allowed. | False |
-| VT.PROJECT.Project.NationalIdProjectReference | 5 | MANDATORY | C.PROJECT.Project.NationalIdProjectReference.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=30 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference "{value}" in project record {recordId} exceeds the maximum allowed length of 30 characters. | False |
-| VT.PROJECT.Project.NationalIdProjectReference | 5 | MANDATORY | C.PROJECT.Project.NationalIdProjectReference.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=10 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference "{value}" in project record {recordId} must contain at least 10 characters. | False |
-| VT.PROJECT.Project.NationalIdProjectReference | 5 | MANDATORY | C.PROJECT.Project.NationalIdProjectReference.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference field is missing in project record {recordId}. Although the projectReference field is not mandatory, it is recommended. | False |
-| VT.PROJECT.Project.NationalIdProjectReference | 5 | MANDATORY | C.PROJECT.Project.NationalIdProjectReference.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference value "{value}" in project record {recordId1} must be unique. There is already a record {recordId2} with the same value of projectReference. | False |
-| VT.PROJECT.Project.Organisations | 5 | MANDATORY | C.PROJECT.Project.Organisations.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=The sum of fundingPart.amount of all organisations can not be bigger than Project.funding.amount<br><br>If in the consortium list is one specified as COORDINATOR (contributionType field), there should be also other CONSORTIUM_MEMBER. <br><br>Moreover, if there is more members, and neither of them is a COORDINATOR, it can be also an issue with data. | GR.PTCRIS_F1_01DCONSIST.sum_of_organizations_funding_greater_than_project_total, GR.PTCRIS_F1_01DSTRUCT.project_with_associated_organizations_but_no_coordinator, GR.PTCRIS_F1_01DSTRUCT.project_with_coordinating_organization_but_no_other_participants | Sum of linked funding parts' amounts ({value1}{currency}) assigned to organisations participating in the project is higher than project funding's amount ({value2}{currency}) for the project record {recordId}. | True |
-| VT.PROJECT.Project.Organisations | 5 | MANDATORY | C.PROJECT.Project.Organisations.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=30 | GR.PTCRIS_F1_01DCONSIST.sum_of_organizations_funding_greater_than_project_total, GR.PTCRIS_F1_01DSTRUCT.project_with_associated_organizations_but_no_coordinator, GR.PTCRIS_F1_01DSTRUCT.project_with_coordinating_organization_but_no_other_participants | The organisations target in Project record {recordId} must contain at most {maxCardinality} value(s). | True |
-| VT.PROJECT.Project.Organisations | 5 | MANDATORY | C.PROJECT.Project.Organisations.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 | GR.PTCRIS_F1_01DCONSIST.sum_of_organizations_funding_greater_than_project_total, GR.PTCRIS_F1_01DSTRUCT.project_with_associated_organizations_but_no_coordinator, GR.PTCRIS_F1_01DSTRUCT.project_with_coordinating_organization_but_no_other_participants | The organisations target in Project record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.PROJECT.Project.Organisations | 5 | MANDATORY | C.PROJECT.Project.Organisations.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCONSIST.sum_of_organizations_funding_greater_than_project_total, GR.PTCRIS_F1_01DSTRUCT.project_with_associated_organizations_but_no_coordinator, GR.PTCRIS_F1_01DSTRUCT.project_with_coordinating_organization_but_no_other_participants | The project organisations list is missing in the project record {recordId}. At least one organisation should be linked to the project, it is mandatory. | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=45 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID "{value}" in project record {recordId} exceeds the maximum allowed length of 45 characters. | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=10 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID "{value}" in project record {recordId} must contain at least 10 characters. | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID field is missing in project record {recordId}. Although the raid field is not mandatory, it is recommended. | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^10\.\d{4,9}/[-._;()/:A-Za-z0-9]+$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID "{value}" in project record {recordId} is not in a valid format. Expected format: Valid RAiD identifier in the form 10.<numeric prefix>/<suffix> (e.g., 10.26259/0e59e9a5). The identifier must start with 10., contain one or more numeric prefix segments separated by dots, followed by / and a non-empty suffix. | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID value "{value}" in project record {recordId} must be resolvable (https://raid.org/{value}). | False |
-| VT.PROJECT.Project.Raid | 3 | RECOMMENDED | C.PROJECT.Project.Raid.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation, GR.PTCRIS_F1_01DSTRUCT.raid_format_verification, GR.PTCRIS_F1_A1.resolvable_raid | The RAID value "{value}" in project record {recordId1} must be unique. There is already a record {recordId2} with the same value of RAID. | False |
-| VT.PROJECT.Project.ResearchAreas | 5 | MANDATORY | C.PROJECT.Project.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCONSIST.semantic_iri_url_validation | There is no any research area linked with the project record {recordId}, except "Not informed' research area. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.PROJECT.Project.ResearchAreas | 5 | MANDATORY | C.PROJECT.Project.ResearchAreas.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DCONSIST.semantic_iri_url_validation | The researchAreas value "{value}" in Project record {recordId} must be unique. | True |
-| VT.PROJECT.Project.ResearchAreas | 5 | MANDATORY | C.PROJECT.Project.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_F1_01DCONSIST.semantic_iri_url_validation | The researchAreas value "{value}" in Project record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PROJECT.Project.Team | 3 | RECOMMENDED | C.PROJECT.Project.Team.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=If team members are specified, there should be at least one researcher who is PRINCIPAL_INVESTIGATOR | GR.PTCRIS_F1_01DSTRUCT.project_with_team_but_no_principal_investigator | The project team is missing in the project record {recordId}. Although the team specification is not mandatory, it is recommended. | True |
-| VT.PROJECT.Project.Team | 3 | RECOMMENDED | C.PROJECT.Project.Team.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=100 | GR.PTCRIS_F1_01DSTRUCT.project_with_team_but_no_principal_investigator | The team target in Project record {recordId} must contain at most {maxCardinality} value(s). | True |
-| VT.PROJECT.Project.Team | 3 | RECOMMENDED | C.PROJECT.Project.Team.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=0 | GR.PTCRIS_F1_01DSTRUCT.project_with_team_but_no_principal_investigator | The team target in Project record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.PROJECT.Project.Team | 3 | RECOMMENDED | C.PROJECT.Project.Team.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DSTRUCT.project_with_team_but_no_principal_investigator | Although the team for the project record {record} is specified, there is no any principal investigator. | False |
-| VT.PROJECT.Project.ToDate | 5 | MANDATORY | C.PROJECT.Project.ToDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(fromDate + 10 years) | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project end date ({value1}) in project record {recordId} has to be in the near future (+10 years from right now). | False |
-| VT.PROJECT.Project.ToDate | 5 | MANDATORY | C.PROJECT.Project.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=fromDate | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project end date ({value1}) in project record {recordId} can't be before the project start date ({value2}). | False |
-| VT.PROJECT.Project.ToDate | 5 | MANDATORY | C.PROJECT.Project.ToDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates | The project end date is missing in funding record {recordId}. The end date field is mandatory. | False |
+## `Project.costs`
+
+Validation Target: `VT.PROJECT.Project.Costs`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Costs.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The sum of linked funding amounts must not exceed the project costs. | GR.PTCRIS_F1_01DCONSIST.sum_of_linked_fundings_amounts |
+
+## `Project.createDate`
+
+Validation Target: `VT.PROJECT.Project.CreateDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.createDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Project.description`
+
+Validation Target: `VT.PROJECT.Project.Description`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Description.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Project.description is shorter than the minimum allowed length. | PTCRIS-FsF-F2-01M |
+| C.PROJECT.Project.Description.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.description is required. | PTCRIS-FsF-F2-01M |
+
+## `Project.doi`
+
+Validation Target: `VT.PROJECT.Project.Doi`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Doi.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Project.doi exceeds the maximum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Doi.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Project.doi is shorter than the minimum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Doi.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Project.doi is recommended. | UNMAPPED |
+| C.PROJECT.Project.Doi.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Project.doi does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.doi_format_verification |
+| C.PROJECT.Project.Doi.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Project.doi must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_doi |
+| C.PROJECT.Project.Doi.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Project.doi must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation |
+
+## `Project.doi, raid, projectReference, other identifiers`
+
+Validation Target: `VT.PROJECT.Project.Identifiers`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Project.doi, raid, projectReference, other identifiers is below the minimum allowed cardinality. | GR.PTCRIS_F1_01DACURR.project_without_at_least_one_identifier |
+| C.PROJECT.Project.Identifiers.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.doi, raid, projectReference, other identifiers is required. | GR.PTCRIS_F1_01DACURR.project_without_at_least_one_identifier |
+| C.PROJECT.Project.Identifiers.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Project.doi, raid, projectReference, other identifiers must be unique within the repository. | UNMAPPED |
+
+## `Project.fromDate`
+
+Validation Target: `VT.PROJECT.Project.FromDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Project.fromDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.PROJECT.Project.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Project.fromDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.PROJECT.Project.FromDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.fromDate is required. | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates |
+
+## `Project.fundings`
+
+Validation Target: `VT.PROJECT.Project.Fundings`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Fundings.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Funding identifiers recorded on the project and on the linked funding record must match. | GR.PTCRIS_F1_01DCONSIST.different_funding_ids_in_project_and_funding |
+| C.PROJECT.Project.Fundings.maxCardinality | MAX_CARDINALITY | CONSISTENCY | ERROR | True | 1.0 | The number of values for Project.fundings exceeds the maximum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Fundings.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Project.fundings is below the minimum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Fundings.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.fundings is required. | UNMAPPED |
+
+## `Project.lastModificationDate`
+
+Validation Target: `VT.PROJECT.Project.LastModificationDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Project.metadataAccessLevel`
+
+Validation Target: `VT.PROJECT.Project.MetadataAccessLevel`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.metadataAccessLevel is required. | PTCRIS-FsF-A1-01M |
+| C.PROJECT.Project.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Project.metadataAccessLevel must belong to the configured controlled vocabulary. | PTCRIS-FsF-A1-01M |
+
+## `Project.metadataLicense`
+
+Validation Target: `VT.PROJECT.Project.MetadataLicense`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.MetadataLicense.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.metadataLicense is required. | PTCRIS-FsF-R1.1-01M |
+| C.PROJECT.Project.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Project.metadataLicense must belong to the configured controlled vocabulary. | PTCRIS-FsF-R1.1-01M |
+
+## `Project.name`
+
+Validation Target: `VT.PROJECT.Project.Name`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Project.name exceeds the maximum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Project.name is shorter than the minimum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.name is required. | GR.PTCRIS_F1_01DCONSIST.project_title_presence_requirement |
+| C.PROJECT.Project.Name.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Project.name does not match the required format. | UNMAPPED |
+
+## `Project.nationalId (projectReference)`
+
+Validation Target: `VT.PROJECT.Project.NationalIdProjectReference`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.NationalIdProjectReference.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Project.nationalId (projectReference) exceeds the maximum allowed length. | UNMAPPED |
+| C.PROJECT.Project.NationalIdProjectReference.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Project.nationalId (projectReference) is shorter than the minimum allowed length. | UNMAPPED |
+| C.PROJECT.Project.NationalIdProjectReference.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.nationalId (projectReference) is required. | UNMAPPED |
+| C.PROJECT.Project.NationalIdProjectReference.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Project.nationalId (projectReference) must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation |
+
+## `Project.organisations`
+
+Validation Target: `VT.PROJECT.Project.Organisations`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Organisations.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Project organisation contributions must be internally consistent: allocated funding must not exceed project funding and consortium membership must include a coordinator when required. | GR.PTCRIS_F1_01DCONSIST.sum_of_organizations_funding_greater_than_project_total; GR.PTCRIS_F1_01DSTRUCT.project_with_coordinating_organization_but_no_other_participants |
+| C.PROJECT.Project.Organisations.maxCardinality | MAX_CARDINALITY | CONSISTENCY | ERROR | True | 1.0 | The number of values for Project.organisations exceeds the maximum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Organisations.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Project.organisations is below the minimum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Organisations.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.organisations is required. | UNMAPPED |
+
+## `Project.raid`
+
+Validation Target: `VT.PROJECT.Project.Raid`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Raid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Project.raid exceeds the maximum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Raid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Project.raid is shorter than the minimum allowed length. | UNMAPPED |
+| C.PROJECT.Project.Raid.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Project.raid is recommended. | UNMAPPED |
+| C.PROJECT.Project.Raid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Project.raid does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.raid_format_verification |
+| C.PROJECT.Project.Raid.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Project.raid must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_raid |
+| C.PROJECT.Project.Raid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Project.raid must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_raid_allocation |
+
+## `Project.researchAreas`
+
+Validation Target: `VT.PROJECT.Project.ResearchAreas`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.ResearchAreas.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.researchAreas is required. | UNMAPPED |
+| C.PROJECT.Project.ResearchAreas.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Project.researchAreas must be unique within the repository. | UNMAPPED |
+| C.PROJECT.Project.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Project.researchAreas must belong to the configured controlled vocabulary. | GR.PTCRIS_F1_01DCONSIST.semantic_iri_url_validation |
+
+## `Project.team`
+
+Validation Target: `VT.PROJECT.Project.Team`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.Team.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | If a project team is specified, at least one team member must be a principal investigator. | GR.PTCRIS_F1_01DSTRUCT.project_with_team_but_no_principal_investigator |
+| C.PROJECT.Project.Team.maxCardinality | MAX_CARDINALITY | CONSISTENCY | ERROR | True | 1.0 | The number of values for Project.team exceeds the maximum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Team.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Project.team is below the minimum allowed cardinality. | UNMAPPED |
+| C.PROJECT.Project.Team.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Project.team is recommended. | UNMAPPED |
+
+## `Project.toDate`
+
+Validation Target: `VT.PROJECT.Project.ToDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PROJECT.Project.ToDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Project.toDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.PROJECT.Project.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Project.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.PROJECT.Project.ToDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Project.toDate is required. | GR.PTCRIS_F1_01DCURREN.mandatory_project_boundary_dates |
