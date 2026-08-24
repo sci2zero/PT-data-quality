@@ -16,10 +16,11 @@ from .renderers.markdown import (
 )
 from .renderers.profile_json import render_profile
 from .renderers.pt_master import render_pt_master
-from .renderers.reports import coverage, governance_traceability, validation_markdown
+from .renderers.reports import coverage, governance_traceability, runtime_compatibility_markdown, validation_markdown
 from .renderers.schematron import render_schematron
 from .renderers.shacl import render_shacl
 from .util import ensure_dir, slug, write_json, write_text
+from .config import load_json as load_json_file
 from .validation import validate_repository
 from .xlsx_loader import load_repository
 
@@ -58,6 +59,14 @@ def build_repository(source: str | Path, output: str | Path, schema_path: str | 
         impl = output / "implementation" / "pt-master" / profile_id
         write_json(impl / f"{version}.json", legacy_runtime)
         write_json(impl / "runtime-config.json", enriched_runtime)
+
+        legacy_fixture = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "pt-master-legacy-1.0.0.json"
+        if legacy_fixture.exists() and profile_id == "PTCRIS-DATAGOV-1.0.0":
+            legacy_baseline = load_json_file(legacy_fixture)
+            write_text(
+                output / "reports" / f"pt-master-compatibility-{profile_id}.md",
+                runtime_compatibility_markdown(legacy_baseline, legacy_runtime, profile_id),
+            )
 
         shacl, shacl_cov = render_shacl(repository, profile_id)
         schematron, schematron_cov = render_schematron(repository, profile_id)

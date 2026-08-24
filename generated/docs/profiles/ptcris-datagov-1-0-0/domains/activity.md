@@ -1,32 +1,173 @@
-# ACTIVITY — PTCRIS-DATAGOV-1.0.0
+# ACTIVITY
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.ACTIVITY.Involvement.FromDate | 3 | RECOMMENDED | C.ACTIVITY.Involvement.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate={currentDate + 3 years} |  | The start date ({value1}) in activity record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.ACTIVITY.Involvement.FromDate | 3 | RECOMMENDED | C.ACTIVITY.Involvement.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(1950-01-01, Person.birthDate+15) |  | The start date ({value1}) in activity record {recordId} can't be before the year 1950, neither before linked person turned on 15 (person birth date + 15 years). | False |
-| VT.ACTIVITY.Involvement.FromDate | 3 | RECOMMENDED | C.ACTIVITY.Involvement.FromDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The start date is missing in activity record {recordId}. Although the activity start date field is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.Involvement.ResearchAreas | 5 | MANDATORY | C.ACTIVITY.Involvement.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | True |  |  | There is no any research area linked with the activity record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.Involvement.ResearchAreas | 5 | MANDATORY | C.ACTIVITY.Involvement.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in Involvement record {recordId} is not contained in the configured vocabulary. | True |
-| VT.ACTIVITY.Involvement.ToDate | 3 | RECOMMENDED | C.ACTIVITY.Involvement.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=fromDate |  | The end date ({value1}) in activity record {recordId} can't be before the start date ({value2}). | False |
-| VT.ACTIVITY.Involvement.ToDate | 3 | RECOMMENDED | C.ACTIVITY.Involvement.ToDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The end date is missing in activity record {recordId}. Although the activity end date field is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.PersonContribution.FromDate | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate={currentDate + 3 years} |  | The start date ({value1}) in activity record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.ACTIVITY.PersonContribution.FromDate | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(1950-01-01, Person.birthDate+15) |  | The start date ({value1}) in activity record {recordId} can't be before the year 1950, neither before linked person turned on 15 (person birth date + 15 years). | False |
-| VT.ACTIVITY.PersonContribution.FromDate | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.FromDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The start date is missing in activity record {recordId}. Although the activity start date field is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.PersonContribution.ResearchAreas | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | False |  |  | There is no any research area linked with the activity record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.PersonContribution.ResearchAreas | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in PersonContribution record {recordId} is not contained in the configured vocabulary. | True |
-| VT.ACTIVITY.PersonContribution.ToDate | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=fromDate |  | The end date ({value1}) in activity record {recordId} can't be before the start date ({value2}). | False |
-| VT.ACTIVITY.PersonContribution.ToDate | 3 | RECOMMENDED | C.ACTIVITY.PersonContribution.ToDate.presence | PRESENCE | COMPLETENESS | — | False |  |  | The end date is missing in activity record {recordId}. Although the activity end date field is not mandatory, it is recommended. | False |
-| VT.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor | 1 | OPTIONAL | C.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Can be true only if contributionType is in [AUTHOR, PRESENTER, EDITOR]. |  | The corresponding contributor flag can be true in activity record {recordId} only when the contribution type is AUTHOR, PRESENTER or EDITOR. | True |
-| VT.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor | 1 | OPTIONAL | C.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor.vocabulary | VOCABULARY | VALIDITY | 3.0 | True | allowedValues=TRUE\|FALSE |  | The is corresponding contributor value "{value}" in activity record {recordId} is invalid. Allowed values are TRUE, FALSE. | False |
-| VT.ACTIVITY.PersonDocumentContribution.IsMainContributor | 1 | OPTIONAL | C.ACTIVITY.PersonDocumentContribution.IsMainContributor.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Can be true only if contributionType is in [AUTHOR, PRESENTER, EDITOR, ADVISOR, ARGUER, BOARD_MEMBER]. |  | The main contributor flag can be true in activity record {recordId} only when the contribution type is AUTHOR, PRESENTER, EDITOR, ADVISOR or ARGUER. | True |
-| VT.ACTIVITY.PersonDocumentContribution.IsMainContributor | 1 | OPTIONAL | C.ACTIVITY.PersonDocumentContribution.IsMainContributor.vocabulary | VOCABULARY | VALIDITY | 3.0 | True | allowedValues=TRUE\|FALSE |  | The is main contributor value "{value}" in activity record {recordId} is invalid. Allowed values are TRUE, FALSE. | False |
-| VT.ACTIVITY.PersonDocumentContribution.Person | 1 | OPTIONAL | C.ACTIVITY.PersonDocumentContribution.Person.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=A document can't be linked with Person if documentDate is not after Person birthDate.<br><br>In the case of Thesis all dates should be after birthDate (thesisDefenceDate, topicAcceptanceDate, and documentDate). |  | The document {recordId1} linked to person record {recordId2} has a date that can't be before the person's birth date. For theses, thesis defence date, topic acceptance date and document date must also be after the person's birth date. | True |
-| VT.ACTIVITY.PersonEventContribution.Case | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.Case.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there is PersonEventContribution is linked with an OtherEvent instance with type=TRIAL |  | The case field can be specified in activity record {recordId} only when the person event contribution is linked with an OtherEvent instance with type TRIAL. | True |
-| VT.ACTIVITY.PersonEventContribution.LabHoursPerWeek | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.LabHoursPerWeek.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there if PersonEventContribution is linked with a Course |  | The lab hours per week field can be specified in activity record {recordId} only when the person event contribution is linked with a course. | True |
-| VT.ACTIVITY.PersonEventContribution.LectureHoursPerWeek | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.LectureHoursPerWeek.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there if PersonEventContribution is linked with a Course |  | The lecture hours per week field can be specified in activity record {recordId} only when the person event contribution is linked with a course. | True |
-| VT.ACTIVITY.PersonEventContribution.LocationJurisdiction | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.LocationJurisdiction.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there is PersonEventContribution is linked with an OtherEvent instance with type=TRIAL |  | The location jurisdiction field can be specified in activity record {recordId} only when the person event contribution is linked with an OtherEvent instance with type TRIAL. | True |
-| VT.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there if PersonEventContribution is linked with a Conference, and contributionType is a REVIEWER |  | The number of reviews or assessments can be specified in activity record {recordId} only when the person event contribution is linked with a conference and the contribution type is REVIEWER. | True |
-| VT.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=20 |  | The number of reviews or assessment "{value}" in activity record {recordId} must be less than or equal to 20. | False |
-| VT.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The numberOfReviewsOrAssessment "{value}" in PersonEventContribution record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.ACTIVITY.PersonEventContribution.OtherContactHoursPerWeek | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.OtherContactHoursPerWeek.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there if PersonEventContribution is linked with a Course |  | The other contact hours per week field can be specified in activity record {recordId} only when the person event contribution is linked with a course. | True |
-| VT.ACTIVITY.PersonEventContribution.TutorialHoursPerWeek | 1 | OPTIONAL | C.ACTIVITY.PersonEventContribution.TutorialHoursPerWeek.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Only can be there if PersonEventContribution is linked with a Course |  | The tutorial hours per week field can be specified in activity record {recordId} only when the person event contribution is linked with a course. | True |
+## `Involvement.fromDate`
+
+Validation Target: `VT.ACTIVITY.Involvement.FromDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.Involvement.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Involvement.fromDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.Involvement.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Involvement.fromDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.Involvement.FromDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Involvement.fromDate is recommended. | UNMAPPED |
+
+## `Involvement.researchAreas`
+
+Validation Target: `VT.ACTIVITY.Involvement.ResearchAreas`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.Involvement.ResearchAreas.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Involvement.researchAreas is required. | UNMAPPED |
+| C.ACTIVITY.Involvement.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Involvement.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Involvement.toDate`
+
+Validation Target: `VT.ACTIVITY.Involvement.ToDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.Involvement.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Involvement.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.Involvement.ToDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Involvement.toDate is recommended. | UNMAPPED |
+
+## `PersonContribution.fromDate`
+
+Validation Target: `VT.ACTIVITY.PersonContribution.FromDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonContribution.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of PersonContribution.fromDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.PersonContribution.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of PersonContribution.fromDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.PersonContribution.FromDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for PersonContribution.fromDate is recommended. | UNMAPPED |
+
+## `PersonContribution.researchAreas`
+
+Validation Target: `VT.ACTIVITY.PersonContribution.ResearchAreas`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonContribution.ResearchAreas.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for PersonContribution.researchAreas is recommended. | UNMAPPED |
+| C.ACTIVITY.PersonContribution.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of PersonContribution.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `PersonContribution.toDate`
+
+Validation Target: `VT.ACTIVITY.PersonContribution.ToDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonContribution.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of PersonContribution.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.ACTIVITY.PersonContribution.ToDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for PersonContribution.toDate is recommended. | UNMAPPED |
+
+## `PersonDocumentContribution.isCorrespondingContributor`
+
+Validation Target: `VT.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The corresponding contributor flag may be true only for AUTHOR, PRESENTER, or EDITOR contributions. | UNMAPPED |
+| C.ACTIVITY.PersonDocumentContribution.IsCorrespondingContributor.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of PersonDocumentContribution.isCorrespondingContributor must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `PersonDocumentContribution.isMainContributor`
+
+Validation Target: `VT.ACTIVITY.PersonDocumentContribution.IsMainContributor`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonDocumentContribution.IsMainContributor.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The main contributor flag may be true only for an allowed main-contribution type such as AUTHOR, PRESENTER, EDITOR, ADVISOR, ARGUER, or BOARD_MEMBER. | UNMAPPED |
+| C.ACTIVITY.PersonDocumentContribution.IsMainContributor.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of PersonDocumentContribution.isMainContributor must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `PersonDocumentContribution.person`
+
+Validation Target: `VT.ACTIVITY.PersonDocumentContribution.Person`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonDocumentContribution.Person.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | A research output may be linked to a person only when the relevant document dates occur after the person's birth date. | UNMAPPED |
+
+## `PersonEventContribution.case`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.Case`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.Case.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The case field may be specified only for a person-event contribution linked to an OtherEvent of type TRIAL. | UNMAPPED |
+
+## `PersonEventContribution.labHoursPerWeek`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.LabHoursPerWeek`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.LabHoursPerWeek.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Lab hours per week may be specified only when the person-event contribution is linked to a course. | UNMAPPED |
+
+## `PersonEventContribution.lectureHoursPerWeek`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.LectureHoursPerWeek`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.LectureHoursPerWeek.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Lecture hours per week may be specified only when the person-event contribution is linked to a course. | UNMAPPED |
+
+## `PersonEventContribution.locationJurisdiction`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.LocationJurisdiction`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.LocationJurisdiction.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Location jurisdiction may be specified only for a person-event contribution linked to an OtherEvent of type TRIAL. | UNMAPPED |
+
+## `PersonEventContribution.numberOfReviewsOrAssessment`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The number of reviews or assessments may be specified only for a conference contribution with contribution type REVIEWER. | UNMAPPED |
+| C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of PersonEventContribution.numberOfReviewsOrAssessment exceeds the maximum allowed value. | UNMAPPED |
+| C.ACTIVITY.PersonEventContribution.NumberOfReviewsOrAssessment.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of PersonEventContribution.numberOfReviewsOrAssessment is below the minimum allowed value. | UNMAPPED |
+
+## `PersonEventContribution.otherContactHoursPerWeek`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.OtherContactHoursPerWeek`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.OtherContactHoursPerWeek.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Other contact hours per week may be specified only when the person-event contribution is linked to a course. | UNMAPPED |
+
+## `PersonEventContribution.tutorialHoursPerWeek`
+
+Validation Target: `VT.ACTIVITY.PersonEventContribution.TutorialHoursPerWeek`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.ACTIVITY.PersonEventContribution.TutorialHoursPerWeek.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Tutorial hours per week may be specified only when the person-event contribution is linked to a course. | UNMAPPED |

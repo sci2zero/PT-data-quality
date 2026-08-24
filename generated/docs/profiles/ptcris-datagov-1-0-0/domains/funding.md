@@ -1,45 +1,186 @@
-# FUNDING — PTCRIS-DATAGOV-1.0.0
+# FUNDING
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.FUNDING.Funding.Amount | 5 | MANDATORY | C.FUNDING.Funding.Amount.presence | PRESENCE | COMPLETENESS | — | True |  |  | The amount field is missing in funding record {recordId}. The amount field is mandatory. | False |
-| VT.FUNDING.Funding.CreateDate | 5 | MANDATORY | C.FUNDING.Funding.CreateDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The createDate field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.DateAwarded | 3 | RECOMMENDED | C.FUNDING.Funding.DateAwarded.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=min(project.fromDate, funding.fromDate, current date + 3 years) | GR.PTCRIS_F1_01DCURREN.award_year_required_verification | The funding award date ({value1}) in funding record {recordId1} can't be after the linked project {recordId2} start date ({value2}). | False |
-| VT.FUNDING.Funding.DateAwarded | 3 | RECOMMENDED | C.FUNDING.Funding.DateAwarded.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(funding.dateSubmitted, 1950-01-01) | GR.PTCRIS_F1_01DCURREN.award_year_required_verification | The funding award date ({value1}) in funding record {recordId1} can't be before the year 1950. | False |
-| VT.FUNDING.Funding.DateAwarded | 3 | RECOMMENDED | C.FUNDING.Funding.DateAwarded.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DCURREN.award_year_required_verification | The funding award date is missing in funding record {recordId}. Although the award date field is not mandatory, it is recommende. | False |
-| VT.FUNDING.Funding.DateSubmitted | 1 | OPTIONAL | C.FUNDING.Funding.DateSubmitted.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=min(project.fromDate, funding.fromDate, funding.dateAwarded, current date + 3 years) |  | The funding submission date ({value1}) in funding record {recordId1} can't be after the linked project {recordId2} start date ({value2}). | False |
-| VT.FUNDING.Funding.DateSubmitted | 1 | OPTIONAL | C.FUNDING.Funding.DateSubmitted.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=1950-01-01 |  | The funding submission date ({value1}) in funding record {recordId1} can't be before the year 1950. | False |
-| VT.FUNDING.Funding.Description | 5 | MANDATORY | C.FUNDING.Funding.Description.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=100 | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description "{value}" in Funding record {recordId} must contain at least {minLength} characters. | True |
-| VT.FUNDING.Funding.Description | 5 | MANDATORY | C.FUNDING.Funding.Description.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_F2_01M.metric_requirement | The description field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in funding record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=9 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in funding record {recordId} must contain at least 9 characters. | False |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI field is missing in funding record {recordId}. Although the doi field is not mandatory, it is recommended. | False |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^10\.\d{4,9}/[-._;()/:A-Za-z0-9]+$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI "{value}" in funding record {recordId} is not in a valid format. Expected format: DOI identifier in the form 10.<registrant>/<suffix> (e.g., 10.1000/182). The value must start with 10., followed by a registrant code (4–9 digits), a slash (/), and a non-empty suffix. | False |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in funding record {recordId} must be resolvable (https://doi.org/{value}). | False |
-| VT.FUNDING.Funding.Doi | 3 | RECOMMENDED | C.FUNDING.Funding.Doi.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation, GR.PTCRIS_F1_01DSTRUCT.doi_format_verification, GR.PTCRIS_F1_A1.resolvable_doi | The DOI value "{value}" in funding record {recordId1} must be unique. There is already a record {recordId2} with the same value of DOI. | False |
-| VT.FUNDING.Funding.FromDate | 5 | MANDATORY | C.FUNDING.Funding.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=min(project.toDate,funding.toDate, currentDate + 3 years) | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date | The fromDate value "{value}" in Funding record {recordId} is later than the configured maximum/date constraint {maxDate}. | True |
-| VT.FUNDING.Funding.FromDate | 5 | MANDATORY | C.FUNDING.Funding.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=project.fromDate | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date | The funding start date ({value1}) in funding record {recordId1} can't be before the linked project {recordId2} start date ({value2}) | False |
-| VT.FUNDING.Funding.FromDate | 5 | MANDATORY | C.FUNDING.Funding.FromDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date | The funding start date is missing in funding record {recordId}. The start date field is mandatory. | False |
-| VT.FUNDING.Funding.Identifiers | 5 | MANDATORY | C.FUNDING.Funding.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The doi, grantAgreementId, other identifiers target in Funding record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.FUNDING.Funding.Identifiers | 5 | MANDATORY | C.FUNDING.Funding.Identifiers.presence | PRESENCE | COMPLETENESS | — | True |  |  | The funding record {recordId} must contain at least one identifier. | False |
-| VT.FUNDING.Funding.LastModificationDate | 5 | MANDATORY | C.FUNDING.Funding.LastModificationDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The lastModificationDate field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.MetadataAccessLevel | 5 | MANDATORY | C.FUNDING.Funding.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.MetadataAccessLevel | 5 | MANDATORY | C.FUNDING.Funding.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel value "{value}" in Funding record {recordId} is not contained in the configured vocabulary. | True |
-| VT.FUNDING.Funding.MetadataLicense | 5 | MANDATORY | C.FUNDING.Funding.MetadataLicense.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.MetadataLicense | 5 | MANDATORY | C.FUNDING.Funding.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense value "{value}" in Funding record {recordId} is not contained in the configured vocabulary. | True |
-| VT.FUNDING.Funding.Name | 5 | MANDATORY | C.FUNDING.Funding.Name.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DSTRUCT.format_validation_for_award_title_name | The name "{value}" in funding record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.FUNDING.Funding.Name | 5 | MANDATORY | C.FUNDING.Funding.Name.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 | GR.PTCRIS_F1_01DSTRUCT.format_validation_for_award_title_name | The name "{value}" in Funding record {recordId} must contain at least {minLength} characters. | True |
-| VT.FUNDING.Funding.Name | 5 | MANDATORY | C.FUNDING.Funding.Name.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DSTRUCT.format_validation_for_award_title_name | The name field is missing in funding record {recordId}. The name field is mandatory. | False |
-| VT.FUNDING.Funding.Name | 5 | MANDATORY | C.FUNDING.Funding.Name.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[\p{L}\p{N}][\p{L}\p{N}\s\-_.,:/()&+]{1,254}$ | GR.PTCRIS_F1_01DSTRUCT.format_validation_for_award_title_name | The name "{value}" in funding record {recordId} contains invalid characters. Only letters, numbers, spaces, dots, underscores, commas, slashes, ampersends, brackets and hyphens are allowed. | False |
-| VT.FUNDING.Funding.ProjectInvolvement | 5 | MANDATORY | C.FUNDING.Funding.ProjectInvolvement.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=The Funding should linking either Project, or paid job position (Employment) or it might represent scholarship for Education, i.e. it should linking Education |  | The funding record {recordId} must link exactly one funded record which might be a project or an involvement (education or employment). | True |
-| VT.FUNDING.Funding.ProjectInvolvement | 5 | MANDATORY | C.FUNDING.Funding.ProjectInvolvement.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The project, involvement target in Funding record {recordId} must contain at least {minCardinality} value(s). | True |
-| VT.FUNDING.Funding.ProjectInvolvement | 5 | MANDATORY | C.FUNDING.Funding.ProjectInvolvement.presence | PRESENCE | COMPLETENESS | — | True |  |  | The project, involvement field is missing in Funding record {recordId}. | True |
-| VT.FUNDING.Funding.ProjectReferenceIdGrantAgreementId | 3 | RECOMMENDED | C.FUNDING.Funding.ProjectReferenceIdGrantAgreementId.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=30 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference "{value}" in funding record {recordId} exceeds the maximum allowed length of 30 characters. | False |
-| VT.FUNDING.Funding.ProjectReferenceIdGrantAgreementId | 3 | RECOMMENDED | C.FUNDING.Funding.ProjectReferenceIdGrantAgreementId.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=10 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference "{value}" in funding record {recordId} must contain at least 10 characters. | False |
-| VT.FUNDING.Funding.ProjectReferenceIdGrantAgreementId | 3 | RECOMMENDED | C.FUNDING.Funding.ProjectReferenceIdGrantAgreementId.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference field is missing in funding record {recordId}. Although the projectReference field is not mandatory, it is recommended. | False |
-| VT.FUNDING.Funding.ProjectReferenceIdGrantAgreementId | 3 | RECOMMENDED | C.FUNDING.Funding.ProjectReferenceIdGrantAgreementId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation, GR.PTCRIS_F1_01DSTRUCT.pid_format_verification | The projectReference value "{value}" in funding record {recordId1} must be unique. There is already a record {recordId2} with the same value of projectReference. | False |
-| VT.FUNDING.Funding.ResearchAreas | 3 | RECOMMENDED | C.FUNDING.Funding.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | False |  |  | There is no any research area linked with the funding record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.FUNDING.Funding.ResearchAreas | 3 | RECOMMENDED | C.FUNDING.Funding.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in Funding record {recordId} is not contained in the configured vocabulary. | True |
-| VT.FUNDING.Funding.ToDate | 5 | MANDATORY | C.FUNDING.Funding.ToDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=project.toDate | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspected_end_date | The toDate value "{value}" in Funding record {recordId} is later than the configured maximum/date constraint {maxDate}. | True |
-| VT.FUNDING.Funding.ToDate | 5 | MANDATORY | C.FUNDING.Funding.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(project.fromDate, funding.fromDate) | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspected_end_date | The funding end date ({value1}) in funding record {recordId1} can't be before the funding start date ({value2}) | False |
-| VT.FUNDING.Funding.ToDate | 5 | MANDATORY | C.FUNDING.Funding.ToDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspected_end_date | The funding end date is missing in funding record {recordId}. The end date field is mandatory. | False |
+## `Funding.amount`
+
+Validation Target: `VT.FUNDING.Funding.Amount`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.Amount.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.amount is required. | UNMAPPED |
+
+## `Funding.createDate`
+
+Validation Target: `VT.FUNDING.Funding.CreateDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.createDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Funding.dateAwarded`
+
+Validation Target: `VT.FUNDING.Funding.DateAwarded`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.DateAwarded.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.dateAwarded is later than allowed by the configured date constraints. | UNMAPPED |
+| C.FUNDING.Funding.DateAwarded.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.dateAwarded is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.FUNDING.Funding.DateAwarded.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Funding.dateAwarded is recommended. | GR.PTCRIS_F1_01DCURREN.award_year_required_verification |
+
+## `Funding.dateSubmitted`
+
+Validation Target: `VT.FUNDING.Funding.DateSubmitted`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.DateSubmitted.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.dateSubmitted is later than allowed by the configured date constraints. | UNMAPPED |
+| C.FUNDING.Funding.DateSubmitted.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.dateSubmitted is earlier than allowed by the configured date constraints. | UNMAPPED |
+
+## `Funding.description`
+
+Validation Target: `VT.FUNDING.Funding.Description`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.Description.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.description is shorter than the minimum allowed length. | PTCRIS-FsF-F2-01M |
+| C.FUNDING.Funding.Description.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.description is required. | PTCRIS-FsF-F2-01M |
+
+## `Funding.doi`
+
+Validation Target: `VT.FUNDING.Funding.Doi`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.Doi.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.doi exceeds the maximum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.Doi.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.doi is shorter than the minimum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.Doi.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Funding.doi is recommended. | UNMAPPED |
+| C.FUNDING.Funding.Doi.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Funding.doi does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.doi_format_verification |
+| C.FUNDING.Funding.Doi.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Funding.doi must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_doi |
+| C.FUNDING.Funding.Doi.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Funding.doi must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_doi_allocation |
+
+## `Funding.doi, grantAgreementId, other identifiers`
+
+Validation Target: `VT.FUNDING.Funding.Identifiers`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.Identifiers.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Funding.doi, grantAgreementId, other identifiers is below the minimum allowed cardinality. | UNMAPPED |
+| C.FUNDING.Funding.Identifiers.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.doi, grantAgreementId, other identifiers is required. | UNMAPPED |
+
+## `Funding.fromDate`
+
+Validation Target: `VT.FUNDING.Funding.FromDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.fromDate is later than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date |
+| C.FUNDING.Funding.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.fromDate is earlier than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date |
+| C.FUNDING.Funding.FromDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.fromDate is required. | UNMAPPED |
+
+## `Funding.lastModificationDate`
+
+Validation Target: `VT.FUNDING.Funding.LastModificationDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Funding.metadataAccessLevel`
+
+Validation Target: `VT.FUNDING.Funding.MetadataAccessLevel`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.metadataAccessLevel is required. | PTCRIS-FsF-A1-01M |
+| C.FUNDING.Funding.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Funding.metadataAccessLevel must belong to the configured controlled vocabulary. | PTCRIS-FsF-A1-01M |
+
+## `Funding.metadataLicense`
+
+Validation Target: `VT.FUNDING.Funding.MetadataLicense`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.MetadataLicense.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.metadataLicense is required. | PTCRIS-FsF-R1.1-01M |
+| C.FUNDING.Funding.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Funding.metadataLicense must belong to the configured controlled vocabulary. | PTCRIS-FsF-R1.1-01M |
+
+## `Funding.name`
+
+Validation Target: `VT.FUNDING.Funding.Name`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.name exceeds the maximum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.name is shorter than the minimum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.name is required. | UNMAPPED |
+| C.FUNDING.Funding.Name.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Funding.name does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.format_validation_for_award_title_name |
+
+## `Funding.project, involvement`
+
+Validation Target: `VT.FUNDING.Funding.ProjectInvolvement`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.ProjectInvolvement.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | A funding record must be linked to exactly one funded context: a project, an employment, or an education record. | UNMAPPED |
+| C.FUNDING.Funding.ProjectInvolvement.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Funding.project, involvement is below the minimum allowed cardinality. | UNMAPPED |
+| C.FUNDING.Funding.ProjectInvolvement.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.project, involvement is required. | UNMAPPED |
+
+## `Funding.projectReferenceId`
+
+Validation Target: `VT.FUNDING.Funding.ProjectReferenceId`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.ProjectReferenceId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.projectReferenceId exceeds the maximum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.ProjectReferenceId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.projectReferenceId is shorter than the minimum allowed length. | UNMAPPED |
+| C.FUNDING.Funding.ProjectReferenceId.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Funding.projectReferenceId is recommended. | UNMAPPED |
+| C.FUNDING.Funding.ProjectReferenceId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Funding.projectReferenceId must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_pid_allocation |
+
+## `Funding.researchAreas`
+
+Validation Target: `VT.FUNDING.Funding.ResearchAreas`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.ResearchAreas.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Funding.researchAreas is recommended. | UNMAPPED |
+| C.FUNDING.Funding.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Funding.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Funding.toDate`
+
+Validation Target: `VT.FUNDING.Funding.ToDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.FUNDING.Funding.ToDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Funding.toDate is later than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date |
+| C.FUNDING.Funding.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Funding.toDate is earlier than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCURREN.project_funding_with_suspicious_start_date |
+| C.FUNDING.Funding.ToDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Funding.toDate is required. | UNMAPPED |

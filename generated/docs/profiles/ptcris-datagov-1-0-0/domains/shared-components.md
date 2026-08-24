@@ -1,87 +1,309 @@
-# SHARED_COMPONENTS — PTCRIS-DATAGOV-1.0.0
+# SHARED_COMPONENTS
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.SHARED_COMPONENTS.Contact.ContactEmail | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.ContactEmail.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The contact email "{value}" in contact linked with record {recordid} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.ContactEmail | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.ContactEmail.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=3 |  | The contact email "{value}" in contact linked with record {recordid} must contain at least 3 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.ContactEmail | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.ContactEmail.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]$ |  | The contactEmail "{value}" in Contact record {recordId} is not in a valid format. | True |
-| VT.SHARED_COMPONENTS.Contact.FaxNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.FaxNumber.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The fax number "{value}" in contact linked with record {recordid} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.FaxNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.FaxNumber.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=3 |  | The fax number "{value}" in contact linked with record {recordid} must contain at least 3 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.FaxNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.FaxNumber.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\+351[1-9][0-9]{8}$ |  | The fax number "{value}" in contact linked with record {recordid} is not in a valid Portuguese phone number format. Expected format: +351 followed by 9 digits, where the first digit after +351 is not 0. | False |
-| VT.SHARED_COMPONENTS.Contact.MobilePhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The mobile phone number "{value}" in contact linked with record {recordid} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.MobilePhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=3 |  | The mobile phone number "{value}" in contact linked with record {recordid} must contain at least 3 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.MobilePhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\+351[1-9][0-9]{8}$ |  | The mobile phone number "{value}" in contact linked with record {recordid} is not in a valid Portuguese phone number format. Expected format: +351 followed by 9 digits, where the first digit after +351 is not 0. | False |
-| VT.SHARED_COMPONENTS.Contact.PhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.PhoneNumber.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The phone number "{value}" in contact linked with record {recordid} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.PhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.PhoneNumber.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=3 |  | The phone number "{value}" in contact linked with record {recordid} must contain at least 3 characters. | False |
-| VT.SHARED_COMPONENTS.Contact.PhoneNumber | 1 | OPTIONAL | C.SHARED_COMPONENTS.Contact.PhoneNumber.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\+351[1-9][0-9]{8}$ |  | The phone number "{value}" in contact linked with record {recordid} is not in a valid Portuguese phone number format. Expected format: +351 followed by 9 digits, where the first digit after +351 is not 0. | False |
-| VT.SHARED_COMPONENTS.Country.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Country.Code.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding | The code "{value}" in Country record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.SHARED_COMPONENTS.Country.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Country.Code.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding | The code "{value}" in country linked with record {recordid} must contain exactly 2 characters. | False |
-| VT.SHARED_COMPONENTS.Country.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Country.Code.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding | The code field is missing in country linked with record {recordid}. The code field is mandatory. | False |
-| VT.SHARED_COMPONENTS.Country.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Country.Code.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding | The code value "{value}" in country linked with record {recordid} must be unique. | False |
-| VT.SHARED_COMPONENTS.Country.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Country.Code.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding | The code value "{value}" in Country record {recordId} is not contained in the configured vocabulary. | True |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=3 |  | The code "{value}" in Currency record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=3 |  | The code "{value}" in currency linked with record {recordid} must contain exactly 3 characters. | False |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.presence | PRESENCE | COMPLETENESS | — | True |  |  | The code field is missing in currency linked with record {recordid}. The code field is mandatory. | False |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^AED\|AFN\|ALL\|AMD\|ANG\|AOA\|ARS\|AUD\|AWG\|AZN\|BAM\|BBD\|BDT\|BGN\|BHD\|BIF\|BMD\|BND\|BOB\|BRL\|BSD\|BTN\|BWP\|BYR\|BZD\|CAD\|CDF\|CHF\|CLP\|CNY\|COP\|CRC\|CUC\|CUP\|CVE\|CZK\|DJF\|DKK\|DOP\|DZD\|EGP\|ERN\|ETB\|EUR\|FJD\|FKP\|GBP\|GEL\|GGP\|GHS\|GIP\|GMD\|GNF\|GTQ\|GYD\|HKD\|HNL\|HRK\|HTG\|HUF\|IDR\|ILS\|IMP\|INR\|IQD\|IRR\|ISK\|JEP\|JMD\|JOD\|JPY\|KES\|KGS\|KHR\|KMF\|KPW\|KRW\|KWD\|KYD\|KZT\|LAK\|LBP\|LKR\|LRD\|LSL\|LYD\|MAD\|MDL\|MGA\|MKD\|MMK\|MNT\|MOP\|MRO\|MUR\|MVR\|MWK\|MXN\|MYR\|MZN\|NAD\|NGN\|NIO\|NOK\|NPR\|NZD\|OMR\|PAB\|PEN\|PGK\|PHP\|PKR\|PLN\|PYG\|QAR\|RON\|RSD\|RUB\|RWF\|SAR\|SBD\|SCR\|SDG\|SEK\|SGD\|SHP\|SLL\|SOS\|SPL\|SRD\|STD\|SVC\|SYP\|SZL\|THB\|TJS\|TMT\|TND\|TOP\|TRY\|TTD\|TVD\|TWD\|TZS\|UAH\|UGX\|USD\|UYU\|UZS\|VEF\|VND\|VUV\|WST\|XAF\|XCD\|XDR\|XOF\|XPF\|YER\|ZAR\|ZMW\|ZWD$ |  | The code "{value}" in Currency record {recordId} is not in a valid format. | True |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The code value "{value}" in currency linked with record {recordid} must be unique. | False |
-| VT.SHARED_COMPONENTS.Currency.Code | 5 | MANDATORY | C.SHARED_COMPONENTS.Currency.Code.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The code value "{value}" in Currency record {recordId} is not contained in the configured vocabulary. | True |
-| VT.SHARED_COMPONENTS.Currency.Symbol | 1 | OPTIONAL | C.SHARED_COMPONENTS.Currency.Symbol.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=15 |  | The symbol "{value}" in currency record linked with record {recordid} exceeds the maximum allowed length of 15 characters. | False |
-| VT.SHARED_COMPONENTS.Currency.Symbol | 1 | OPTIONAL | C.SHARED_COMPONENTS.Currency.Symbol.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The symbol "{value}" in currency record linked with record {recordid} must contain at least 1 character. | False |
-| VT.SHARED_COMPONENTS.Currency.Symbol | 1 | OPTIONAL | C.SHARED_COMPONENTS.Currency.Symbol.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The symbol value "{value}" in Currency record {recordId} is not contained in the configured vocabulary. | True |
-| VT.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue | 5 | MANDATORY | C.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=At least one of those fields should be present in concrete subclass (DocumentIndicator for instance) depending on linked Indicator.contentType |  | The entity indicator record {recordId} must contain at least one value field aligned with the linked indicator content type: numericValue, booleanValue or textualValue. | True |
-| VT.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue | 5 | MANDATORY | C.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue.presence | PRESENCE | COMPLETENESS | — | True |  |  | The numericValue, booleanValue, textualValue field is missing in EntityIndicator record {recordId}. | True |
-| VT.SHARED_COMPONENTS.EntityIndicator.Subclass | 1 | OPTIONAL | C.SHARED_COMPONENTS.EntityIndicator.Subclass.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Subclass type has to be aligned with entityIndicator.indicator.applicableTypes |  | The entity indicator {recordId} subclass "{value1}" is not aligned with the linked indicator applicable types "{value}". | True |
-| VT.SHARED_COMPONENTS.FlexibleDate.Day | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Day.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=Values 31, 30, 29 should be checked whether are available for the certain month |  | The flexible date day value "{value1}" in flexible date linked with record {recordid} is not valid for the specified month "{value2}". | True |
-| VT.SHARED_COMPONENTS.FlexibleDate.Day | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Day.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=31 |  | The day "{value}" in flexible date linked with record {recordid} must be less than or equal to 31. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Day | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Day.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The day "{value}" in flexible date linked with record {recordid} must be greater than or equal to 1. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Day | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Day.presence | PRESENCE | COMPLETENESS | — | False |  |  | The day field is missing in flexible date linked with record {recordid}. Although the day field is not mandatory, it is recommended. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Month | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Month.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=12 |  | The month "{value}" in flexible date linked with record {recordid} must be less than or equal to 12. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Month | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Month.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The month "{value}" in flexible date linked with record {recordid} must be greater than or equal to 1. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Month | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Month.presence | PRESENCE | COMPLETENESS | — | False |  |  | The month field is missing in flexible date linked with record {recordid}. Although the month field is not mandatory, it is recommended. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.TextYear | 5 | MANDATORY | C.SHARED_COMPONENTS.FlexibleDate.TextYear.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=For any  date should be defined at least year, or if there is no year, then textual representation should be there (e.g. in print, indefinately, 3rd century, etc.) |  | Either year, or textual representation should be defined for flexible date linked with record {recordid} | True |
-| VT.SHARED_COMPONENTS.FlexibleDate.TextYear | 5 | MANDATORY | C.SHARED_COMPONENTS.FlexibleDate.TextYear.presence | PRESENCE | COMPLETENESS | — | True |  |  | The text, year field is missing in FlexibleDate record {recordId}. | True |
-| VT.SHARED_COMPONENTS.FlexibleDate.Year | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Year.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=2100 |  | The year "{value}" in flexible date record linked with record {recordid} must be less than or equal to 2100. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Year | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Year.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1900 |  | The year "{value}" in flexible date record linked with record {recordid} must be greater than or equal to 1900. | False |
-| VT.SHARED_COMPONENTS.FlexibleDate.Year | 3 | RECOMMENDED | C.SHARED_COMPONENTS.FlexibleDate.Year.presence | PRESENCE | COMPLETENESS | — | False |  |  | The year field is missing in flexible date linked with record {recordid}. The year field is mandatory. | False |
-| VT.SHARED_COMPONENTS.GeoLocation.Address | 3 | RECOMMENDED | C.SHARED_COMPONENTS.GeoLocation.Address.presence | PRESENCE | COMPLETENESS | — | False |  |  | The address field is missing in geolocation linked with record {recordid}. Although the address field is not mandatory, it is recommended. | False |
-| VT.SHARED_COMPONENTS.GeoLocation.Latitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Latitude.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=90 |  | The latitude "{value}" in GeoLocation record {recordId} must be less than or equal to {maxValue}. | True |
-| VT.SHARED_COMPONENTS.GeoLocation.Latitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Latitude.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=-90 |  | The latitude "{value}" in GeoLocation record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.SHARED_COMPONENTS.GeoLocation.Latitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Latitude.presence | PRESENCE | COMPLETENESS | — | True |  |  | The latitude field is missing in geolocation linked with record {recordid}. The latitude field is mandatory. | False |
-| VT.SHARED_COMPONENTS.GeoLocation.Longitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Longitude.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=180 |  | The longitude "{value}" in GeoLocation record {recordId} must be less than or equal to {maxValue}. | True |
-| VT.SHARED_COMPONENTS.GeoLocation.Longitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Longitude.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=-180 |  | The longitude "{value}" in GeoLocation record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.SHARED_COMPONENTS.GeoLocation.Longitude | 5 | MANDATORY | C.SHARED_COMPONENTS.GeoLocation.Longitude.presence | PRESENCE | COMPLETENESS | — | True |  |  | The longitude field is missing in geolocation linked with record {recordid}. The longitude field is mandatory. | False |
-| VT.SHARED_COMPONENTS.Identifier.RegularExpression | 3 | RECOMMENDED | C.SHARED_COMPONENTS.Identifier.RegularExpression.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=It should be a valid regular expression |  | The regular expression "{value}" in identifier record {recordId} must be a valid regular expression. | True |
-| VT.SHARED_COMPONENTS.Identifier.RegularExpression | 3 | RECOMMENDED | C.SHARED_COMPONENTS.Identifier.RegularExpression.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The regular expression "{value}" in identifier record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.Identifier.RegularExpression | 3 | RECOMMENDED | C.SHARED_COMPONENTS.Identifier.RegularExpression.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The regular expression "{value}" in identifier record {recordId} must contain at least 1 character. | False |
-| VT.SHARED_COMPONENTS.Identifier.RegularExpression | 3 | RECOMMENDED | C.SHARED_COMPONENTS.Identifier.RegularExpression.presence | PRESENCE | COMPLETENESS | — | False |  |  | The regular expression field is missing in identifier record {recordid}. Although the regular expression field is not mandatory, it is recommended. | False |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The languageCode "{value}" in Language record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The language code "{value}" in language linked with record {recordid} must contain exactly 2 characters. | False |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.presence | PRESENCE | COMPLETENESS | — | True |  |  | The language code field is missing in language linked with record {recordid}. The language code field is mandatory. | False |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[a-z]{2}$ |  | The languageCode "{value}" in Language record {recordId} is not in a valid format. | True |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The language code value "{value}" in language linked with record {recordid} must be unique. | False |
-| VT.SHARED_COMPONENTS.Language.LanguageCode | 5 | MANDATORY | C.SHARED_COMPONENTS.Language.LanguageCode.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The languageCode value "{value}" in Language record {recordId} is not contained in the configured vocabulary. | True |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=10 |  | The language tag "{value}" in language tag linked with record {recordid} exceeds the maximum allowed length of 10 characters. | False |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The language tag "{value}" in language tag linked with record {recordid} must contain at least 2 characters. | False |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.presence | PRESENCE | COMPLETENESS | — | True |  |  | The language tag field is missing in language tag linked with record {recordid}. The language tag field is mandatory. | False |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[a-z]{2}(_([a-zA-Z]{2}){1,2})?_[A-Z]{2}$ |  | The language tag "{value}" in language tag linked with record {recordid} is not in a valid format. Expected format: language_COUNTRY_Script, for example pt_PT. | False |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  |  | The language tag value "{value}" in language tag linked with record {recordid} must be unique. | False |
-| VT.SHARED_COMPONENTS.LanguageTag.LanguageTag | 5 | MANDATORY | C.SHARED_COMPONENTS.LanguageTag.LanguageTag.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The languageTag value "{value}" in LanguageTag record {recordId} is not contained in the configured vocabulary. | True |
-| VT.SHARED_COMPONENTS.MonetaryAmount.Amount | 5 | MANDATORY | C.SHARED_COMPONENTS.MonetaryAmount.Amount.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=1000000000 | GR.PTCRIS_F1_01DCONSIST.negative_or_zero_funding_anomaly_detection | The amount "{value}" in MonetaryAmount record {recordId} must be less than or equal to {maxValue}. | True |
-| VT.SHARED_COMPONENTS.MonetaryAmount.Amount | 5 | MANDATORY | C.SHARED_COMPONENTS.MonetaryAmount.Amount.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=>0 | GR.PTCRIS_F1_01DCONSIST.negative_or_zero_funding_anomaly_detection | The amount "{value}" in MonetaryAmount record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.SHARED_COMPONENTS.MonetaryAmount.Amount | 5 | MANDATORY | C.SHARED_COMPONENTS.MonetaryAmount.Amount.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCONSIST.negative_or_zero_funding_anomaly_detection | The amount field is missing in monetary amount linked with record {recordid}. The amount field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=10000 |  | The height "{value}" in profile photo linked with record {recordid} must be less than or equal to 10000. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The height "{value}" in profile photo linked with record {recordid} must be greater than or equal to 1. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.presence | PRESENCE | COMPLETENESS | — | True |  |  | The height field is missing in profile photo linked with record {recordid}. The height field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=10000 |  | The left offset "{value}" in profile photo linked with record {recordid} must be less than or equal to 10000. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=0 |  | The leftOffset "{value}" in ProfilePhotoOrLogo record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.presence | PRESENCE | COMPLETENESS | — | True |  |  | The left offset field is missing in profile photo linked with record {recordid}. The left offset field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=10000 |  | The top offset "{value}" in profile photo linked with record {recordid} must be less than or equal to 10000. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=0 |  | The topOffset "{value}" in ProfilePhotoOrLogo record {recordId} must be greater than or equal to {minValue}. | True |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.presence | PRESENCE | COMPLETENESS | — | True |  |  | The top offset field is missing in profile photo linked with record {recordid}. The top offset field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.maxValue | MAX_VALUE | CONSISTENCY | 1.0 | True | maxValue=10000 |  | The width "{value}" in profile photo linked with record {recordid} must be less than or equal to 10000. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.minValue | MIN_VALUE | CONSISTENCY | 3.0 | True | minValue=1 |  | The width "{value}" in profile photo linked with record {recordid} must be greater than or equal to 1. | False |
-| VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width | 5 | MANDATORY | C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.presence | PRESENCE | COMPLETENESS | — | True |  |  | The width field is missing in profile photo linked with record {recordid}. The width field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ResearchArea.Name | 5 | MANDATORY | C.SHARED_COMPONENTS.ResearchArea.Name.maxCardinality | MAX_CARDINALITY | CONSISTENCY | 1.0 | True | maxCardinality=255 |  | The name "{value}" in research area linked with record {recordid} exceeds the maximum allowed length of 255 characters. | False |
-| VT.SHARED_COMPONENTS.ResearchArea.Name | 5 | MANDATORY | C.SHARED_COMPONENTS.ResearchArea.Name.minCardinality | MIN_CARDINALITY | COMPLETENESS | 3.0 | True | minCardinality=1 |  | The name "{value}" in research area linked with record {recordid} must contain at least 1 character. | False |
-| VT.SHARED_COMPONENTS.ResearchArea.Name | 5 | MANDATORY | C.SHARED_COMPONENTS.ResearchArea.Name.presence | PRESENCE | COMPLETENESS | — | True |  |  | The name field is missing in research area linked with record {recordid}. The name field is mandatory. | False |
-| VT.SHARED_COMPONENTS.ResearchArea.Name | 5 | MANDATORY | C.SHARED_COMPONENTS.ResearchArea.Name.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The name value "{value}" in ResearchArea record {recordId} is not contained in the configured vocabulary. | True |
+## `Contact.contactEmail`
+
+Validation Target: `VT.SHARED_COMPONENTS.Contact.ContactEmail`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Contact.ContactEmail.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Contact.contactEmail exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.ContactEmail.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Contact.contactEmail is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.ContactEmail.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Contact.contactEmail does not match the required format. | UNMAPPED |
+
+## `Contact.faxNumber`
+
+Validation Target: `VT.SHARED_COMPONENTS.Contact.FaxNumber`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Contact.FaxNumber.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Contact.faxNumber exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.FaxNumber.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Contact.faxNumber is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.FaxNumber.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Contact.faxNumber does not match the required format. | UNMAPPED |
+
+## `Contact.mobilePhoneNumber`
+
+Validation Target: `VT.SHARED_COMPONENTS.Contact.MobilePhoneNumber`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Contact.mobilePhoneNumber exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Contact.mobilePhoneNumber is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.MobilePhoneNumber.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Contact.mobilePhoneNumber does not match the required format. | UNMAPPED |
+
+## `Contact.phoneNumber`
+
+Validation Target: `VT.SHARED_COMPONENTS.Contact.PhoneNumber`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Contact.PhoneNumber.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Contact.phoneNumber exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.PhoneNumber.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Contact.phoneNumber is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Contact.PhoneNumber.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Contact.phoneNumber does not match the required format. | UNMAPPED |
+
+## `Country.code`
+
+Validation Target: `VT.SHARED_COMPONENTS.Country.Code`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Country.Code.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Country.code exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Country.Code.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Country.code is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Country.Code.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Country.code is required. | UNMAPPED |
+| C.SHARED_COMPONENTS.Country.Code.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Country.code must be unique within the repository. | UNMAPPED |
+| C.SHARED_COMPONENTS.Country.Code.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Country.code must belong to the configured controlled vocabulary. | GR.PTCRIS_F1_01DSEMANT.standardized_geopolitical_country_coding |
+
+## `Currency.code`
+
+Validation Target: `VT.SHARED_COMPONENTS.Currency.Code`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Currency.Code.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Currency.code exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Code.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Currency.code is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Code.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Currency.code is required. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Code.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Currency.code does not match the required format. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Code.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Currency.code must be unique within the repository. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Code.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Currency.code must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Currency.symbol`
+
+Validation Target: `VT.SHARED_COMPONENTS.Currency.Symbol`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Currency.Symbol.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Currency.symbol exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Symbol.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Currency.symbol is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Currency.Symbol.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Currency.symbol must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `EntityIndicator.numericValue, booleanValue, textualValue`
+
+Validation Target: `VT.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | An entity indicator must contain at least one value compatible with the linked indicator content type: numeric, boolean, or textual. | UNMAPPED |
+| C.SHARED_COMPONENTS.EntityIndicator.NumericValueBooleanValueTextualValue.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for EntityIndicator.numericValue, booleanValue, textualValue is required. | UNMAPPED |
+
+## `EntityIndicator.subclass`
+
+Validation Target: `VT.SHARED_COMPONENTS.EntityIndicator.Subclass`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.EntityIndicator.Subclass.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The entity-indicator subclass must be compatible with the applicable types of the linked indicator. | UNMAPPED |
+
+## `FlexibleDate.day`
+
+Validation Target: `VT.SHARED_COMPONENTS.FlexibleDate.Day`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.FlexibleDate.Day.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The day value must be valid for the selected month. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Day.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of FlexibleDate.day exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Day.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of FlexibleDate.day is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Day.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for FlexibleDate.day is recommended. | UNMAPPED |
+
+## `FlexibleDate.month`
+
+Validation Target: `VT.SHARED_COMPONENTS.FlexibleDate.Month`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.FlexibleDate.Month.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of FlexibleDate.month exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Month.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of FlexibleDate.month is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Month.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for FlexibleDate.month is recommended. | UNMAPPED |
+
+## `FlexibleDate.text, year`
+
+Validation Target: `VT.SHARED_COMPONENTS.FlexibleDate.TextYear`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.FlexibleDate.TextYear.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | A flexible date must contain at least a year or a textual date representation. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.TextYear.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for FlexibleDate.text, year is required. | UNMAPPED |
+
+## `FlexibleDate.year`
+
+Validation Target: `VT.SHARED_COMPONENTS.FlexibleDate.Year`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.FlexibleDate.Year.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of FlexibleDate.year exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Year.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of FlexibleDate.year is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.FlexibleDate.Year.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for FlexibleDate.year is recommended. | UNMAPPED |
+
+## `GeoLocation.address`
+
+Validation Target: `VT.SHARED_COMPONENTS.GeoLocation.Address`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.GeoLocation.Address.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for GeoLocation.address is recommended. | UNMAPPED |
+
+## `GeoLocation.latitude`
+
+Validation Target: `VT.SHARED_COMPONENTS.GeoLocation.Latitude`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.GeoLocation.Latitude.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of GeoLocation.latitude exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.GeoLocation.Latitude.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of GeoLocation.latitude is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.GeoLocation.Latitude.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for GeoLocation.latitude is required. | UNMAPPED |
+
+## `GeoLocation.longitude`
+
+Validation Target: `VT.SHARED_COMPONENTS.GeoLocation.Longitude`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.GeoLocation.Longitude.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of GeoLocation.longitude exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.GeoLocation.Longitude.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of GeoLocation.longitude is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.GeoLocation.Longitude.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for GeoLocation.longitude is required. | UNMAPPED |
+
+## `Identifier.regularExpression`
+
+Validation Target: `VT.SHARED_COMPONENTS.Identifier.RegularExpression`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Identifier.RegularExpression.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | The configured regular expression must be syntactically valid. | UNMAPPED |
+| C.SHARED_COMPONENTS.Identifier.RegularExpression.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Identifier.regularExpression exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Identifier.RegularExpression.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Identifier.regularExpression is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Identifier.RegularExpression.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Identifier.regularExpression is recommended. | UNMAPPED |
+
+## `Language.languageCode`
+
+Validation Target: `VT.SHARED_COMPONENTS.Language.LanguageCode`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.Language.LanguageCode.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Language.languageCode exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Language.LanguageCode.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Language.languageCode is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.Language.LanguageCode.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Language.languageCode is required. | UNMAPPED |
+| C.SHARED_COMPONENTS.Language.LanguageCode.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Language.languageCode does not match the required format. | UNMAPPED |
+| C.SHARED_COMPONENTS.Language.LanguageCode.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Language.languageCode must be unique within the repository. | UNMAPPED |
+| C.SHARED_COMPONENTS.Language.LanguageCode.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Language.languageCode must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageTag.languageTag`
+
+Validation Target: `VT.SHARED_COMPONENTS.LanguageTag.LanguageTag`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageTag.languageTag exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageTag.languageTag is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for LanguageTag.languageTag is required. | UNMAPPED |
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of LanguageTag.languageTag does not match the required format. | UNMAPPED |
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of LanguageTag.languageTag must be unique within the repository. | UNMAPPED |
+| C.SHARED_COMPONENTS.LanguageTag.LanguageTag.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageTag.languageTag must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `MonetaryAmount.amount`
+
+Validation Target: `VT.SHARED_COMPONENTS.MonetaryAmount.Amount`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.MonetaryAmount.Amount.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of MonetaryAmount.amount exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.MonetaryAmount.Amount.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of MonetaryAmount.amount is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.MonetaryAmount.Amount.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for MonetaryAmount.amount is required. | UNMAPPED |
+
+## `ProfilePhotoOrLogo.height`
+
+Validation Target: `VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ProfilePhotoOrLogo.height exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ProfilePhotoOrLogo.height is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Height.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for ProfilePhotoOrLogo.height is required. | UNMAPPED |
+
+## `ProfilePhotoOrLogo.leftOffset`
+
+Validation Target: `VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ProfilePhotoOrLogo.leftOffset exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ProfilePhotoOrLogo.leftOffset is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for ProfilePhotoOrLogo.leftOffset is required. | UNMAPPED |
+
+## `ProfilePhotoOrLogo.topOffset`
+
+Validation Target: `VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ProfilePhotoOrLogo.topOffset exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ProfilePhotoOrLogo.topOffset is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for ProfilePhotoOrLogo.topOffset is required. | UNMAPPED |
+
+## `ProfilePhotoOrLogo.width`
+
+Validation Target: `VT.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.maxValue | MAX_VALUE | CONSISTENCY | ERROR | True | 1.0 | The value of ProfilePhotoOrLogo.width exceeds the maximum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.minValue | MIN_VALUE | CONSISTENCY | ERROR | True | 3.0 | The value of ProfilePhotoOrLogo.width is below the minimum allowed value. | UNMAPPED |
+| C.SHARED_COMPONENTS.ProfilePhotoOrLogo.Width.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for ProfilePhotoOrLogo.width is required. | UNMAPPED |
+
+## `ResearchArea.name`
+
+Validation Target: `VT.SHARED_COMPONENTS.ResearchArea.Name`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.SHARED_COMPONENTS.ResearchArea.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of ResearchArea.name exceeds the maximum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.ResearchArea.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of ResearchArea.name is shorter than the minimum allowed length. | UNMAPPED |
+| C.SHARED_COMPONENTS.ResearchArea.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for ResearchArea.name is required. | UNMAPPED |
+| C.SHARED_COMPONENTS.ResearchArea.Name.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of ResearchArea.name must belong to the configured controlled vocabulary. | UNMAPPED |

@@ -1,6 +1,6 @@
 # PT Data Quality Repository
 
-This site is generated from the authoritative XLSX Rule Specification Repository.
+This site is generated from the authoritative XLSX Rule Specification Repository (RSR).
 
 ## Available Data Quality Profiles
 
@@ -10,4 +10,4 @@ This site is generated from the authoritative XLSX Rule Specification Repository
 
 ## Repository principle
 
-The XLSX source is maintained by governance/domain experts. JSON, implementation configuration, documentation, validation reports, SHACL and Schematron artefacts are derived outputs and must not be edited manually.
+Validation Targets define what is assessed. Constraints define executable validation conditions. The former one-to-one Rule layer is not part of RSR schema 2.0.

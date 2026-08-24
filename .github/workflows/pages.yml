@@ -1,9 +1,6 @@
 name: Publish data quality documentation
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:

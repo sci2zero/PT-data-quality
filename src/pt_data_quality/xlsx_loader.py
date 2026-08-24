@@ -11,6 +11,11 @@ def _normalise_header(value: Any) -> str:
     return str(value).strip() if value is not None else ""
 
 
+def _headers(book: XlsxWorkbook, sheet_name: str) -> list[str]:
+    rows = book.rows(sheet_name)
+    return [_normalise_header(v) for v in rows[0]] if rows else []
+
+
 def _records(book: XlsxWorkbook, sheet_name: str, key_field: str) -> list[Row]:
     rows = book.rows(sheet_name)
     if not rows:
@@ -30,6 +35,13 @@ def load_repository(xlsx_path: str | Path, schema: dict[str, Any]) -> Repository
         missing = [spec["name"] for spec in sheets.values() if spec["name"] not in book.sheet_names]
         if missing:
             raise ValueError(f"Missing required XLSX sheets: {', '.join(missing)}")
+
+        for logical_name, spec in sheets.items():
+            headers = set(_headers(book, spec["name"]))
+            required = set(spec.get("required", []))
+            absent = sorted(required - headers)
+            if absent:
+                raise ValueError(f"Sheet {spec['name']} is missing required columns: {', '.join(absent)}")
 
         metadata_rows = _records(book, sheets["repository_metadata"]["name"], sheets["repository_metadata"]["key_field"])
         metadata = {str(r.get("property")): r.get("value") for r in metadata_rows}

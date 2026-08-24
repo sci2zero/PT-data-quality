@@ -1,122 +1,487 @@
-# PERSON — PTCRIS-DATAGOV-1.0.0
+# PERSON
 
-| Validation target | Importance | Requirement | Constraint | Type | Dimension | Weight | Blocking | Parameters | Governance | Message | Review |
-|---|---:|---|---|---|---|---:|---|---|---|---|---|
-| VT.PERSON.Education.DegreeType | 5 | MANDATORY | C.PERSON.Education.DegreeType.presence | PRESENCE | COMPLETENESS | — | True |  |  | The degree type field is missing in education record {recordId}. The degree type field is mandatory. | False |
-| VT.PERSON.Education.DegreeType | 5 | MANDATORY | C.PERSON.Education.DegreeType.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The degree type value "{value}" in education record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.Education.EducationStatus | 3 | RECOMMENDED | C.PERSON.Education.EducationStatus.presence | PRESENCE | COMPLETENESS | — | False |  |  | The education status field is missing in education record {recordId}. Although the education status field is not mandatory, it is recommended. | False |
-| VT.PERSON.Education.EducationStatus | 3 | RECOMMENDED | C.PERSON.Education.EducationStatus.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The education status value "{value}" in education record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.Employment.EmploymentPositionHierarchy | 5 | MANDATORY | C.PERSON.Employment.EmploymentPositionHierarchy.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DSEMANT.type_professional_path_classification_validation | The employment position hierarchy field is missing in employment record {recordId}. The employment position hierarchy field is mandatory. | False |
-| VT.PERSON.Employment.EmploymentPositionHierarchy | 5 | MANDATORY | C.PERSON.Employment.EmploymentPositionHierarchy.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_F1_01DSEMANT.type_professional_path_classification_validation | The employment position hierarchy value "{value}" in employment record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.ExpertiseOrSkill.ResearchAreas | 3 | RECOMMENDED | C.PERSON.ExpertiseOrSkill.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | False |  |  | There is no any research area linked with the skill/expertise record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.PERSON.ExpertiseOrSkill.ResearchAreas | 3 | RECOMMENDED | C.PERSON.ExpertiseOrSkill.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in ExpertiseOrSkill record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PERSON.Involvement.FromDate | 3 | RECOMMENDED | C.PERSON.Involvement.FromDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date + 3 years) | GR.PTCRIS_F1_01DSTRUCT.validation_of_the_format_of_the_start_date_of_the_professional_career | The start date ({value1}) in involvement record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.PERSON.Involvement.FromDate | 3 | RECOMMENDED | C.PERSON.Involvement.FromDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=max(1900-01-01, involvement.organisationUnit.dateEstablished) | GR.PTCRIS_F1_01DSTRUCT.validation_of_the_format_of_the_start_date_of_the_professional_career | The start date ({value1}) in involvement record {recordId} can't be before the year 1900. | False |
-| VT.PERSON.Involvement.FromDate | 3 | RECOMMENDED | C.PERSON.Involvement.FromDate.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DSTRUCT.validation_of_the_format_of_the_start_date_of_the_professional_career | The start date field is missing in involvement record {recordId}. Although the start date field is not mandatory, it is recommended. | False |
-| VT.PERSON.Involvement.FundingPartsFunding | 1 | OPTIONAL | C.PERSON.Involvement.FundingPartsFunding.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=If fundingParts and funding are specified, then involvement.fundingParts.funding should be same as involvement.funding |  | The involvement record {recordId} has inconsistent funding references: involvement.fundingParts.funding must match involvement.funding. | True |
-| VT.PERSON.Involvement.InvolvementType | 5 | MANDATORY | C.PERSON.Involvement.InvolvementType.presence | PRESENCE | COMPLETENESS | — | True |  |  | The involvement type field is missing in involvement record {recordId}. The involvement type field is mandatory. | False |
-| VT.PERSON.Involvement.InvolvementType | 5 | MANDATORY | C.PERSON.Involvement.InvolvementType.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The involvement type value "{value}" in involvement record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.Involvement.ToDate | 1 | OPTIONAL | C.PERSON.Involvement.ToDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=involvement.organisationUnit.dateDissolved |  | The to date ({value1}) in involvement record {recordId1} can't be after the linked organisation {recordId2} unit dissolution date ({value2}). | False |
-| VT.PERSON.Involvement.ToDate | 1 | OPTIONAL | C.PERSON.Involvement.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=fromDate |  | The end date ({value1}) in involvement record {recordId} can't be before the start date ({value2}). | False |
-| VT.PERSON.LanguageKnowledge.AcademicReview | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicReview.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The academic review "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.AcademicReview | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicReview.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The academic review "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.AcademicReview | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicReview.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The academic review value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.AcademicWriting | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicWriting.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The academic writing "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.AcademicWriting | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicWriting.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The academic writing "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.AcademicWriting | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.AcademicWriting.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The academic writing value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.Listening | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Listening.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The listening "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Listening | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Listening.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The listening "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Listening | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Listening.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The listening value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.Overall | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Overall.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The overall "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Overall | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Overall.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The overall "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Overall | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Overall.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The overall value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.Reading | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Reading.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The reading "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Reading | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Reading.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The reading "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Reading | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Reading.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The reading value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.Speaking | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Speaking.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The speaking "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Speaking | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Speaking.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The speaking "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Speaking | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Speaking.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The speaking value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.LanguageKnowledge.Writing | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Writing.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=2 |  | The writing "{value}" in language knowledge record {recordId} exceeds the maximum allowed length of 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Writing | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Writing.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 |  | The writing "{value}" in language knowledge record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.LanguageKnowledge.Writing | 1 | OPTIONAL | C.PERSON.LanguageKnowledge.Writing.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The writing value "{value}" in language knowledge record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.Membership.MembershipType | 5 | MANDATORY | C.PERSON.Membership.MembershipType.presence | PRESENCE | COMPLETENESS | — | True |  |  | The membership type field is missing in membership record {recordId}. The membership type field is mandatory. | False |
-| VT.PERSON.Membership.MembershipType | 5 | MANDATORY | C.PERSON.Membership.MembershipType.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The membership type value "{value}" in membership record {recordId} is not aligned with the configured controlled vocabulary. | False |
-| VT.PERSON.Person.AuthenticusId | 1 | OPTIONAL | C.PERSON.Person.AuthenticusId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=7 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The authenticus id "{value}" in person record {recordId} exceeds the maximum allowed length of 7 characters. | False |
-| VT.PERSON.Person.AuthenticusId | 1 | OPTIONAL | C.PERSON.Person.AuthenticusId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=7 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The authenticus id "{value}" in person record {recordId} must contain at least 7 characters. | False |
-| VT.PERSON.Person.AuthenticusId | 1 | OPTIONAL | C.PERSON.Person.AuthenticusId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[A-Z]-[0-9A-Z]{3}-[0-9A-Z]{3}$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The authenticus id "{value}" in person record {recordId} is not in a valid format. Expected format: A-XXX-XXX (X can be only a digit or an uppercase letter). | False |
-| VT.PERSON.Person.AuthenticusId | 1 | OPTIONAL | C.PERSON.Person.AuthenticusId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The authenticus id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.Person.Biography | 5 | MANDATORY | C.PERSON.Person.Biography.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=100 | GR.PTCRIS_FsF_F2_01M.metric_requirement | The biography "{value}" in Person record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.Person.Biography | 5 | MANDATORY | C.PERSON.Person.Biography.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_F2_01M.metric_requirement | The biography field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.CreateDate | 5 | MANDATORY | C.PERSON.Person.CreateDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The createDate field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.Involvements | 5 | MANDATORY | C.PERSON.Person.Involvements.custom | CUSTOM | CONSISTENCY | 5.0 | True | expression=At least one employment should be linked with Portuguese researcher with startDate, it represents Start Date of Professional Career. Moreover, linked Employment should include employment position. | GR.PTCRIS_F1_01DCURREN.mandatory_start_date_of_professional_career | The person record {recordId} must have at least one linked employment with a start date and employment position. | True |
-| VT.PERSON.Person.Involvements | 5 | MANDATORY | C.PERSON.Person.Involvements.maxValueOrLength | MAX_VALUE_OR_LENGTH | CONSISTENCY | 1.0 | True | maxValueOrLength=30 | GR.PTCRIS_F1_01DCURREN.mandatory_start_date_of_professional_career | The involvements value "{value}" in Person record {recordId} exceeds the configured maximum {maxValueOrLength}. | True |
-| VT.PERSON.Person.Involvements | 5 | MANDATORY | C.PERSON.Person.Involvements.minValueOrLength | MIN_VALUE_OR_LENGTH | CONSISTENCY | 3.0 | True | minValueOrLength=1 | GR.PTCRIS_F1_01DCURREN.mandatory_start_date_of_professional_career | The involvements value "{value}" in Person record {recordId} is below the configured minimum {minValueOrLength}. | True |
-| VT.PERSON.Person.Involvements | 5 | MANDATORY | C.PERSON.Person.Involvements.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DCURREN.mandatory_start_date_of_professional_career | The involvements field is missing in person record {recordId}. The involvements field is mandatory. | False |
-| VT.PERSON.Person.LastModificationDate | 5 | MANDATORY | C.PERSON.Person.LastModificationDate.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DLINEAGE.metric_requirement | The lastModificationDate field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.LattesId | 1 | OPTIONAL | C.PERSON.Person.LattesId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=16 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The lattes id "{value}" in person record {recordId} exceeds the maximum allowed length of 16 characters. | False |
-| VT.PERSON.Person.LattesId | 1 | OPTIONAL | C.PERSON.Person.LattesId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=16 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The lattes id "{value}" in person record {recordId} must contain at least 16 characters. | False |
-| VT.PERSON.Person.LattesId | 1 | OPTIONAL | C.PERSON.Person.LattesId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\d{16}$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The lattesId "{value}" in Person record {recordId} is not in a valid format. | True |
-| VT.PERSON.Person.LattesId | 1 | OPTIONAL | C.PERSON.Person.LattesId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The lattes id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.Person.MetadataAccessLevel | 5 | MANDATORY | C.PERSON.Person.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.MetadataAccessLevel | 5 | MANDATORY | C.PERSON.Person.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_A1_01M.metric_requirement | The metadataAccessLevel value "{value}" in Person record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PERSON.Person.MetadataLicense | 5 | MANDATORY | C.PERSON.Person.MetadataLicense.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.MetadataLicense | 5 | MANDATORY | C.PERSON.Person.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  | GR.PTCRIS_FsF_R1_1_01M.metric_requirement | The metadataLicense value "{value}" in Person record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PERSON.Person.Name | 5 | MANDATORY | C.PERSON.Person.Name.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=20 | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation | The name "{value}" in Person record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.PERSON.Person.Name | 5 | MANDATORY | C.PERSON.Person.Name.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation | The name "{value}" in Person record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.Person.Name | 5 | MANDATORY | C.PERSON.Person.Name.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation | The name field is missing in Person record {recordId}. | True |
-| VT.PERSON.Person.NationalIdCienciaId | 5 | MANDATORY | C.PERSON.Person.NationalIdCienciaId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=12 | GR.PTCRIS_DQ_F1_01IDUNIQ.metric_requirement, GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The cienciaId "{value}" in person record {recordId} exceeds the maximum allowed length of 12 characters. | False |
-| VT.PERSON.Person.NationalIdCienciaId | 5 | MANDATORY | C.PERSON.Person.NationalIdCienciaId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=12 | GR.PTCRIS_DQ_F1_01IDUNIQ.metric_requirement, GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The cienciaId "{value}" in person record {recordId} must contain at least 12 characters. | False |
-| VT.PERSON.Person.NationalIdCienciaId | 5 | MANDATORY | C.PERSON.Person.NationalIdCienciaId.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_DQ_F1_01IDUNIQ.metric_requirement, GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The cienciaId field is missing in person record {recordId}. The cienciaId field is mandatory. | False |
-| VT.PERSON.Person.NationalIdCienciaId | 5 | MANDATORY | C.PERSON.Person.NationalIdCienciaId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[0-9A-F]{4}[.-]{1}[0-9A-F]{4}[.-]{1}[0-9A-F]{4}$ | GR.PTCRIS_DQ_F1_01IDUNIQ.metric_requirement, GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The cienciaId "{value}" in person record {recordId} is not in a valid format. Expected format: XXXX-XXXX-XXXX (X can be only a digit or uppercase letters A-F). | False |
-| VT.PERSON.Person.NationalIdCienciaId | 5 | MANDATORY | C.PERSON.Person.NationalIdCienciaId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_DQ_F1_01IDUNIQ.metric_requirement, GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The cienciaId value "{value}" in person record {recordId} must be unique. There is already a record {recordId2} with the same value of cienciaId. | False |
-| VT.PERSON.Person.OpenAlexId | 1 | OPTIONAL | C.PERSON.Person.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=16 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The open alex id "{value}" in person record {recordId} exceeds the maximum allowed length of 16 characters. | False |
-| VT.PERSON.Person.OpenAlexId | 1 | OPTIONAL | C.PERSON.Person.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=6 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The open alex id "{value}" in person record {recordId} must contain at least 6 characters. | False |
-| VT.PERSON.Person.OpenAlexId | 1 | OPTIONAL | C.PERSON.Person.OpenAlexId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^A[0-9]{5,15}$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The open alex id "{value}" in person record {recordId} is not in a valid format. Expected format: A followed by 5 to 15 digits. | False |
-| VT.PERSON.Person.OpenAlexId | 1 | OPTIONAL | C.PERSON.Person.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The open alex id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=19 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID "{value}" in person record {recordId} exceeds the maximum allowed length of 19 characters. | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=19 | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID "{value}" in person record {recordId} must contain at least 19 characters. | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID field is missing in person record {recordId}. Although the orcid field is not mandatory, it is recommended. | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\d{4}-\d{4}-\d{4}-\d{4}$ | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID "{value}" in person record {recordId} is not in a valid format. Expected format: XXXX-XXXX-XXXX-XXXX (X can be only a digit, not a letter). | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.resolvable | RESOLVABLE | ACCURACY | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID value "{value}" in project record {recordId} must be resolvable (https://orcid.org/{value}). | False |
-| VT.PERSON.Person.Orcid | 3 | RECOMMENDED | C.PERSON.Person.Orcid.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation, GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification, GR.PTCRIS_F1_A1.resolvable_pid | The ORCID value "{value}" in person record {recordId1} must be unique. There is already a record {recordId2} with the same value of DOI. | False |
-| VT.PERSON.Person.ScholarId | 1 | OPTIONAL | C.PERSON.Person.ScholarId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=12 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The scholar id "{value}" in person record {recordId} exceeds the maximum allowed length of 12 characters. | False |
-| VT.PERSON.Person.ScholarId | 1 | OPTIONAL | C.PERSON.Person.ScholarId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=10 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The scholar id "{value}" in person record {recordId} must contain at least 10 characters. | False |
-| VT.PERSON.Person.ScholarId | 1 | OPTIONAL | C.PERSON.Person.ScholarId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[a-zA-Z0-9_-]{10,12}$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The scholarId "{value}" in Person record {recordId} is not in a valid format. | True |
-| VT.PERSON.Person.ScholarId | 1 | OPTIONAL | C.PERSON.Person.ScholarId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.metric_requirement | The scholar id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.Person.ScopusAuthorId | 1 | OPTIONAL | C.PERSON.Person.ScopusAuthorId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=20 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.scopus_author_id_format_validation | The scopus author id "{value}" in person record {recordId} exceeds the maximum allowed length of 20 characters. | False |
-| VT.PERSON.Person.ScopusAuthorId | 1 | OPTIONAL | C.PERSON.Person.ScopusAuthorId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.scopus_author_id_format_validation | The scopus author id "{value}" in person record {recordId} must contain at least 1 character. | False |
-| VT.PERSON.Person.ScopusAuthorId | 1 | OPTIONAL | C.PERSON.Person.ScopusAuthorId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^\d+$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.scopus_author_id_format_validation | The scopus author id "{value}" in person record {recordId} contains invalid characters. Only digits are allowed. | False |
-| VT.PERSON.Person.ScopusAuthorId | 1 | OPTIONAL | C.PERSON.Person.ScopusAuthorId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.scopus_author_id_format_validation | The scopus author id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.Person.WebOfScienceResearcherId | 1 | OPTIONAL | C.PERSON.Person.WebOfScienceResearcherId.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=11 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.web_of_science_researcher_id_format_validation | The web of science researcher id "{value}" in person record {recordId} exceeds the maximum allowed length of 11 characters. | False |
-| VT.PERSON.Person.WebOfScienceResearcherId | 1 | OPTIONAL | C.PERSON.Person.WebOfScienceResearcherId.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=11 | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.web_of_science_researcher_id_format_validation | The web of science researcher id "{value}" in person record {recordId} must contain at least 11 characters. | False |
-| VT.PERSON.Person.WebOfScienceResearcherId | 1 | OPTIONAL | C.PERSON.Person.WebOfScienceResearcherId.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[A-Z]-\d{4}-\d{4}$ | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.web_of_science_researcher_id_format_validation | The web of science researcher id "{value}" in person record {recordId} is not in a valid format. Expected format: A-XXXX-XXXX (X can be only a digit, not a letter). | False |
-| VT.PERSON.Person.WebOfScienceResearcherId | 1 | OPTIONAL | C.PERSON.Person.WebOfScienceResearcherId.unique | UNIQUENESS | UNIQUENESS | 5.0 | True |  | GR.PTCRIS_F1_01DACURR.metric_requirement, GR.PTCRIS_F1_01DSTRUCT.web_of_science_researcher_id_format_validation | The web of science researcher id value "{value}" in person record {recordId} must be unique. | False |
-| VT.PERSON.PersonName.Firstname | 1 | OPTIONAL | C.PERSON.PersonName.Firstname.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The first name in person record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.PERSON.PersonName.Firstname | 1 | OPTIONAL | C.PERSON.PersonName.Firstname.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The firstname "{value}" in PersonName record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.PersonName.Firstname | 1 | OPTIONAL | C.PERSON.PersonName.Firstname.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[A-Za-zA-ÿ\s\.\-]{1,255}$ |  | The first name "{value}" in person record {recordId} contains invalid characters. Only letters, spaces, dots, and hyphens are allowed. | False |
-| VT.PERSON.PersonName.Lastname | 5 | MANDATORY | C.PERSON.PersonName.Lastname.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation, GR.PTCRIS_F1_01DSTRUCT.standardized_citation_name_format_verification | The last name "{value}" in person record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.PERSON.PersonName.Lastname | 5 | MANDATORY | C.PERSON.PersonName.Lastname.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=2 | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation, GR.PTCRIS_F1_01DSTRUCT.standardized_citation_name_format_verification | The last name "{value}" in person record {recordId} must contain at least 2 characters. | False |
-| VT.PERSON.PersonName.Lastname | 5 | MANDATORY | C.PERSON.PersonName.Lastname.presence | PRESENCE | COMPLETENESS | — | True |  | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation, GR.PTCRIS_F1_01DSTRUCT.standardized_citation_name_format_verification | The last name is missing in person record {recordId}. A last name is mandatory. | False |
-| VT.PERSON.PersonName.Lastname | 5 | MANDATORY | C.PERSON.PersonName.Lastname.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[A-Za-zA-ÿ\s\.\-]{2,255}$ | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation, GR.PTCRIS_F1_01DSTRUCT.standardized_citation_name_format_verification | The last name "{value}" in person record {recordId} contains invalid characters. Only letters, spaces, dots, and hyphens are allowed. | False |
-| VT.PERSON.PersonName.OtherName | 1 | OPTIONAL | C.PERSON.PersonName.OtherName.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=255 |  | The other name "{value}" in person record {recordId} exceeds the maximum allowed length of 255 characters. | False |
-| VT.PERSON.PersonName.OtherName | 1 | OPTIONAL | C.PERSON.PersonName.OtherName.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The otherName "{value}" in PersonName record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.PersonName.OtherName | 1 | OPTIONAL | C.PERSON.PersonName.OtherName.pattern | REGEX | VALIDITY | 3.0 | True | pattern=^[A-Za-zA-ÿ\s\.\-]{1,255}$ |  | The other name "{value}" in person record {recordId} contains invalid characters. Only letters, spaces, dots, and hyphens are allowed. | False |
-| VT.PERSON.PersonName.PersonNameType | 5 | MANDATORY | C.PERSON.PersonName.PersonNameType.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=1 |  | The personNameType "{value}" in PersonName record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.PERSON.PersonName.PersonNameType | 5 | MANDATORY | C.PERSON.PersonName.PersonNameType.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=1 |  | The personNameType "{value}" in PersonName record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.PersonName.PersonNameType | 5 | MANDATORY | C.PERSON.PersonName.PersonNameType.presence | PRESENCE | COMPLETENESS | — | True |  |  | The person name type field is missing in person record {recordId}. Although the person name type field is not mandatory, it is recommended. | False |
-| VT.PERSON.PersonName.PersonNameType | 5 | MANDATORY | C.PERSON.PersonName.PersonNameType.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The person name type value "{value}" in person record {recordId} is not aligned with the configured controlled vocabulary (PresentedName, DisplayName, CitationName, FullName). | False |
-| VT.PERSON.PersonalInfo.BirthDate | 3 | RECOMMENDED | C.PERSON.PersonalInfo.BirthDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date - 18 years) | GR.PTCRIS_F1_01DCONSIST.non_existent_or_futuristic_birth_date_restriction, GR.PTCRIS_F1_01DCURREN.minor_underage_researcher_validation | The birthDate value "{value}" in PersonalInfo record {recordId} is later than the configured maximum/date constraint {maxDate}. | True |
-| VT.PERSON.PersonalInfo.BirthDate | 3 | RECOMMENDED | C.PERSON.PersonalInfo.BirthDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=1900-01-01 | GR.PTCRIS_F1_01DCONSIST.non_existent_or_futuristic_birth_date_restriction, GR.PTCRIS_F1_01DCURREN.minor_underage_researcher_validation | The birth date ({value1}) in person record {recordId} can't be before the year 1900. | False |
-| VT.PERSON.PersonalInfo.BirthDate | 3 | RECOMMENDED | C.PERSON.PersonalInfo.BirthDate.presence | PRESENCE | COMPLETENESS | — | False |  | GR.PTCRIS_F1_01DCONSIST.non_existent_or_futuristic_birth_date_restriction, GR.PTCRIS_F1_01DCURREN.minor_underage_researcher_validation | The birth date field is missing in person record {recordId}. Although the birth date field is not mandatory, it is recommended. | False |
-| VT.PERSON.PersonalInfo.Sex | 1 | OPTIONAL | C.PERSON.PersonalInfo.Sex.maxLength | MAX_LENGTH | CONSISTENCY | 1.0 | True | maxLength=1 | GR.PTCRIS_F1_01DSEMANT.gender_classification_conformity | The sex "{value}" in PersonalInfo record {recordId} exceeds the configured maximum length {maxLength}. | True |
-| VT.PERSON.PersonalInfo.Sex | 1 | OPTIONAL | C.PERSON.PersonalInfo.Sex.minLength | MIN_LENGTH | CONSISTENCY | 3.0 | True | minLength=0 | GR.PTCRIS_F1_01DSEMANT.gender_classification_conformity | The sex "{value}" in PersonalInfo record {recordId} must contain at least {minLength} characters. | True |
-| VT.PERSON.PersonalInfo.Sex | 1 | OPTIONAL | C.PERSON.PersonalInfo.Sex.vocabulary | VOCABULARY | VALIDITY | 3.0 | True | allowedValues=FEMALE\|MALE | GR.PTCRIS_F1_01DSEMANT.gender_classification_conformity | The sex value "{value}" in person record {recordId} is invalid. Allowed values are FEMALE, MALE. | False |
-| VT.PERSON.Prize.EffectiveDate | 5 | MANDATORY | C.PERSON.Prize.EffectiveDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=(current date + 3 years) |  | The effective date ({value1}) in prize record {recordId} can be only in the near future (+3 years from right now). | False |
-| VT.PERSON.Prize.EffectiveDate | 5 | MANDATORY | C.PERSON.Prize.EffectiveDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=2 |  | The effective date ({value1}) in prize record {recordId} can't be before the minimum allowed value ({value2}). | False |
-| VT.PERSON.Prize.EffectiveDate | 5 | MANDATORY | C.PERSON.Prize.EffectiveDate.presence | PRESENCE | COMPLETENESS | — | True |  |  | The effective date field is missing in prize record {recordId}. The effective date field is mandatory. | False |
-| VT.PERSON.Prize.ResearchAreas | 3 | RECOMMENDED | C.PERSON.Prize.ResearchAreas.presence | PRESENCE | COMPLETENESS | — | False |  |  | There is no any research area linked with the prize record {recordId}. Although the reserach area(s) is not mandatory, it is recommended. | False |
-| VT.PERSON.Prize.ResearchAreas | 3 | RECOMMENDED | C.PERSON.Prize.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The researchAreas value "{value}" in Prize record {recordId} is not contained in the configured vocabulary. | True |
-| VT.PERSON.Prize.ToDate | 1 | OPTIONAL | C.PERSON.Prize.ToDate.maxDate | MAX_DATE | CONSISTENCY | 1.0 | True | maxDate=no limit |  | The toDate value "{value}" in Prize record {recordId} is later than the configured maximum/date constraint {maxDate}. | True |
-| VT.PERSON.Prize.ToDate | 1 | OPTIONAL | C.PERSON.Prize.ToDate.minDate | MIN_DATE | CONSISTENCY | 3.0 | True | minDate=effectiveDate |  | The end date ({value1}) in prize record {recordId} can't be before the effective date ({value2}). | False |
-| VT.PERSON.Prize.Type | 5 | MANDATORY | C.PERSON.Prize.Type.presence | PRESENCE | COMPLETENESS | — | True |  |  | The type field is missing in prize record {recordId}. The type field is mandatory. | False |
-| VT.PERSON.Prize.Type | 5 | MANDATORY | C.PERSON.Prize.Type.vocabulary | VOCABULARY | VALIDITY | 3.0 | True |  |  | The type value "{value}" in prize record {recordId} is not aligned with the configured controlled vocabulary. | False |
+## `Education.degreeType`
+
+Validation Target: `VT.PERSON.Education.DegreeType`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Education.DegreeType.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Education.degreeType is required. | UNMAPPED |
+| C.PERSON.Education.DegreeType.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Education.degreeType must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Education.educationStatus`
+
+Validation Target: `VT.PERSON.Education.EducationStatus`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Education.EducationStatus.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Education.educationStatus is recommended. | UNMAPPED |
+| C.PERSON.Education.EducationStatus.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Education.educationStatus must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Employment.employmentPositionHierarchy`
+
+Validation Target: `VT.PERSON.Employment.EmploymentPositionHierarchy`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Employment.EmploymentPositionHierarchy.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Employment.employmentPositionHierarchy is required. | UNMAPPED |
+| C.PERSON.Employment.EmploymentPositionHierarchy.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Employment.employmentPositionHierarchy must belong to the configured controlled vocabulary. | GR.PTCRIS_F1_01DSEMANT.type_professional_path_classification_validation |
+
+## `ExpertiseOrSkill.researchAreas`
+
+Validation Target: `VT.PERSON.ExpertiseOrSkill.ResearchAreas`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.ExpertiseOrSkill.ResearchAreas.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for ExpertiseOrSkill.researchAreas is recommended. | UNMAPPED |
+| C.PERSON.ExpertiseOrSkill.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of ExpertiseOrSkill.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Involvement.fromDate`
+
+Validation Target: `VT.PERSON.Involvement.FromDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Involvement.FromDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Involvement.fromDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.PERSON.Involvement.FromDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Involvement.fromDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.PERSON.Involvement.FromDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Involvement.fromDate is recommended. | UNMAPPED |
+
+## `Involvement.fundingParts, funding`
+
+Validation Target: `VT.PERSON.Involvement.FundingPartsFunding`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Involvement.FundingPartsFunding.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | Funding references in the involvement must be consistent: fundingParts.funding must match involvement.funding. | UNMAPPED |
+
+## `Involvement.involvementType`
+
+Validation Target: `VT.PERSON.Involvement.InvolvementType`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Involvement.InvolvementType.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Involvement.involvementType is required. | UNMAPPED |
+| C.PERSON.Involvement.InvolvementType.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Involvement.involvementType must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Involvement.toDate`
+
+Validation Target: `VT.PERSON.Involvement.ToDate`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Involvement.ToDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Involvement.toDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.PERSON.Involvement.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Involvement.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+
+## `LanguageKnowledge.academicReview`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.AcademicReview`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.AcademicReview.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.academicReview exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.AcademicReview.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.academicReview is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.AcademicReview.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.academicReview must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.academicWriting`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.AcademicWriting`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.AcademicWriting.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.academicWriting exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.AcademicWriting.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.academicWriting is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.AcademicWriting.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.academicWriting must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.listening`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.Listening`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.Listening.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.listening exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Listening.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.listening is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Listening.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.listening must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.overall`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.Overall`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.Overall.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.overall exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Overall.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.overall is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Overall.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.overall must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.reading`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.Reading`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.Reading.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.reading exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Reading.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.reading is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Reading.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.reading must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.speaking`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.Speaking`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.Speaking.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.speaking exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Speaking.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.speaking is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Speaking.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.speaking must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `LanguageKnowledge.writing`
+
+Validation Target: `VT.PERSON.LanguageKnowledge.Writing`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.LanguageKnowledge.Writing.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of LanguageKnowledge.writing exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Writing.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of LanguageKnowledge.writing is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.LanguageKnowledge.Writing.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of LanguageKnowledge.writing must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Membership.membershipType`
+
+Validation Target: `VT.PERSON.Membership.MembershipType`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Membership.MembershipType.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Membership.membershipType is required. | UNMAPPED |
+| C.PERSON.Membership.MembershipType.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Membership.membershipType must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Person.authenticusId`
+
+Validation Target: `VT.PERSON.Person.AuthenticusId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.AuthenticusId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.authenticusId exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.AuthenticusId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.authenticusId is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.AuthenticusId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.authenticusId does not match the required format. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.AuthenticusId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.authenticusId must be unique within the repository. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+
+## `Person.biography`
+
+Validation Target: `VT.PERSON.Person.Biography`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.Biography.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.biography is shorter than the minimum allowed length. | PTCRIS-FsF-F2-01M |
+| C.PERSON.Person.Biography.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.biography is required. | PTCRIS-FsF-F2-01M |
+
+## `Person.createDate`
+
+Validation Target: `VT.PERSON.Person.CreateDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.createDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Person.involvements`
+
+Validation Target: `VT.PERSON.Person.Involvements`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.Involvements.custom | CUSTOM | CONSISTENCY | ERROR | True | 5.0 | A Portuguese researcher must have at least one linked employment with a start date and an employment position. | UNMAPPED |
+| C.PERSON.Person.Involvements.maxCardinality | MAX_CARDINALITY | CONSISTENCY | ERROR | True | 1.0 | The number of values for Person.involvements exceeds the maximum allowed cardinality. | UNMAPPED |
+| C.PERSON.Person.Involvements.minCardinality | MIN_CARDINALITY | COMPLETENESS | ERROR | True | 3.0 | The number of values for Person.involvements is below the minimum allowed cardinality. | UNMAPPED |
+| C.PERSON.Person.Involvements.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.involvements is required. | GR.PTCRIS_F1_01DCURREN.mandatory_start_date_of_professional_career |
+
+## `Person.lastModificationDate`
+
+Validation Target: `VT.PERSON.Person.LastModificationDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+
+## `Person.lattesId`
+
+Validation Target: `VT.PERSON.Person.LattesId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.LattesId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.lattesId exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.LattesId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.lattesId is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.LattesId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.lattesId does not match the required format. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.LattesId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.lattesId must be unique within the repository. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+
+## `Person.metadataAccessLevel`
+
+Validation Target: `VT.PERSON.Person.MetadataAccessLevel`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.MetadataAccessLevel.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.metadataAccessLevel is required. | PTCRIS-FsF-A1-01M |
+| C.PERSON.Person.MetadataAccessLevel.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Person.metadataAccessLevel must belong to the configured controlled vocabulary. | PTCRIS-FsF-A1-01M |
+
+## `Person.metadataLicense`
+
+Validation Target: `VT.PERSON.Person.MetadataLicense`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.MetadataLicense.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.metadataLicense is required. | PTCRIS-FsF-R1.1-01M |
+| C.PERSON.Person.MetadataLicense.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Person.metadataLicense must belong to the configured controlled vocabulary. | PTCRIS-FsF-R1.1-01M |
+
+## `Person.name`
+
+Validation Target: `VT.PERSON.Person.Name`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.name exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.Person.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.name is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.Person.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.name is required. | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation |
+
+## `Person.nationalId (cienciaId)`
+
+Validation Target: `VT.PERSON.Person.NationalIdCienciaId`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.NationalIdCienciaId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.nationalId (cienciaId) exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-DQ-F1-01IDUNIQ |
+| C.PERSON.Person.NationalIdCienciaId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.nationalId (cienciaId) is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-DQ-F1-01IDUNIQ |
+| C.PERSON.Person.NationalIdCienciaId.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Person.nationalId (cienciaId) is required. | PTCRIS-F1-01DSTRUCT; PTCRIS-DQ-F1-01IDUNIQ |
+| C.PERSON.Person.NationalIdCienciaId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.nationalId (cienciaId) does not match the required format. | PTCRIS-F1-01DSTRUCT; PTCRIS-DQ-F1-01IDUNIQ |
+| C.PERSON.Person.NationalIdCienciaId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.nationalId (cienciaId) must be unique within the repository. | PTCRIS-F1-01DSTRUCT; GR.PTCRIS_F1_01DACURR.global_uniqueness_of_science_id_allocation; PTCRIS-DQ-F1-01IDUNIQ |
+
+## `Person.openAlexId`
+
+Validation Target: `VT.PERSON.Person.OpenAlexId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.openAlexId exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.openAlexId is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.OpenAlexId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.openAlexId does not match the required format. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.openAlexId must be unique within the repository. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+
+## `Person.orcid`
+
+Validation Target: `VT.PERSON.Person.Orcid`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.Orcid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.orcid exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.Person.Orcid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.orcid is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.Person.Orcid.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Person.orcid is recommended. | UNMAPPED |
+| C.PERSON.Person.Orcid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.orcid does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.open_researcher_and_contributor_id_orcid_format_verification |
+| C.PERSON.Person.Orcid.resolvable | RESOLVABLE | ACCURACY | ERROR | False | 5.0 | The identifier in Person.orcid must be resolvable through the configured resolver. | GR.PTCRIS_F1_A1.resolvable_pid |
+| C.PERSON.Person.Orcid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.orcid must be unique within the repository. | GR.PTCRIS_F1_01DACURR.global_uniqueness_of_orcid_allocation |
+
+## `Person.scholarId`
+
+Validation Target: `VT.PERSON.Person.ScholarId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.ScholarId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.scholarId exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScholarId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.scholarId is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScholarId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.scholarId does not match the required format. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScholarId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.scholarId must be unique within the repository. | PTCRIS-F1-01DSTRUCT; PTCRIS-F1-01DACURR |
+
+## `Person.scopusAuthorId`
+
+Validation Target: `VT.PERSON.Person.ScopusAuthorId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.ScopusAuthorId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.scopusAuthorId exceeds the maximum allowed length. | PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScopusAuthorId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.scopusAuthorId is shorter than the minimum allowed length. | PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScopusAuthorId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.scopusAuthorId does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.scopus_author_id_format_validation; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.ScopusAuthorId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.scopusAuthorId must be unique within the repository. | PTCRIS-F1-01DACURR |
+
+## `Person.webOfScienceResearcherId`
+
+Validation Target: `VT.PERSON.Person.WebOfScienceResearcherId`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Person.WebOfScienceResearcherId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of Person.webOfScienceResearcherId exceeds the maximum allowed length. | PTCRIS-F1-01DACURR |
+| C.PERSON.Person.WebOfScienceResearcherId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of Person.webOfScienceResearcherId is shorter than the minimum allowed length. | PTCRIS-F1-01DACURR |
+| C.PERSON.Person.WebOfScienceResearcherId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of Person.webOfScienceResearcherId does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.web_of_science_researcher_id_format_validation; PTCRIS-F1-01DACURR |
+| C.PERSON.Person.WebOfScienceResearcherId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of Person.webOfScienceResearcherId must be unique within the repository. | PTCRIS-F1-01DACURR |
+
+## `PersonName.firstname`
+
+Validation Target: `VT.PERSON.PersonName.Firstname`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonName.Firstname.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of PersonName.firstname exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.Firstname.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of PersonName.firstname is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.Firstname.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of PersonName.firstname does not match the required format. | UNMAPPED |
+
+## `PersonName.lastname`
+
+Validation Target: `VT.PERSON.PersonName.Lastname`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonName.Lastname.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of PersonName.lastname exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.Lastname.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of PersonName.lastname is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.Lastname.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for PersonName.lastname is required. | GR.PTCRIS_F1_01DACURR.full_name_presence_and_length_validation |
+| C.PERSON.PersonName.Lastname.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of PersonName.lastname does not match the required format. | GR.PTCRIS_F1_01DSTRUCT.standardized_citation_name_format_verification |
+
+## `PersonName.otherName`
+
+Validation Target: `VT.PERSON.PersonName.OtherName`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonName.OtherName.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of PersonName.otherName exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.OtherName.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of PersonName.otherName is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.OtherName.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of PersonName.otherName does not match the required format. | UNMAPPED |
+
+## `PersonName.personNameType`
+
+Validation Target: `VT.PERSON.PersonName.PersonNameType`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonName.PersonNameType.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of PersonName.personNameType exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.PersonNameType.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of PersonName.personNameType is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.PersonName.PersonNameType.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for PersonName.personNameType is required. | UNMAPPED |
+| C.PERSON.PersonName.PersonNameType.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of PersonName.personNameType must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `PersonalInfo.birthDate`
+
+Validation Target: `VT.PERSON.PersonalInfo.BirthDate`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonalInfo.BirthDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of PersonalInfo.birthDate is later than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCONSIST.non_existent_or_futuristic_birth_date_restriction |
+| C.PERSON.PersonalInfo.BirthDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of PersonalInfo.birthDate is earlier than allowed by the configured date constraints. | GR.PTCRIS_F1_01DCONSIST.non_existent_or_futuristic_birth_date_restriction |
+| C.PERSON.PersonalInfo.BirthDate.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for PersonalInfo.birthDate is recommended. | UNMAPPED |
+
+## `PersonalInfo.sex`
+
+Validation Target: `VT.PERSON.PersonalInfo.Sex`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.PersonalInfo.Sex.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of PersonalInfo.sex exceeds the maximum allowed length. | UNMAPPED |
+| C.PERSON.PersonalInfo.Sex.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of PersonalInfo.sex is shorter than the minimum allowed length. | UNMAPPED |
+| C.PERSON.PersonalInfo.Sex.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of PersonalInfo.sex must belong to the configured controlled vocabulary. | GR.PTCRIS_F1_01DSEMANT.gender_classification_conformity |
+
+## `Prize.effectiveDate`
+
+Validation Target: `VT.PERSON.Prize.EffectiveDate`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Prize.EffectiveDate.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of Prize.effectiveDate is later than allowed by the configured date constraints. | UNMAPPED |
+| C.PERSON.Prize.EffectiveDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Prize.effectiveDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.PERSON.Prize.EffectiveDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Prize.effectiveDate is required. | UNMAPPED |
+
+## `Prize.researchAreas`
+
+Validation Target: `VT.PERSON.Prize.ResearchAreas`  
+Importance: `3`  
+Requirement level: `RECOMMENDED`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Prize.ResearchAreas.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for Prize.researchAreas is recommended. | UNMAPPED |
+| C.PERSON.Prize.ResearchAreas.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Prize.researchAreas must belong to the configured controlled vocabulary. | UNMAPPED |
+
+## `Prize.toDate`
+
+Validation Target: `VT.PERSON.Prize.ToDate`  
+Importance: `1`  
+Requirement level: `OPTIONAL`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Prize.ToDate.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of Prize.toDate is earlier than allowed by the configured date constraints. | UNMAPPED |
+
+## `Prize.type`
+
+Validation Target: `VT.PERSON.Prize.Type`  
+Importance: `5`  
+Requirement level: `MANDATORY`
+
+| Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
+|---|---|---|---|---|---:|---|---|
+| C.PERSON.Prize.Type.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for Prize.type is required. | UNMAPPED |
+| C.PERSON.Prize.Type.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of Prize.type must belong to the configured controlled vocabulary. | UNMAPPED |

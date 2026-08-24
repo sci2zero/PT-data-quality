@@ -1,49 +1,55 @@
 {
   "profileId": "PTCRIS-DATAGOV-1.0.0",
   "validationTargets": 163,
-  "rules": 163,
-  "constraints": 446,
-  "governanceMappedRules": 62,
-  "governanceRuleCoveragePercent": 38.04,
+  "constraints": 445,
+  "governanceMappedConstraints": 114,
+  "governanceConstraintCoveragePercent": 25.62,
   "ptMasterBoundTargets": 163,
-  "ptMasterUniqueRuntimeTargets": 161,
-  "ptMasterRuntimeTargetCollisions": 2,
+  "ptMasterUniqueRuntimeTargets": 144,
+  "ptMasterRuntimeTargetCollisions": 19,
   "ptMasterBindingCoveragePercent": 100.0,
   "domains": {
     "ACTIVITY": {
       "targets": 16,
       "constraints": 28,
-      "reviewRequired": 13
+      "reviewRequired": 13,
+      "governanceMapped": 0
     },
     "FUNDING": {
       "targets": 16,
       "constraints": 41,
-      "reviewRequired": 16
+      "reviewRequired": 16,
+      "governanceMapped": 18
     },
     "ORGANISATION_UNIT": {
       "targets": 19,
       "constraints": 50,
-      "reviewRequired": 14
+      "reviewRequired": 13,
+      "governanceMapped": 8
     },
     "OUTPUT": {
       "targets": 29,
       "constraints": 73,
-      "reviewRequired": 14
+      "reviewRequired": 13,
+      "governanceMapped": 14
     },
     "PERSON": {
       "targets": 41,
-      "constraints": 118,
-      "reviewRequired": 27
+      "constraints": 117,
+      "reviewRequired": 25,
+      "governanceMapped": 48
     },
     "PROJECT": {
       "targets": 17,
       "constraints": 53,
-      "reviewRequired": 23
+      "reviewRequired": 23,
+      "governanceMapped": 25
     },
     "SHARED_COMPONENTS": {
       "targets": 25,
       "constraints": 83,
-      "reviewRequired": 27
+      "reviewRequired": 27,
+      "governanceMapped": 1
     }
   }
 }
