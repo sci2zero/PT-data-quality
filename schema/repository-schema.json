@@ -1,37 +1,387 @@
 {
-  "repository_schema_version": "2.0.0",
+  "repository_schema_version": "2.0.1",
   "sheets": {
-    "repository_metadata": {"name": "Repository Metadata", "key_field": "property", "required": ["property", "value"]},
-    "domains": {"name": "Domains", "key_field": "domain_id", "required": ["domain_id", "name", "status"]},
-    "governance_sources": {"name": "Governance Sources", "key_field": "governance_source_id", "required": ["governance_source_id", "title", "source_type", "status"]},
-    "governance_dimensions": {"name": "Governance Dimensions", "key_field": "dimension_id", "required": ["dimension_id", "name", "governance_source_id", "status"]},
-    "governance_metrics": {"name": "Governance Metrics", "key_field": "metric_id", "required": ["metric_id", "title", "status"]},
-    "governance_requirements": {"name": "Governance Requirements", "key_field": "requirement_id", "required": ["requirement_id", "metric_id", "title", "governance_source_id", "status"]},
-    "assessment_dimensions": {"name": "Assessment Dimensions", "key_field": "assessment_dimension_id", "required": ["assessment_dimension_id", "name_en", "description_en", "status"]},
-    "validation_targets": {"name": "Validation Targets", "key_field": "validation_target_id", "required": ["domain_id", "validation_target_id", "object_name", "target_category", "canonical_path", "status"]},
-    "constraints": {"name": "Constraints", "key_field": "constraint_id", "required": ["domain_id", "constraint_id", "validation_target_id", "constraint_type", "weight_key", "assessment_dimension", "status"]},
-    "constraint_parameters": {"name": "Constraint Parameters", "key_field": "parameter_id", "required": ["domain_id", "parameter_id", "constraint_id", "parameter_name", "parameter_value", "value_type", "sequence", "status"]},
-    "messages": {"name": "Messages", "key_field": "message_id", "required": ["domain_id", "message_id", "constraint_id", "title_en", "message_en", "status"]},
-    "resolvers": {"name": "Resolvers", "key_field": "resolver_id", "required": ["resolver_id", "name", "resolver_type", "status"]},
-    "vocabularies": {"name": "Vocabularies", "key_field": "vocabulary_id", "required": ["vocabulary_id", "name", "status"]},
-    "vocabulary_terms": {"name": "Vocabulary Terms", "key_field": "term_code", "required": ["vocabulary_id", "term_code", "status"]},
-    "governance_mappings": {"name": "Governance Mappings", "key_field": "mapping_id", "required": ["mapping_id", "domain_id", "constraint_id", "relation", "profile_id", "mapping_status", "mapping_basis"]},
-    "profiles": {"name": "Data Quality Profiles", "key_field": "profile_id", "required": ["profile_id", "name", "version", "status", "repository_id", "minimum_required_score"]},
-    "profile_target_settings": {"name": "Profile Target Settings", "key_field": "validation_target_id", "required": ["profile_id", "domain_id", "validation_target_id", "enabled", "importance", "requirement_level", "status"]},
-    "profile_constraint_defaults": {"name": "Profile Constraint Defaults", "key_field": "weight_key", "required": ["profile_id", "weight_key", "include_in_score", "behavior_basis", "status"]},
-    "profile_overrides": {"name": "Profile Overrides", "key_field": "override_id", "required": ["override_id", "profile_id", "constraint_id", "property_name", "property_value", "value_type", "status"]},
-    "implementation_bindings": {"name": "Implementation Bindings", "key_field": "binding_id", "required": ["domain_id", "binding_id", "implementation_id", "profile_scope", "artifact_type", "artifact_id", "representation", "binding_mode", "status"]}
+    "repository_metadata": {
+      "name": "Repository Metadata",
+      "key_field": "property",
+      "required": [
+        "property",
+        "value"
+      ]
+    },
+    "domains": {
+      "name": "Domains",
+      "key_field": "domain_id",
+      "required": [
+        "domain_id",
+        "name",
+        "status"
+      ]
+    },
+    "governance_sources": {
+      "name": "Governance Sources",
+      "key_field": "governance_source_id",
+      "required": [
+        "governance_source_id",
+        "title",
+        "source_type",
+        "status"
+      ]
+    },
+    "governance_dimensions": {
+      "name": "Governance Dimensions",
+      "key_field": "dimension_id",
+      "required": [
+        "dimension_id",
+        "name",
+        "governance_source_id",
+        "status"
+      ]
+    },
+    "governance_metrics": {
+      "name": "Governance Metrics",
+      "key_field": "metric_id",
+      "required": [
+        "metric_id",
+        "title",
+        "status"
+      ]
+    },
+    "governance_requirements": {
+      "name": "Governance Requirements",
+      "key_field": "requirement_id",
+      "required": [
+        "requirement_id",
+        "metric_id",
+        "title",
+        "governance_source_id",
+        "status"
+      ]
+    },
+    "assessment_dimensions": {
+      "name": "Assessment Dimensions",
+      "key_field": "assessment_dimension_id",
+      "required": [
+        "assessment_dimension_id",
+        "name_en",
+        "description_en",
+        "status"
+      ]
+    },
+    "validation_targets": {
+      "name": "Validation Targets",
+      "key_field": "validation_target_id",
+      "required": [
+        "domain_id",
+        "validation_target_id",
+        "object_name",
+        "target_category",
+        "canonical_path",
+        "status"
+      ]
+    },
+    "constraints": {
+      "name": "Constraints",
+      "key_field": "constraint_id",
+      "required": [
+        "domain_id",
+        "constraint_id",
+        "validation_target_id",
+        "constraint_type",
+        "weight_key",
+        "assessment_dimension",
+        "status"
+      ]
+    },
+    "constraint_parameters": {
+      "name": "Constraint Parameters",
+      "key_field": "parameter_id",
+      "required": [
+        "domain_id",
+        "parameter_id",
+        "constraint_id",
+        "parameter_name",
+        "parameter_value",
+        "value_type",
+        "sequence",
+        "status"
+      ]
+    },
+    "messages": {
+      "name": "Messages",
+      "key_field": "message_id",
+      "required": [
+        "domain_id",
+        "message_id",
+        "constraint_id",
+        "title_en",
+        "message_en",
+        "status"
+      ]
+    },
+    "resolvers": {
+      "name": "Resolvers",
+      "key_field": "resolver_id",
+      "required": [
+        "resolver_id",
+        "name",
+        "resolver_type",
+        "status"
+      ]
+    },
+    "vocabularies": {
+      "name": "Vocabularies",
+      "key_field": "vocabulary_id",
+      "required": [
+        "vocabulary_id",
+        "name",
+        "status"
+      ]
+    },
+    "vocabulary_terms": {
+      "name": "Vocabulary Terms",
+      "key_field": "term_code",
+      "required": [
+        "vocabulary_id",
+        "term_code",
+        "status"
+      ]
+    },
+    "governance_mappings": {
+      "name": "Governance Mappings",
+      "key_field": "mapping_id",
+      "required": [
+        "mapping_id",
+        "domain_id",
+        "constraint_id",
+        "relation",
+        "profile_id",
+        "mapping_status",
+        "mapping_basis"
+      ]
+    },
+    "profiles": {
+      "name": "Data Quality Profiles",
+      "key_field": "profile_id",
+      "required": [
+        "profile_id",
+        "name",
+        "version",
+        "status",
+        "repository_id",
+        "minimum_required_score"
+      ]
+    },
+    "profile_target_settings": {
+      "name": "Profile Target Settings",
+      "key_field": "validation_target_id",
+      "required": [
+        "profile_id",
+        "domain_id",
+        "validation_target_id",
+        "enabled",
+        "importance",
+        "requirement_level",
+        "status"
+      ]
+    },
+    "profile_constraint_defaults": {
+      "name": "Profile Constraint Defaults",
+      "key_field": "weight_key",
+      "required": [
+        "profile_id",
+        "weight_key",
+        "include_in_score",
+        "behavior_basis",
+        "status"
+      ]
+    },
+    "profile_overrides": {
+      "name": "Profile Overrides",
+      "key_field": "override_id",
+      "required": [
+        "override_id",
+        "profile_id",
+        "constraint_id",
+        "property_name",
+        "property_value",
+        "value_type",
+        "status"
+      ]
+    },
+    "implementation_bindings": {
+      "name": "Implementation Bindings",
+      "key_field": "binding_id",
+      "required": [
+        "domain_id",
+        "binding_id",
+        "implementation_id",
+        "profile_scope",
+        "artifact_type",
+        "artifact_id",
+        "representation",
+        "binding_mode",
+        "status"
+      ]
+    },
+    "implementation_profiles": {
+      "name": "Implementation Profiles",
+      "key_field": "implementation_profile_id",
+      "required": [
+        "implementation_profile_id",
+        "implementation_id",
+        "profile_scope",
+        "status",
+        "compatibility_mode",
+        "minimum_required_score"
+      ]
+    },
+    "implementation_target_weights": {
+      "name": "Implementation Target Weights",
+      "key_field": "runtime_target",
+      "required": [
+        "implementation_profile_id",
+        "sequence",
+        "runtime_target",
+        "weight",
+        "source_kind",
+        "status"
+      ]
+    },
+    "implementation_runtime_rules": {
+      "name": "Implementation Runtime Rules",
+      "key_field": "runtime_rule_id",
+      "required": [
+        "implementation_profile_id",
+        "sequence",
+        "runtime_rule_id",
+        "runtime_key",
+        "runtime_target",
+        "severity",
+        "assessment_dimension",
+        "blocking",
+        "points",
+        "used_for_fair_compliance",
+        "include_in_runtime",
+        "source_kind",
+        "status"
+      ]
+    },
+    "implementation_runtime_parameters": {
+      "name": "Implementation Runtime Parameters",
+      "key_field": "runtime_parameter_id",
+      "required": [
+        "implementation_profile_id",
+        "sequence",
+        "runtime_parameter_id",
+        "runtime_rule_id",
+        "runtime_key",
+        "parameter_name",
+        "parameter_value",
+        "value_type",
+        "additive_metadata",
+        "source_kind",
+        "status"
+      ]
+    }
   },
   "enums": {
-    "target_category": ["FIELD", "LOGICAL_GROUP", "BUSINESS", "CROSS_FIELD", "RELATIONSHIP"],
-    "requirement_level": ["MANDATORY", "RECOMMENDED", "OPTIONAL"],
-    "constraint_type": ["PRESENCE", "MIN_LENGTH", "MAX_LENGTH", "MIN_VALUE", "MAX_VALUE", "MIN_CARDINALITY", "MAX_CARDINALITY", "MIN_DATE", "MAX_DATE", "MIN_VALUE_OR_LENGTH", "MAX_VALUE_OR_LENGTH", "REGEX", "UNIQUENESS", "VOCABULARY", "RESOLVABLE", "CUSTOM"],
-    "weight_key": ["PRESENCE", "MINIMUM", "MAXIMUM", "REGEX", "UNIQUENESS", "VOCABULARY", "RESOLVABLE", "CUSTOM"],
-    "assessment_dimension": ["COMPLETENESS", "VALIDITY", "UNIQUENESS", "CONSISTENCY", "TIMELINESS", "ACCURACY", "CONFORMITY", "INTEGRITY"],
-    "parameter_value_type": ["STRING", "INTEGER", "DECIMAL", "BOOLEAN", "DATE", "URI", "EXPRESSION"],
-    "combine_operator": ["MIN", "MAX", "ALL", "ANY"],
-    "mapping_status": ["FULL", "DIMENSION_AND_METRIC", "METRIC_ONLY", "DIMENSION_ONLY", "UNMAPPED"],
-    "status": ["DRAFT", "UNDER_REVIEW", "APPROVED", "ACTIVE", "RETIRED", "ARCHIVED", "DEPRECATED"]
+    "target_category": [
+      "FIELD",
+      "LOGICAL_GROUP",
+      "BUSINESS",
+      "CROSS_FIELD",
+      "RELATIONSHIP"
+    ],
+    "requirement_level": [
+      "MANDATORY",
+      "RECOMMENDED",
+      "OPTIONAL"
+    ],
+    "constraint_type": [
+      "PRESENCE",
+      "MIN_LENGTH",
+      "MAX_LENGTH",
+      "MIN_VALUE",
+      "MAX_VALUE",
+      "MIN_CARDINALITY",
+      "MAX_CARDINALITY",
+      "MIN_DATE",
+      "MAX_DATE",
+      "MIN_VALUE_OR_LENGTH",
+      "MAX_VALUE_OR_LENGTH",
+      "REGEX",
+      "UNIQUENESS",
+      "VOCABULARY",
+      "RESOLVABLE",
+      "CUSTOM"
+    ],
+    "weight_key": [
+      "PRESENCE",
+      "MINIMUM",
+      "MAXIMUM",
+      "REGEX",
+      "UNIQUENESS",
+      "VOCABULARY",
+      "RESOLVABLE",
+      "CUSTOM"
+    ],
+    "assessment_dimension": [
+      "COMPLETENESS",
+      "VALIDITY",
+      "UNIQUENESS",
+      "CONSISTENCY",
+      "TIMELINESS",
+      "ACCURACY",
+      "CONFORMITY",
+      "INTEGRITY"
+    ],
+    "parameter_value_type": [
+      "STRING",
+      "INTEGER",
+      "DECIMAL",
+      "BOOLEAN",
+      "DATE",
+      "URI",
+      "EXPRESSION"
+    ],
+    "combine_operator": [
+      "MIN",
+      "MAX",
+      "ALL",
+      "ANY"
+    ],
+    "mapping_status": [
+      "FULL",
+      "DIMENSION_AND_METRIC",
+      "METRIC_ONLY",
+      "DIMENSION_ONLY",
+      "UNMAPPED"
+    ],
+    "status": [
+      "DRAFT",
+      "UNDER_REVIEW",
+      "APPROVED",
+      "ACTIVE",
+      "RETIRED",
+      "ARCHIVED",
+      "DEPRECATED"
+    ],
+    "compatibility_mode": [
+      "PRESERVE_EXISTING",
+      "PRESERVE_EXISTING_PLUS_ADDITIVE",
+      "CANONICAL"
+    ],
+    "implementation_compatibility_role": [
+      "BASELINE",
+      "BASELINE_PARAMETER",
+      "ADDITIVE_METADATA",
+      "FUTURE"
+    ],
+    "implementation_binding_mode": [
+      "AUTO",
+      "EXPLICIT"
+    ]
   },
   "implementations": {
     "pt_master": {

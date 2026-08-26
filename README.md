@@ -10,7 +10,7 @@ source/rsr.xlsx
 
 Everything below `generated/` is derived from that workbook and should not be edited manually.
 
-## RSR schema 2.0
+## RSR schema 2.0.1
 
 The core model is intentionally simple:
 
@@ -35,17 +35,9 @@ Operational assessment dimensions (`COMPLETENESS`, `VALIDITY`, `UNIQUENESS`, `CO
 
 ## Two generated JSON projections
 
-The generator deliberately produces two different JSON representations.
+The generator deliberately produces two PT Master runtime configurations from the same `source/rsr.xlsx`.
 
-### Canonical RSR JSON
-
-```text
-generated/rsr/rsr.json
-```
-
-This is the full-fidelity machine-readable projection of `source/rsr.xlsx`. It preserves Validation Targets, Constraints, typed parameter rows, multilingual messages, governance hierarchy/mappings, profiles and implementation bindings.
-
-### PT Master runtime JSON
+### `1.0.0.json` — improved configuration for the current Java engine
 
 ```text
 generated/implementation/pt-master/
@@ -53,7 +45,7 @@ generated/implementation/pt-master/
   1.0.0.json
 ```
 
-This is a compatibility-oriented projection for the current Java/PT Master evaluator. Its high-level shape intentionally remains close to the deployed configuration:
+This file keeps the JSON contract that the current Java code can consume immediately:
 
 ```json
 {
@@ -64,9 +56,36 @@ This is a compatibility-oriented projection for the current Java/PT Master evalu
 }
 ```
 
-The runtime generator resolves profile-specific target importance, Constraint weights, severity/blocking behaviour, typed parameter values and implementation bindings. Existing `dataQualityRemarks` keys are reused where an explicit confident legacy binding exists; otherwise a deterministic key is generated.
+Compatibility is **structural/runtime compatibility, not content identity**. The generator preserves the current Java runtime keys, runtime targets and the constraint parameter names/types that `DataQualityCalculator` reads (`minYear`, `maxFutureYears`, `min`, `max`, `minLength`, `maxLength`, `pattern`, ...). At the same time it refreshes the configuration from the canonical RSR wherever there is a stable binding:
 
-`runtime-config.json` is the richer PT Master projection and retains canonical Constraint/Validation Target IDs and governance traceability.
+- new multilingual messages (`en`, `sr`, `sr-cyr`, `pt`);
+- DQP severity/blocking/scoring behaviour;
+- canonical constraint values transformed into the legacy Java parameter names;
+- expanded RSR-derived target weights.
+
+The current Java code hard-codes the runtime issue keys it can report, so `1.0.0.json` deliberately does **not** add unsupported new rule keys. Adding such keys would incorrectly affect rule counts/scoring even though Java could never report them. The Java-branch `1.0.0.json` fixture is therefore used as a **contract baseline**, not as the generated content.
+
+### `2.0.0-preview.json` — future generic runtime contract
+
+The same build also creates:
+
+```text
+generated/implementation/pt-master/
+  PTCRIS-DATAGOV-1.0.0/
+  2.0.0-preview.json
+```
+
+This is the target configuration for future Java refactoring. It contains all active RSR Constraints and introduces configuration concepts that current Java does not yet execute generically:
+
+- all 445 active Constraints / all modeled entities;
+- four-language messages;
+- typed canonical parameter definitions and combine operators;
+- `resolverDefinitions` plus `resolverId` references;
+- `vocabularyDefinitions` plus `vocabularyId` references;
+- governance traceability;
+- current-Java legacy runtime keys and parameter contracts as migration metadata.
+
+Because standard JSON has no comments, every preview rule has a `javaSupport` object with a status (`LEGACY_SUPPORTED`, `LEGACY_CONFIG_ONLY`, `NOT_SUPPORTED`) and a human-readable migration comment. As generic Java evaluators are implemented, the support status can advance without redesigning the RSR or the 2.0.0 format.
 
 ## Governance model
 
@@ -97,7 +116,7 @@ becomes:
 
 rather than a string.
 
-Multiple rows with the same parameter name are supported. `MIN`/`MAX` combinations are projected into expressions already understood by the PT Master runtime, for example:
+Multiple rows with the same parameter name are supported in the canonical RSR. `MIN`/`MAX` combinations remain available in the canonical projection, for example:
 
 ```text
 minDate = funding.dateSubmitted
@@ -122,7 +141,7 @@ sr-cyr
 pt
 ```
 
-User-facing messages are intentionally generic and do not contain legacy runtime placeholders such as `{value}` or `{recordId}`. Record context is supplied by the application/UI.
+Canonical RSR messages are intentionally generic and do not contain legacy runtime placeholders such as `{value}` or `{recordId}`. In `1.0.0.json`, 1:1 canonically bound runtime rules use these new four-language messages directly. Legacy-only and N:M compatibility rules keep their runtime-specific wording (including positional placeholders where Java supplies values) and receive a Portuguese compatibility translation. `2.0.0-preview.json` always uses the canonical RSR messages.
 
 ## Data Quality Profiles
 
@@ -177,7 +196,7 @@ generated/
 │   └── pt-master/
 │       └── PTCRIS-DATAGOV-1.0.0/
 │           ├── 1.0.0.json
-│           ├── runtime-config.json
+│           ├── 2.0.0-preview.json
 │           ├── shacl/
 │           └── schematron/
 ├── docs/
@@ -185,12 +204,13 @@ generated/
     ├── validation.md
     ├── governance-traceability-PTCRIS-DATAGOV-1.0.0.md
     ├── coverage-PTCRIS-DATAGOV-1.0.0.json
-    └── pt-master-compatibility-PTCRIS-DATAGOV-1.0.0.md
+    ├── pt-master-compatibility-PTCRIS-DATAGOV-1.0.0.md
+    └── pt-master-next-support-PTCRIS-DATAGOV-1.0.0.md
 ```
 
-## Legacy-runtime compatibility
+## Current-Java compatibility
 
-`tests/fixtures/pt-master-legacy-1.0.0.json` is a compatibility fixture containing the JSON currently used by the Java system. It is **not** the source of truth for current values.
+`tests/fixtures/pt-master-legacy-1.0.0.json` is copied from `src/main/resources/dataQualityAssessment/ptcris/1.0.0.json` in the current TeslaRIS Java branch. It defines the **1.x runtime contract**: known runtime keys/targets and hard-coded constraint parameter names/types. It is not the source of the new RSR messages, scoring or parameter values.
 
 The build creates:
 
@@ -199,7 +219,9 @@ generated/reports/
   pt-master-compatibility-PTCRIS-DATAGOV-1.0.0.md
 ```
 
-The report classifies runtime keys as `PRESERVED`, `CHANGED`, `REMOVED` or `ADDED` and identifies changes in target, severity, dimension, blocking, points and Constraint parameters. This makes intentional profile changes distinguishable from generator regressions.
+A valid `1.0.0.json` build must preserve all current runtime keys and targets, keep every Java-read constraint parameter name with the same JSON type, and avoid extra rule-level fields that the current DTO does not know. Messages, Portuguese localisation, target weights, severity/blocking and points may intentionally differ because those values are now generated from the RSR/DQP.
+
+The separate `pt-master-next-support-...md` report summarizes the `2.0.0-preview.json` Java migration backlog.
 
 ## SHACL and Schematron
 
@@ -217,7 +239,7 @@ python -m unittest discover -s tests -v
 
 git status
 git add source/rsr.xlsx src schema tests generated README.md CHANGELOG.md CONTRIBUTING.md
-git commit -m "Upgrade data quality repository to RSR schema 2.0"
+git commit -m "Generate current-Java 1.x and future PT Master 2.x runtime contracts"
 git push
 ```
 

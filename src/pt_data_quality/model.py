@@ -39,6 +39,10 @@ class Repository:
     profile_constraint_defaults: list[Row] = field(default_factory=list)
     profile_overrides: list[Row] = field(default_factory=list)
     implementation_bindings: list[Row] = field(default_factory=list)
+    implementation_profiles: list[Row] = field(default_factory=list)
+    implementation_target_weights: list[Row] = field(default_factory=list)
+    implementation_runtime_rules: list[Row] = field(default_factory=list)
+    implementation_runtime_parameters: list[Row] = field(default_factory=list)
 
     def index(self, rows: Iterable[Row], key: str) -> dict[str, Row]:
         return {str(r.get(key)): r for r in rows if r.get(key) not in (None, "")}
@@ -82,6 +86,14 @@ class Repository:
     @property
     def vocabularies_by_id(self) -> dict[str, Row]:
         return self.index(self.vocabularies, "vocabulary_id")
+
+    @property
+    def implementation_profiles_by_id(self) -> dict[str, Row]:
+        return self.index(self.implementation_profiles, "implementation_profile_id")
+
+    @property
+    def implementation_runtime_rules_by_id(self) -> dict[str, Row]:
+        return self.index(self.implementation_runtime_rules, "runtime_rule_id")
 
 
 @dataclass(frozen=True)

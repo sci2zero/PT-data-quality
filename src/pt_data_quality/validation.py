@@ -54,6 +54,9 @@ def validate_repository(repository: Repository, schema: dict[str, Any]) -> list[
         (repository.profiles, "profile_id"),
         (repository.profile_overrides, "override_id"),
         (repository.implementation_bindings, "binding_id"),
+        (repository.implementation_profiles, "implementation_profile_id"),
+        (repository.implementation_runtime_rules, "runtime_rule_id"),
+        (repository.implementation_runtime_parameters, "runtime_parameter_id"),
     ]
     for rows, key in unique_specs:
         for duplicate in sorted(_duplicates(rows, key)):
@@ -234,6 +237,78 @@ def validate_repository(repository: Repository, schema: dict[str, Any]) -> list[
         if cid not in constraints:
             issues.append(_issue("error", "UNKNOWN_CONSTRAINT", f"Profile override references unknown Constraint {cid}", row, cid))
 
+    # Explicit implementation compatibility overlay.
+    implementation_profiles = repository.implementation_profiles_by_id
+    runtime_rules = repository.implementation_runtime_rules_by_id
+
+    seen_weights: set[tuple[str, str]] = set()
+    for row in repository.implementation_profiles:
+        ipid = str(row.get("implementation_profile_id") or "")
+        scope = str(row.get("profile_scope") or "*")
+        if scope != "*" and scope not in profiles:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_PROFILE_SCOPE", f"Implementation profile {ipid} references unknown Data Quality Profile {scope}", row, ipid))
+        mode = str(row.get("compatibility_mode") or "")
+        if mode not in enums.get("compatibility_mode", []):
+            issues.append(_issue("error", "INVALID_COMPATIBILITY_MODE", f"Implementation profile {ipid} has invalid compatibility_mode {mode}", row, ipid))
+
+    seen_runtime_keys: set[tuple[str, str]] = set()
+    for row in repository.implementation_target_weights:
+        ipid = str(row.get("implementation_profile_id") or "")
+        target = str(row.get("runtime_target") or "")
+        if ipid not in implementation_profiles:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_PROFILE", f"Target weight references unknown implementation profile {ipid}", row, target))
+        key = (ipid, target)
+        if key in seen_weights:
+            issues.append(_issue("error", "DUPLICATE_IMPLEMENTATION_TARGET_WEIGHT", f"Duplicate implementation target weight {key}", row, target))
+        seen_weights.add(key)
+
+    for row in repository.implementation_runtime_rules:
+        ipid = str(row.get("implementation_profile_id") or "")
+        rid = str(row.get("runtime_rule_id") or "")
+        key = str(row.get("runtime_key") or "")
+        if ipid not in implementation_profiles:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_PROFILE", f"Runtime rule {rid} references unknown implementation profile {ipid}", row, rid))
+        dim = str(row.get("assessment_dimension") or "")
+        if dim not in assessment_dimensions:
+            issues.append(_issue("error", "UNKNOWN_ASSESSMENT_DIMENSION", f"Runtime rule {rid} references unknown assessment dimension {dim}", row, rid))
+        pair = (ipid, key)
+        if pair in seen_runtime_keys:
+            issues.append(_issue("error", "DUPLICATE_IMPLEMENTATION_RUNTIME_KEY", f"Duplicate runtime key {key} in implementation profile {ipid}", row, key))
+        seen_runtime_keys.add(pair)
+
+    for row in repository.implementation_runtime_parameters:
+        ipid = str(row.get("implementation_profile_id") or "")
+        rid = str(row.get("runtime_rule_id") or "")
+        pid = str(row.get("runtime_parameter_id") or "")
+        if ipid not in implementation_profiles:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_PROFILE", f"Runtime parameter {pid} references unknown implementation profile {ipid}", row, pid))
+        rule = runtime_rules.get(rid)
+        if rule is None:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_RUNTIME_RULE", f"Runtime parameter {pid} references unknown runtime rule {rid}", row, pid))
+        elif str(rule.get("implementation_profile_id") or "") != ipid:
+            issues.append(_issue("error", "IMPLEMENTATION_PROFILE_MISMATCH", f"Runtime parameter {pid} and runtime rule {rid} belong to different implementation profiles", row, pid))
+        value_type = str(row.get("value_type") or "")
+        if value_type not in enums.get("parameter_value_type", []):
+            issues.append(_issue("error", "INVALID_PARAMETER_TYPE", f"Runtime parameter {pid} has invalid value_type {value_type}", row, pid))
+        coerced = coerce_value(row.get("parameter_value"), value_type)
+        if value_type == "INTEGER" and not isinstance(coerced, int):
+            issues.append(_issue("error", "PARAMETER_TYPE_MISMATCH", f"Runtime parameter {pid} is declared INTEGER but value is {row.get('parameter_value')!r}", row, pid))
+        if bool(row.get("required_by_current_java")) and bool(row.get("additive_metadata")):
+            issues.append(_issue("error", "ADDITIVE_PARAMETER_MARKED_REQUIRED", f"Runtime parameter {pid} cannot be both additive metadata and required by current Java", row, pid))
+
+    # Validate extended implementation-binding metadata without requiring every
+    # legacy runtime rule to have a canonical Constraint mapping.
+    for row in repository.implementation_bindings:
+        role = str(row.get("compatibility_role") or "")
+        if role and role not in enums.get("implementation_compatibility_role", []):
+            issues.append(_issue("error", "INVALID_IMPLEMENTATION_COMPATIBILITY_ROLE", f"Binding {row.get('binding_id')} has invalid compatibility_role {role}", row, str(row.get("binding_id"))))
+        mode = str(row.get("binding_mode") or "")
+        if mode and mode not in enums.get("implementation_binding_mode", []):
+            issues.append(_issue("error", "INVALID_IMPLEMENTATION_BINDING_MODE", f"Binding {row.get('binding_id')} has invalid binding_mode {mode}", row, str(row.get("binding_id"))))
+        runtime_rule_id = str(row.get("runtime_rule_id") or "")
+        if runtime_rule_id and runtime_rule_id not in runtime_rules:
+            issues.append(_issue("error", "UNKNOWN_IMPLEMENTATION_RUNTIME_RULE", f"Binding {row.get('binding_id')} references unknown runtime rule {runtime_rule_id}", row, str(row.get("binding_id"))))
+
     # PT Master bindings and runtime compatibility hazards.
     for pid in profiles:
         try:
@@ -273,6 +348,6 @@ def validate_repository(repository: Repository, schema: dict[str, Any]) -> list[
                 issues.append(_issue("error", "UNRESOLVED_RUNTIME_BINDING", f"Constraint {cid} has unresolved PT Master binding", artifact_id=cid))
         for key, cids in runtime_keys.items():
             if len(cids) > 1:
-                issues.append(_issue("warning", "DUPLICATE_EXPLICIT_RUNTIME_KEY", f"Explicit runtime key {key} is shared by Constraints: {', '.join(cids)}; only one can retain that key in the flat runtime JSON", artifact_id=key))
+                issues.append(_issue("warning", "SHARED_EXPLICIT_RUNTIME_KEY", f"Explicit runtime key {key} is shared by Constraints: {', '.join(cids)}. This is valid for the RSR 2.0.1 N:M compatibility layer; canonical fallback projection may still collapse it.", artifact_id=key))
 
     return issues

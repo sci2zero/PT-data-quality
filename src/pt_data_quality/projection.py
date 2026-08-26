@@ -27,24 +27,13 @@ def runtime_parameter_map(repository: Repository) -> dict[str, dict[str, Any]]:
     """Resolve typed parameter rows into the compact PT Master runtime shape.
 
     Multiple rows for the same parameter are preserved through an explicit
-    combine_operator. MIN/MAX are rendered as expressions because the current
-    Java runtime already accepts date/business expressions in string form.
+    combine_operator. This function remains canonical: implementation-specific
+    parameter aliases and transformations are represented separately in the
+    PT Master compatibility sheets and are not folded back into the RSR model.
     """
     grouped: defaultdict[str, defaultdict[str, list[dict[str, Any]]]] = defaultdict(lambda: defaultdict(list))
     for row in repository.constraint_parameters:
         grouped[str(row.get("constraint_id"))][str(row.get("parameter_name"))].append(dict(row.data))
-
-    bindings: dict[tuple[str, str], str] = {}
-    for row in repository.implementation_bindings:
-        if row.get("implementation_id") != "PT_MASTER" or row.get("representation") != "RUNTIME_JSON":
-            continue
-        if str(row.get("artifact_type") or "").upper() != "PARAMETER":
-            continue
-        cid = str(row.get("artifact_id") or "")
-        pname = str(row.get("parameter_name") or "")
-        runtime_name = str(row.get("runtime_parameter_name") or pname)
-        if cid and pname:
-            bindings[(cid, pname)] = runtime_name
 
     result: dict[str, dict[str, Any]] = {}
     for cid, by_name in grouped.items():
@@ -53,7 +42,7 @@ def runtime_parameter_map(repository: Repository) -> dict[str, dict[str, Any]]:
             rows.sort(key=lambda r: int(r.get("sequence") or 0))
             values = [typed_parameter_value(r) for r in rows]
             ops = {str(r.get("combine_operator") or "").upper() for r in rows if r.get("combine_operator")}
-            runtime_name = bindings.get((cid, pname), pname)
+            runtime_name = pname
             if len(values) == 1:
                 resolved[runtime_name] = values[0]
             elif len(ops) == 1 and next(iter(ops)) in {"MIN", "MAX"}:

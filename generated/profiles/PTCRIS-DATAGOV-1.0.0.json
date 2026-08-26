@@ -20,7 +20,7 @@
     "effective_date": "2026-08-14",
     "owner": "PTCRIS",
     "approved_by": null,
-    "notes": "Future profile versions should normally set base_profile_id and record only changed target settings/defaults/overrides."
+    "notes": "Future profile versions should normally set base_profile_id and record only changed target settings/defaults/overrides. Canonical DQP values are intentionally independent from the current Java compatibility overlay; the PT Master 1.0.0 projection must use Implementation Profiles/Runtime Rules/Target Weights where explicit baseline values exist."
   },
   "targetSettings": {
     "VT.PERSON.Education.DegreeType": {
