@@ -16,7 +16,8 @@ from .renderers.markdown import (
 )
 from .renderers.profile_json import render_profile
 from .renderers.pt_master import render_pt_master
-from .renderers.reports import coverage, governance_traceability, runtime_compatibility_markdown, validation_markdown
+from .renderers.pt_master_next import render_pt_master_next
+from .renderers.reports import coverage, governance_traceability, next_runtime_support_markdown, runtime_compatibility_markdown, validation_markdown
 from .renderers.schematron import render_schematron
 from .renderers.shacl import render_shacl
 from .util import ensure_dir, slug, write_json, write_text
@@ -54,11 +55,16 @@ def build_repository(source: str | Path, output: str | Path, schema_path: str | 
         write_json(output / "reports" / f"coverage-{profile_id}.json", cov)
         write_text(output / "reports" / f"governance-traceability-{profile_id}.md", governance_traceability(repository, profile_id))
 
-        legacy_runtime, enriched_runtime = render_pt_master(repository, profile_id)
+        legacy_runtime, _ = render_pt_master(repository, profile_id)
+        next_runtime = render_pt_master_next(repository, profile_id)
         version = str(effective.profile.get("version") or "profile")
         impl = output / "implementation" / "pt-master" / profile_id
         write_json(impl / f"{version}.json", legacy_runtime)
-        write_json(impl / "runtime-config.json", enriched_runtime)
+        write_json(impl / "2.0.0-preview.json", next_runtime)
+        write_text(
+            output / "reports" / f"pt-master-next-support-{profile_id}.md",
+            next_runtime_support_markdown(next_runtime, profile_id),
+        )
 
         legacy_fixture = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "pt-master-legacy-1.0.0.json"
         if legacy_fixture.exists() and profile_id == "PTCRIS-DATAGOV-1.0.0":

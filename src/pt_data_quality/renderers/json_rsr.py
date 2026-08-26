@@ -58,4 +58,8 @@ def render_rsr(repository: Repository) -> dict[str, Any]:
         "profileConstraintDefaults": _plain(repository.profile_constraint_defaults),
         "profileOverrides": _plain(repository.profile_overrides),
         "implementationBindings": _plain(repository.implementation_bindings),
+        "implementationProfiles": _plain(repository.implementation_profiles),
+        "implementationTargetWeights": _plain(repository.implementation_target_weights),
+        "implementationRuntimeRules": _plain(repository.implementation_runtime_rules),
+        "implementationRuntimeParameters": _plain(repository.implementation_runtime_parameters),
     }
