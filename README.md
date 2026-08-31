@@ -31,8 +31,6 @@ Each Constraint can have:
 - zero or more authoritative governance mappings;
 - implementation-specific bindings.
 
-Operational assessment dimensions (`COMPLETENESS`, `VALIDITY`, `UNIQUENESS`, `CONSISTENCY`, `TIMELINESS`, `ACCURACY`, `CONFORMITY`, `INTEGRITY`) are maintained separately from PTCRIS Governance Dimensions.
-
 ## Two generated JSON projections
 
 The generator deliberately produces two PT Master runtime configurations from the same `source/rsr.xlsx`.
