@@ -3,46 +3,46 @@
   "minimumRequiredScore": 60,
   "dimensionDefinitions": {
     "ACCURACY": {
-      "sr": "Ova dimenzija obezbeđuje da svaki element podataka podržava sve dozvoljene vrednosti koje su za njega definisane, sprečavajući unos neželjenih vrednosti ili vrednosti van opsega.",
-      "sr-cyr": "Ова димензија обезбеђује да сваки елемент података подржава све дозвољене вредности које су за њега дефинисане, спречавајући унос нежељених вредности или вредности ван опсега.",
-      "en": "This dimension ensures that each data element supports all the acceptable data values defined for it, preventing the introduction of unwanted or out-of-scope values.",
-      "pt": "Esta dimensão garante que cada elemento de dados suporta todos os valores aceitáveis definidos para ele, impedindo a introdução de valores indesejados ou fora do âmbito."
+      "sr": "Ensures that data elements support acceptable data values and prevents unwanted or out-of-scope values.",
+      "sr-cyr": "Ensures that data elements support acceptable data values and prevents unwanted or out-of-scope values.",
+      "en": "Ensures that data elements support acceptable data values and prevents unwanted or out-of-scope values.",
+      "pt": "Ensures that data elements support acceptable data values and prevents unwanted or out-of-scope values."
     },
     "CONSISTENCY": {
-      "sr": "Ova dimenzija nalaže da elementi podataka odgovaraju definisanim formatima prikaza i da odsutne vrednosti imaju definisanu reprezentaciju.",
-      "sr-cyr": "Ова димензија налаже да елементи података одговарају дефинисаним форматима приказа и да одсутне вредности имају дефинисану репрезентацију.",
-      "en": "This dimension dictates that data elements conform to defined presentation formats and enforces null-handling logic, ensuring that absent values have defined representations.",
-      "pt": "Esta dimensão determina que os elementos de dados estejam em conformidade com os formatos de apresentação definidos e impõe o tratamento de valores nulos, garantindo que os valores ausentes têm representações definidas."
+      "sr": "Requires data elements to conform to defined presentation formats and defined handling of absent values.",
+      "sr-cyr": "Requires data elements to conform to defined presentation formats and defined handling of absent values.",
+      "en": "Requires data elements to conform to defined presentation formats and defined handling of absent values.",
+      "pt": "Requires data elements to conform to defined presentation formats and defined handling of absent values."
     },
     "LINEAGE": {
-      "sr": "Ova dimenzija zahteva da svi elementi podataka sadrže atribut koji identifikuje njihov izvorni izvor i datum, čime se održava potpun trag porekla podataka.",
-      "sr-cyr": "Ова димензија захтева да сви елементи података садрже атрибут који идентификује њихов изворни извор и датум, чиме се одржава потпун траг порекла података.",
-      "en": "This dimension requires that all data elements include an attribute identifying their original source and date, maintaining strict audit trails of all provenance data.",
-      "pt": "Esta dimensão exige que todos os elementos de dados incluam um atributo que identifique a sua fonte original e data, mantendo um registo de auditoria rigoroso de toda a proveniência dos dados."
+      "sr": "Requires source and date provenance attributes so that data origin and audit trails are preserved.",
+      "sr-cyr": "Requires source and date provenance attributes so that data origin and audit trails are preserved.",
+      "en": "Requires source and date provenance attributes so that data origin and audit trails are preserved.",
+      "pt": "Requires source and date provenance attributes so that data origin and audit trails are preserved."
     },
     "STRUCTURAL_CONSISTENCY": {
-      "sr": "Ova dimenzija garantuje da elementi podataka odgovaraju standardima dužine i tipa i da sačuvane reprezentacije ne menjaju semantiku (npr. prelazak sa numeričkih na alfanumeričke vrednosti).",
-      "sr-cyr": "Ова димензија гарантује да елементи података одговарају стандардима дужине и типа и да сачуване репрезентације не мењају семантику (нпр. прелазак са нумеричких на алфанумеричке вредности).",
-      "en": "This dimension guarantees that data elements conform to enterprise length and type standards, and that stored representations do not shift semantics (e.g., shifting from numeric to alphanumeric values).",
-      "pt": "Esta dimensão garante que os elementos de dados estão em conformidade com os padrões de comprimento e tipo, e que as representações armazenadas não alteram a semântica (por exemplo, passar de valores numéricos para alfanuméricos)."
+      "sr": "Requires conformity with enterprise length and type standards without semantic shifts in stored representations.",
+      "sr-cyr": "Requires conformity with enterprise length and type standards without semantic shifts in stored representations.",
+      "en": "Requires conformity with enterprise length and type standards without semantic shifts in stored representations.",
+      "pt": "Requires conformity with enterprise length and type standards without semantic shifts in stored representations."
     },
     "QUALITATIVE": {
-      "sr": "Ova dimenzija zahteva da atributi definicionih i referentnih podataka sadrže referencu na autoritativni izvor i da su identifikatori jedinstveni, kako bi se sprečila neželjena dekompozicija entiteta.",
-      "sr-cyr": "Ова димензија захтева да атрибути дефиниционих и референтних података садрже референцу на ауторитативни извор и да су идентификатори јединствени, како би се спречила нежељена декомпозиција ентитета.",
-      "en": "This dimension requires that definition and reference data attributes contain a reference to an authoritative source, and that identifiers are unique, preventing unwanted entity decomposition.",
-      "pt": "Esta dimensão exige que os atributos de dados de definição e de referência contenham uma referência a uma fonte autoritativa e que os identificadores sejam únicos, evitando a decomposição indesejada de entidades."
+      "sr": "Requires authoritative references for definition/reference data and appropriate identifier assignment.",
+      "sr-cyr": "Requires authoritative references for definition/reference data and appropriate identifier assignment.",
+      "en": "Requires authoritative references for definition/reference data and appropriate identifier assignment.",
+      "pt": "Requires authoritative references for definition/reference data and appropriate identifier assignment."
     },
     "SEMANTIC": {
-      "sr": "Ova dimenzija obezbeđuje da su svi elementi podataka imenovani po strogoj konvenciji i da se primenjuju standardni termini usklađeni sa poslovnim konceptima.",
-      "sr-cyr": "Ова димензија обезбеђује да су сви елементи података именовани по строгој конвенцији и да се примењују стандардни термини усклађени са пословним концептима.",
-      "en": "This dimension ensures that all data elements are named according to a strict convention, and that participants apply standard terms consistent with their business concepts.",
-      "pt": "Esta dimensão garante que todos os elementos de dados são nomeados de acordo com uma convenção rigorosa e que os participantes aplicam termos padrão consistentes com os seus conceitos de negócio."
+      "sr": "Requires standard naming conventions and standard terms aligned with business concepts.",
+      "sr-cyr": "Requires standard naming conventions and standard terms aligned with business concepts.",
+      "en": "Requires standard naming conventions and standard terms aligned with business concepts.",
+      "pt": "Requires standard naming conventions and standard terms aligned with business concepts."
     },
     "CURRENCY": {
-      "sr": "Ova dimenzija upravlja vremenskom doslednošću: označava podatke čiji je period važenja istekao kao problem kvaliteta i primenjuje pravila vremenske zavisnosti radi otkrivanja hronoloških grešaka.",
-      "sr-cyr": "Ова димензија управља временском доследношћу: означава податке чији је период важења истекао као проблем квалитета и примењује правила временске зависности ради откривања хронолошких грешака.",
-      "en": "This dimension handles temporal consistency. It flags data whose lifetime period has expired as a quality issue and applies temporal dependency rules to catch chronological flaws.",
-      "pt": "Esta dimensão trata da consistência temporal. Assinala como problema de qualidade os dados cujo período de vigência expirou e aplica regras de dependência temporal para detetar falhas cronológicas."
+      "sr": "Addresses temporal consistency, expired lifetimes and chronological dependency rules.",
+      "sr-cyr": "Addresses temporal consistency, expired lifetimes and chronological dependency rules.",
+      "en": "Addresses temporal consistency, expired lifetimes and chronological dependency rules.",
+      "pt": "Addresses temporal consistency, expired lifetimes and chronological dependency rules."
     }
   },
   "targetWeights": {
@@ -18956,7 +18956,7 @@
       },
       "target": "Document.doi",
       "severity": "ERROR",
-      "dimension": "QUALITATIVE",
+      "dimension": "CONSISTENCY",
       "blocking": false,
       "points": 5,
       "usedForFairCompliance": false,
@@ -19582,7 +19582,7 @@
       },
       "target": "Document.handle",
       "severity": "ERROR",
-      "dimension": "QUALITATIVE",
+      "dimension": "CONSISTENCY",
       "blocking": false,
       "points": 5,
       "usedForFairCompliance": false,
@@ -19884,7 +19884,7 @@
       },
       "target": "Document.license",
       "severity": "ERROR",
-      "dimension": "SEMANTIC",
+      "dimension": "CONSISTENCY",
       "blocking": true,
       "points": 0,
       "usedForFairCompliance": true,
