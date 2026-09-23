@@ -270,448 +270,183 @@
 | Message | MSG.SHARED_COMPONENTS.ProfilePhotoOrLogo.LeftOffset.minValue | Generic runtime placeholders removed; one logical message retained per Constraint. |
 | Message | MSG.SHARED_COMPONENTS.ProfilePhotoOrLogo.TopOffset.minValue | Generic runtime placeholders removed; one logical message retained per Constraint. |
 | Message | MSG.SHARED_COMPONENTS.ResearchArea.Name.vocabulary | Generic runtime placeholders removed; one logical message retained per Constraint. |
-| Governance Mapping | GM.0001 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0002 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0003 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0004 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0005 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0007 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0008 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0009 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0010 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0011 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0012 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0013 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0014 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0015 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0016 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0017 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0018 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0019 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0020 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0021 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0022 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0023 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0024 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0025 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0026 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0027 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0028 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0029 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0030 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0031 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0032 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0033 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0034 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0035 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0036 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0037 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0038 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0039 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0040 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0041 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0042 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0043 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0044 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0045 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0046 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0047 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0048 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0049 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0050 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0051 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0052 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0053 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0055 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0056 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0057 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0058 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0059 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0060 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0061 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0062 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0063 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0064 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0065 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0066 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0067 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0068 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0069 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0071 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0072 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0073 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0074 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0075 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0076 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0077 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0078 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0079 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0081 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0082 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0083 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0084 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0085 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0086 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0087 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0088 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0089 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0090 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0091 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0092 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0094 |  |
-| Governance Mapping | GM.0096 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0097 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0098 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0099 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0100 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0101 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0102 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0103 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0104 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0105 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0107 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0108 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0109 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0110 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0112 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0113 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0114 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0115 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0116 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0117 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0118 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0121 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0122 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0123 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0124 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0125 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0126 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0127 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0130 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0131 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0132 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0134 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0135 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0136 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0137 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0138 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0139 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0140 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0141 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0142 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0143 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0144 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0145 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0146 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0147 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0148 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0149 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0150 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0151 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0152 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0153 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0154 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0155 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0156 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0157 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0158 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0159 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0160 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0161 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0162 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0163 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0164 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0165 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0166 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0167 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0168 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0169 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0170 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0171 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0172 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0173 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0174 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0175 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0176 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0177 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0178 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0179 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0180 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0181 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0182 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0183 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0184 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0185 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0186 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0187 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0188 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0189 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0190 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0191 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0192 |  |
-| Governance Mapping | GM.0193 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0194 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0195 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0196 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0197 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0198 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0199 |  |
-| Governance Mapping | GM.0200 |  |
-| Governance Mapping | GM.0201 |  |
-| Governance Mapping | GM.0204 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0205 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0206 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0209 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0210 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0211 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0212 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0213 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0214 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0215 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0216 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0217 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0218 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0220 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0221 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0222 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0223 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0224 |  |
-| Governance Mapping | GM.0226 |  |
-| Governance Mapping | GM.0227 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0228 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0229 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0230 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0231 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0232 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0233 |  |
-| Governance Mapping | GM.0234 |  |
-| Governance Mapping | GM.0235 |  |
-| Governance Mapping | GM.0236 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0237 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0238 |  |
-| Governance Mapping | GM.0240 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0241 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0242 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0243 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0244 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0246 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0247 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0248 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0249 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0251 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0252 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0253 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0254 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0255 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0256 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0257 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0258 |  |
-| Governance Mapping | GM.0259 |  |
-| Governance Mapping | GM.0260 |  |
-| Governance Mapping | GM.0261 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0262 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0265 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0266 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0267 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0268 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0269 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0270 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0271 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0272 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0273 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0275 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0276 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0277 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0278 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0279 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0280 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0281 |  |
-| Governance Mapping | GM.0282 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0283 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0286 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0287 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0288 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0289 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0290 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0291 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0292 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0293 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0294 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0295 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0296 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0297 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0298 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0299 |  |
-| Governance Mapping | GM.0300 |  |
-| Governance Mapping | GM.0301 |  |
-| Governance Mapping | GM.0302 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0303 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0304 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0305 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0306 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0307 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0308 |  |
-| Governance Mapping | GM.0309 |  |
-| Governance Mapping | GM.0310 |  |
-| Governance Mapping | GM.0311 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0312 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0313 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0314 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0315 | Legacy reference mapped at metric/dimension level; exact governance requirement was not assigned. |
-| Governance Mapping | GM.0316 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0317 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0318 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0319 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0320 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0321 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0322 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0323 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0324 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0325 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0326 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0327 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0328 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0329 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0330 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0331 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0332 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0333 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0334 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0335 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0336 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0337 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0338 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0339 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0340 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0341 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0342 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0343 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0344 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0345 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0346 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0347 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0348 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0349 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0350 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0351 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0352 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0353 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0354 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0355 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0356 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0357 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0358 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0359 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0360 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0361 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0362 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0363 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0364 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0365 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0366 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0367 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0368 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0369 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0370 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0371 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0372 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0373 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0374 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0375 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0376 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0377 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0378 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0379 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0380 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0381 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0382 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0383 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0384 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0385 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0386 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0387 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0388 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0389 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0390 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0391 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0392 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0393 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0394 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0395 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0396 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0397 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0398 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0399 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0400 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0401 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0402 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0403 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0405 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0406 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0407 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0408 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0409 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0410 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0411 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0412 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0413 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0414 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0415 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0416 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0417 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0418 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0419 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0420 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0421 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0422 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0423 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0424 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0425 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0426 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0427 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0428 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0429 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0430 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0431 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0432 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0433 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0434 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0435 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0436 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0437 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0438 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0439 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0440 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0441 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0442 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0443 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0444 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0445 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0446 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0447 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0448 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0449 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0450 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0451 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0452 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0453 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0454 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0455 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0456 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0457 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0458 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0459 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0460 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0461 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0462 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0463 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0464 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0465 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0466 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0467 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0468 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0469 | No constraint-specific governance mapping could be established from the legacy reference. |
-| Governance Mapping | GM.0470 | No constraint-specific governance mapping could be established from the legacy reference. |
+| Governance Mapping | GM.0001 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0004 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0005 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0007 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0011 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0012 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0013 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0015 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0016 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0017 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0018 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0020 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0021 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0023 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0024 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0026 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0027 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0029 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0030 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0032 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0033 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0035 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0036 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0038 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0051 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0052 | Inferred from constraint type MAX_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0075 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0092 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0124 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0125 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0126 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0130 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0131 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0132 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0134 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0135 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0137 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0139 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0140 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0142 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0144 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0145 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0146 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0153 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0157 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0161 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0167 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0168 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0170 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0174 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0178 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0183 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0185 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0189 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSTRUCT. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-02 using constraint type. |
+| Governance Mapping | GM.0190 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0198 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0204 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0209 | Inferred from constraint type MAX_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0210 | Inferred from constraint type MIN_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0211 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0217 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0218 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0220 | Inferred from constraint type REGEX and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0223 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0227 | Inferred from constraint type MAX_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0228 | Inferred from constraint type MIN_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0229 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0232 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0236 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0237 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0240 | Inferred from constraint type MAX_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0241 | Inferred from constraint type MIN_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0242 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0248 | Inferred from constraint type MAX_DATE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCURREN normalized to unique metric PTCRIS-F1-01DCURREN-01 using constraint type. |
+| Governance Mapping | GM.0249 | Inferred from constraint type MIN_DATE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCURREN normalized to unique metric PTCRIS-F1-01DCURREN-01 using constraint type. |
+| Governance Mapping | GM.0251 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0252 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0257 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0261 | Inferred from constraint type MIN_CARDINALITY and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0262 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0265 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0273 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0275 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DQUALIT. Source metric identifier PTCRIS-F1-01DQUALIT normalized to unique metric PTCRIS-F1-01DQUALIT-02 using target semantics. |
+| Governance Mapping | GM.0276 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DQUALIT. Source metric identifier PTCRIS-F1-01DQUALIT normalized to unique metric PTCRIS-F1-01DQUALIT-02 using target semantics. |
+| Governance Mapping | GM.0277 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DQUALIT. Source metric identifier PTCRIS-F1-01DQUALIT normalized to unique metric PTCRIS-F1-01DQUALIT-02 using target semantics. |
+| Governance Mapping | GM.0280 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0282 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DSEMANT. Source metric identifier PTCRIS-F1-01DSEMANT normalized to unique metric PTCRIS-F1-01DSEMANT-06 using constraint type. |
+| Governance Mapping | GM.0286 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0287 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0295 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0298 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0304 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0307 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0316 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0318 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0320 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0321 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0325 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0328 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0331 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0334 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0342 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0345 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0362 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0363 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0366 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0369 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0370 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0373 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0378 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0388 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0389 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0390 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0391 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0392 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0393 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0394 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0395 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0396 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0397 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0398 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0399 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0400 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0401 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0402 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0403 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0405 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0406 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0408 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0409 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0410 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0411 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0412 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-02 using constraint type. |
+| Governance Mapping | GM.0413 | Confirmed by Portuguese partner feedback: PTCRIS-F1-01DCONSIST. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0414 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0415 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0416 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0417 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0418 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0419 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0421 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0422 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0424 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0426 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0427 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0429 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0430 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0431 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0433 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0434 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0436 | Inferred from constraint type CUSTOM and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0437 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0438 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0439 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0440 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0441 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0442 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0443 | Inferred from constraint type REGEX and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0444 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0446 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0447 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0448 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0449 | Inferred from constraint type REGEX and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0450 | Inferred from constraint type UNIQUENESS and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. |
+| Governance Mapping | GM.0452 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0454 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
+| Governance Mapping | GM.0455 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0456 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0458 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0459 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0461 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0462 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0464 | Inferred from constraint type MAX_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0465 | Inferred from constraint type MIN_VALUE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-04 using constraint type. |
+| Governance Mapping | GM.0467 | Inferred from constraint type MAX_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0468 | Inferred from constraint type MIN_LENGTH and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DSTRUCT normalized to unique metric PTCRIS-F1-01DSTRUCT-01 using constraint type. |
+| Governance Mapping | GM.0469 | Inferred from constraint type PRESENCE and the authoritative PTCRIS governance catalogue because the partner workbook did not provide a constraint-specific mapping. Review recommended. Source metric identifier PTCRIS-F1-01DCONSIST normalized to unique metric PTCRIS-F1-01DCONSIST-03 using requirement. |
 | Implementation Binding | BIND.PT_MASTER.VT.PERSON.Involvement.FundingPartsFunding | Composite/cross-field target requires an explicit runtime binding before exact JSON generation. |
 | Implementation Binding | BIND.PT_MASTER.VT.PERSON.Involvement.ToDate | Composite/cross-field target requires an explicit runtime binding before exact JSON generation. |
 | Implementation Binding | BIND.PT_MASTER.VT.PERSON.Prize.ToDate | Composite/cross-field target requires an explicit runtime binding before exact JSON generation. |

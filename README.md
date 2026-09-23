@@ -10,7 +10,7 @@ source/rsr.xlsx
 
 Everything below `generated/` is derived from that workbook and should not be edited manually.
 
-## RSR schema 2.0.1
+## RSR schema 2.0.2 / repository 2.0.3
 
 The core model is intentionally simple:
 
@@ -28,7 +28,7 @@ Each Constraint can have:
 
 - typed Constraint Parameters;
 - one logical multilingual message (`en`, `sr`, `sr-cyr`, `pt`);
-- zero or more authoritative governance mappings;
+- one or more governance mappings (partner-confirmed or explicitly marked for review);
 - implementation-specific bindings.
 
 ## Two generated JSON projections
@@ -59,7 +59,8 @@ Compatibility is **structural/runtime compatibility, not content identity**. The
 - new multilingual messages (`en`, `sr`, `sr-cyr`, `pt`);
 - DQP severity/blocking/scoring behaviour;
 - canonical constraint values transformed into the legacy Java parameter names;
-- expanded RSR-derived target weights.
+- expanded RSR-derived target weights;
+- the seven PTCRIS Data Governance runtime dimensions (`ACCURACY`, `CONSISTENCY`, `LINEAGE`, `STRUCTURAL_CONSISTENCY`, `QUALITATIVE`, `SEMANTIC`, `CURRENCY`).
 
 The current Java code hard-codes the runtime issue keys it can report, so `1.0.0.json` deliberately does **not** add unsupported new rule keys. Adding such keys would incorrectly affect rule counts/scoring even though Java could never report them. The Java-branch `1.0.0.json` fixture is therefore used as a **contract baseline**, not as the generated content.
 
@@ -80,7 +81,7 @@ This is the target configuration for future Java refactoring. It contains all ac
 - typed canonical parameter definitions and combine operators;
 - `resolverDefinitions` plus `resolverId` references;
 - `vocabularyDefinitions` plus `vocabularyId` references;
-- governance traceability;
+- governance traceability with normalized unique Governance Metric identifiers;
 - current-Java legacy runtime keys and parameter contracts as migration metadata.
 
 Because standard JSON has no comments, every preview rule has a `javaSupport` object with a status (`LEGACY_SUPPORTED`, `LEGACY_CONFIG_ONLY`, `NOT_SUPPORTED`) and a human-readable migration comment. As generic Java evaluators are implemented, the support status can advance without redesigning the RSR or the 2.0.0 format.
@@ -96,7 +97,7 @@ Constraint
          -> Governance Requirement
 ```
 
-Partial mappings are valid. An active Constraint may therefore be mapped only to a Dimension, to Dimension + Metric, or to a complete Requirement. Constraints with no authoritative mapping yet are represented explicitly as `UNMAPPED`; the generator never invents governance semantics.
+Every active Constraint currently has at least one governance mapping. Partner-confirmed mappings remain distinguished from mappings inferred during RSR curation through `mapping_basis` and `review_required`. Governance Metrics use unique RSR identifiers; when the source workbook reuses an identifier, RSR appends a stable sequence suffix such as `PTCRIS-F1-01DCONSIST-03` while preserving the original value in `source_metric_identifier`.
 
 ## Constraint Parameters
 
@@ -208,7 +209,7 @@ generated/
 
 ## Current-Java compatibility
 
-`tests/fixtures/pt-master-legacy-1.0.0.json` is copied from `src/main/resources/dataQualityAssessment/ptcris/1.0.0.json` in the current TeslaRIS Java branch. It defines the **1.x runtime contract**: known runtime keys/targets and hard-coded constraint parameter names/types. It is not the source of the new RSR messages, scoring or parameter values.
+`source/pt-master-current-java-1.0.0.json` is the current TeslaRIS/PT Master Java runtime contract supplied by the developers. It defines the **1.x compatibility boundary**: the seven runtime dimensions, known runtime keys/targets and hard-coded constraint parameter names/types. It is not the canonical source of new RSR messages, scoring or parameter values; those continue to come from `source/rsr.xlsx`.
 
 The build creates:
 

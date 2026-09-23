@@ -348,6 +348,6 @@ def validate_repository(repository: Repository, schema: dict[str, Any]) -> list[
                 issues.append(_issue("error", "UNRESOLVED_RUNTIME_BINDING", f"Constraint {cid} has unresolved PT Master binding", artifact_id=cid))
         for key, cids in runtime_keys.items():
             if len(cids) > 1:
-                issues.append(_issue("warning", "SHARED_EXPLICIT_RUNTIME_KEY", f"Explicit runtime key {key} is shared by Constraints: {', '.join(cids)}. This is valid for the RSR 2.0.1 N:M compatibility layer; canonical fallback projection may still collapse it.", artifact_id=key))
+                issues.append(_issue("warning", "SHARED_EXPLICIT_RUNTIME_KEY", f"Explicit runtime key {key} is shared by Constraints: {', '.join(cids)}. This is valid for the PT Master N:M compatibility layer; canonical fallback projection may still collapse it.", artifact_id=key))
 
     return issues

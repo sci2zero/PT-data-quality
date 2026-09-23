@@ -2,8 +2,8 @@
   "profileId": "PTCRIS-DATAGOV-1.0.0",
   "validationTargets": 163,
   "constraints": 445,
-  "governanceMappedConstraints": 114,
-  "governanceConstraintCoveragePercent": 25.62,
+  "governanceMappedConstraints": 445,
+  "governanceConstraintCoveragePercent": 100.0,
   "ptMasterBoundTargets": 163,
   "ptMasterUniqueRuntimeTargets": 144,
   "ptMasterRuntimeTargetCollisions": 19,
@@ -13,43 +13,43 @@
       "targets": 16,
       "constraints": 28,
       "reviewRequired": 13,
-      "governanceMapped": 0
+      "governanceMapped": 28
     },
     "FUNDING": {
       "targets": 16,
       "constraints": 41,
       "reviewRequired": 16,
-      "governanceMapped": 18
+      "governanceMapped": 41
     },
     "ORGANISATION_UNIT": {
       "targets": 19,
       "constraints": 50,
       "reviewRequired": 13,
-      "governanceMapped": 8
+      "governanceMapped": 50
     },
     "OUTPUT": {
       "targets": 29,
       "constraints": 73,
       "reviewRequired": 13,
-      "governanceMapped": 14
+      "governanceMapped": 73
     },
     "PERSON": {
       "targets": 41,
       "constraints": 117,
       "reviewRequired": 25,
-      "governanceMapped": 48
+      "governanceMapped": 117
     },
     "PROJECT": {
       "targets": 17,
       "constraints": 53,
       "reviewRequired": 23,
-      "governanceMapped": 25
+      "governanceMapped": 53
     },
     "SHARED_COMPONENTS": {
       "targets": 25,
       "constraints": 83,
       "reviewRequired": 27,
-      "governanceMapped": 1
+      "governanceMapped": 83
     }
   }
 }

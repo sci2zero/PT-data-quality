@@ -148,6 +148,17 @@ def runtime_compatibility_markdown(legacy: dict[str, Any], current: dict[str, An
         if any(old_rule.get(f) != new_rule.get(f) for f in ("severity", "dimension", "blocking", "points", "usedForFairCompliance")):
             scoring_changes += 1
 
+    baseline_dimensions = set((legacy.get("dimensionDefinitions") or {}).keys())
+    current_dimensions = set((current.get("dimensionDefinitions") or {}).keys())
+    invalid_rule_dimensions = sorted(
+        key for key, rule in new.items()
+        if str(rule.get("dimension") or "") not in current_dimensions
+    )
+    dimension_contract_compatible = (
+        baseline_dimensions == current_dimensions
+        and not invalid_rule_dimensions
+    )
+
     contract_compatible = (
         set(current) == allowed_top
         and not missing_keys
@@ -155,6 +166,7 @@ def runtime_compatibility_markdown(legacy: dict[str, Any], current: dict[str, An
         and not target_changes
         and not contract_parameter_issues
         and not unexpected_rule_fields
+        and dimension_contract_compatible
     )
     pt_messages = sum(1 for rule in new.values() if "pt" in (rule.get("message") or {}))
     pt_titles = sum(1 for rule in new.values() if "pt" in (rule.get("title") or {}))
@@ -170,6 +182,8 @@ def runtime_compatibility_markdown(legacy: dict[str, Any], current: dict[str, An
         f"- Added unsupported 1.x keys: **{len(added_keys)}**",
         f"- Runtime target changes: **{len(target_changes)}**",
         f"- Java parameter contract issues: **{len(contract_parameter_issues)}**",
+        f"- Runtime dimension contract compatible: **{'YES' if dimension_contract_compatible else 'NO'}**",
+        f"- Runtime dimensions: **{', '.join(sorted(current_dimensions))}**",
         f"- Rules with refreshed title/message content: **{message_changes}**",
         f"- Rules with refreshed severity/dimension/blocking/points/FAIR behaviour: **{scoring_changes}**",
         f"- Portuguese titles: **{pt_titles}/{len(new)}**",
@@ -186,6 +200,8 @@ def runtime_compatibility_markdown(legacy: dict[str, Any], current: dict[str, An
         lines += ["## Java parameter contract issues", "", "| Runtime key | Parameter | Issue |", "|---|---|---|"]
         for key, pname, issue in contract_parameter_issues:
             lines.append("| " + " | ".join(markdown_cell(x) for x in [key, pname, issue]) + " |")
+    if invalid_rule_dimensions:
+        lines += ["", "## Rules with unknown runtime dimensions", "", *[f"- `{k}`" for k in invalid_rule_dimensions]]
     return "\n".join(lines)
 
 
@@ -199,6 +215,7 @@ def next_runtime_support_markdown(next_runtime: dict[str, Any], profile_id: str)
         "The current Java code continues to consume `1.0.0.json`. As generic evaluators are implemented, rules can move from `NOT_SUPPORTED`/`LEGACY_*` to native 2.0.0 execution without redesigning the RSR.", "",
         f"- Runtime model version: **{next_runtime.get('runtimeModelVersion')}**",
         f"- Runtime remarks: **{len(remarks)}**",
+        f"- PTCRIS governance dimensions: **{len(next_runtime.get('dimensionDefinitions', {}))}**",
         f"- Resolver definitions: **{len(next_runtime.get('resolverDefinitions', {}))}**",
         f"- Vocabulary definitions: **{len(next_runtime.get('vocabularyDefinitions', {}))}**",
         f"- LEGACY_SUPPORTED: **{counts.get('LEGACY_SUPPORTED', 0)}**",

@@ -5,6 +5,7 @@ The current Java code continues to consume `1.0.0.json`. As generic evaluators a
 
 - Runtime model version: **2.0.0-preview**
 - Runtime remarks: **445**
+- PTCRIS governance dimensions: **7**
 - Resolver definitions: **4**
 - Vocabulary definitions: **20**
 - LEGACY_SUPPORTED: **151**

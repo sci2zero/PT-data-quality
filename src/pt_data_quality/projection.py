@@ -127,3 +127,127 @@ def assessment_dimension_definitions(repository: Repository) -> dict[str, dict[s
             "pt": str(row.get("description_pt") or ""),
         }
     return result
+
+
+def governance_dimension_key(dimension_id: str | None) -> str:
+    """Convert canonical PTCRIS governance dimension IDs to runtime enum keys.
+
+    Example: ``PTCRIS.STRUCTURAL_CONSISTENCY`` -> ``STRUCTURAL_CONSISTENCY``.
+    """
+    value = str(dimension_id or "").strip()
+    return value.split(".", 1)[1] if value.startswith("PTCRIS.") else value
+
+
+def governance_dimension_definitions(
+    repository: Repository,
+    runtime_contract: dict[str, Any] | None = None,
+) -> dict[str, dict[str, str]]:
+    """Render the seven PTCRIS Data Governance dimensions for runtime JSON.
+
+    The RSR Governance Dimensions sheet is authoritative for the dimension set and
+    English semantics. The current Java contract is used as a localization source
+    for Serbian, Serbian Cyrillic and Portuguese descriptions when available.
+    """
+    contract_defs = (runtime_contract or {}).get("dimensionDefinitions", {})
+    result: dict[str, dict[str, str]] = {}
+    for row in repository.governance_dimensions:
+        if str(row.get("status") or "").upper() in {"RETIRED", "ARCHIVED", "DEPRECATED"}:
+            continue
+        key = governance_dimension_key(str(row.get("dimension_id") or ""))
+        if not key:
+            continue
+        fallback = str(row.get("description") or "")
+        localized = contract_defs.get(key, {}) if isinstance(contract_defs, dict) else {}
+        result[key] = {
+            "sr": str(localized.get("sr") or fallback),
+            "sr-cyr": str(localized.get("sr-cyr") or fallback),
+            "en": str(localized.get("en") or fallback),
+            "pt": str(localized.get("pt") or fallback),
+        }
+    return result
+
+
+def primary_governance_mapping(
+    repository: Repository,
+    profile_id: str,
+    constraint_id: str,
+    preferred_runtime_dimension: str | None = None,
+) -> dict[str, Any] | None:
+    """Select one deterministic primary governance mapping for runtime scoring.
+
+    All mappings remain available in the future runtime ``governance`` block. The
+    primary mapping is only needed because the existing Java rule DTO exposes one
+    ``dimension`` value. If the current Java contract dimension is one of the
+    canonical mappings, it is preferred to minimize unnecessary runtime churn.
+    Otherwise we prefer authoritative, complete and non-review mappings.
+    """
+    rows: list[dict[str, Any]] = []
+    for row in repository.governance_mappings:
+        if str(row.get("constraint_id") or "") != constraint_id:
+            continue
+        if str(row.get("profile_id") or "*") not in {"*", profile_id}:
+            continue
+        item = dict(row.data)
+        if not item.get("dimension_id") and item.get("metric_id"):
+            metric = repository.governance_metrics_by_id.get(str(item.get("metric_id")))
+            if metric and metric.get("dimension_id"):
+                item["dimension_id"] = metric.get("dimension_id")
+        if item.get("dimension_id"):
+            rows.append(item)
+    if not rows:
+        return None
+
+    preferred = str(preferred_runtime_dimension or "").upper()
+    if preferred:
+        preferred_rows = [
+            row for row in rows
+            if governance_dimension_key(row.get("dimension_id")).upper() == preferred
+        ]
+        if preferred_rows:
+            rows = preferred_rows
+
+    status_rank = {
+        "FULL": 0,
+        "DIMENSION_AND_METRIC": 1,
+        "DIMENSION_ONLY": 2,
+        "METRIC_ONLY": 3,
+        "UNMAPPED": 4,
+    }
+
+    def rank(row: dict[str, Any]) -> tuple[Any, ...]:
+        basis = str(row.get("mapping_basis") or "")
+        authoritative = 0 if basis.startswith("AUTHORITATIVE_GOVERNANCE") else 1
+        review = 1 if bool(row.get("review_required")) else 0
+        return (
+            authoritative,
+            review,
+            status_rank.get(str(row.get("mapping_status") or "").upper(), 9),
+            str(row.get("mapping_id") or ""),
+        )
+
+    return sorted(rows, key=rank)[0]
+
+
+def governance_runtime_dimension(
+    repository: Repository,
+    profile_id: str,
+    constraint_ids: list[str],
+    preferred_runtime_dimension: str | None = None,
+) -> str | None:
+    """Resolve the single PTCRIS governance dimension expected by Java."""
+    preferred = str(preferred_runtime_dimension or "").upper()
+    mappings: list[dict[str, Any]] = []
+    for cid in constraint_ids:
+        mapping = primary_governance_mapping(
+            repository, profile_id, cid, preferred_runtime_dimension=preferred or None
+        )
+        if mapping:
+            mappings.append(mapping)
+
+    if preferred and any(
+        governance_dimension_key(m.get("dimension_id")).upper() == preferred for m in mappings
+    ):
+        return preferred
+    if mappings:
+        return governance_dimension_key(mappings[0].get("dimension_id"))
+    return preferred or None

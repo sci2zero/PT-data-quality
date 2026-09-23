@@ -21,7 +21,6 @@ from .renderers.reports import coverage, governance_traceability, next_runtime_s
 from .renderers.schematron import render_schematron
 from .renderers.shacl import render_shacl
 from .util import ensure_dir, slug, write_json, write_text
-from .config import load_json as load_json_file
 from .validation import validate_repository
 from .xlsx_loader import load_repository
 
@@ -29,6 +28,9 @@ from .xlsx_loader import load_repository
 def build_repository(source: str | Path, output: str | Path, schema_path: str | Path, profile_filter: str | None = None):
     schema = load_json(schema_path)
     repository = load_repository(source, schema)
+    source_path = Path(source)
+    runtime_contract_path = source_path.parent / "pt-master-current-java-1.0.0.json"
+    runtime_contract = load_json(runtime_contract_path) if runtime_contract_path.exists() else None
     issues = validate_repository(repository, schema)
     output = Path(output)
     ensure_dir(output)
@@ -55,8 +57,8 @@ def build_repository(source: str | Path, output: str | Path, schema_path: str | 
         write_json(output / "reports" / f"coverage-{profile_id}.json", cov)
         write_text(output / "reports" / f"governance-traceability-{profile_id}.md", governance_traceability(repository, profile_id))
 
-        legacy_runtime, _ = render_pt_master(repository, profile_id)
-        next_runtime = render_pt_master_next(repository, profile_id)
+        legacy_runtime, _ = render_pt_master(repository, profile_id, runtime_contract=runtime_contract)
+        next_runtime = render_pt_master_next(repository, profile_id, runtime_contract=runtime_contract)
         version = str(effective.profile.get("version") or "profile")
         impl = output / "implementation" / "pt-master" / profile_id
         write_json(impl / f"{version}.json", legacy_runtime)
@@ -66,12 +68,10 @@ def build_repository(source: str | Path, output: str | Path, schema_path: str | 
             next_runtime_support_markdown(next_runtime, profile_id),
         )
 
-        legacy_fixture = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "pt-master-legacy-1.0.0.json"
-        if legacy_fixture.exists() and profile_id == "PTCRIS-DATAGOV-1.0.0":
-            legacy_baseline = load_json_file(legacy_fixture)
+        if runtime_contract is not None and profile_id == "PTCRIS-DATAGOV-1.0.0":
             write_text(
                 output / "reports" / f"pt-master-compatibility-{profile_id}.md",
-                runtime_compatibility_markdown(legacy_baseline, legacy_runtime, profile_id),
+                runtime_compatibility_markdown(runtime_contract, legacy_runtime, profile_id),
             )
 
         shacl, shacl_cov = render_shacl(repository, profile_id)

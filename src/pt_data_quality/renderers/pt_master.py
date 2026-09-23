@@ -14,7 +14,8 @@ from ..profile import (
     target_setting,
 )
 from ..projection import (
-    assessment_dimension_definitions,
+    governance_dimension_definitions,
+    governance_runtime_dimension,
     constraint_parameter_rows,
     message_map,
     runtime_parameter_map,
@@ -156,8 +157,22 @@ def _canonical_target_weights(repository: Repository, profile_id: str) -> dict[s
     return result
 
 
-def _fallback_localized(runtime_row: Row, key: str) -> tuple[dict[str, str], dict[str, str]]:
-    pt_title, pt_message = _LEGACY_PT.get(key, (str(runtime_row.get("title_en") or ""), str(runtime_row.get("message_en") or "")))
+def _fallback_localized(
+    runtime_row: Row,
+    key: str,
+    runtime_contract: dict[str, Any] | None = None,
+) -> tuple[dict[str, str], dict[str, str]]:
+    contract_rule = ((runtime_contract or {}).get("dataQualityRemarks") or {}).get(key, {})
+    if contract_rule:
+        title = {lang: str(value) for lang, value in (contract_rule.get("title") or {}).items()}
+        message = {lang: str(value) for lang, value in (contract_rule.get("message") or {}).items()}
+        if title and message:
+            return title, message
+
+    pt_title, pt_message = _LEGACY_PT.get(
+        key,
+        (str(runtime_row.get("title_en") or ""), str(runtime_row.get("message_en") or "")),
+    )
     return (
         {
             "sr": str(runtime_row.get("title_sr") or ""),
@@ -183,14 +198,22 @@ def _bound_constraint_ids(repository: Repository, bindings: list[dict[str, Any]]
     return result
 
 
-def _canonical_semantics(repository: Repository, profile_id: str, cids: list[str], runtime_row: Row) -> tuple[str, str, bool, Any, bool]:
+def _canonical_semantics(
+    repository: Repository,
+    profile_id: str,
+    cids: list[str],
+    runtime_row: Row,
+    baseline_rule: dict[str, Any] | None = None,
+) -> tuple[str, str, bool, Any, bool]:
+    baseline_rule = baseline_rule or {}
+    baseline_dimension = str(baseline_rule.get("dimension") or "")
     if not cids:
         return (
-            str(runtime_row.get("severity") or "WARNING"),
-            str(runtime_row.get("assessment_dimension") or "VALIDITY"),
-            bool(runtime_row.get("blocking")),
-            runtime_row.get("points"),
-            bool(runtime_row.get("used_for_fair_compliance")),
+            str(baseline_rule.get("severity") or runtime_row.get("severity") or "WARNING"),
+            baseline_dimension or "CONSISTENCY",
+            bool(baseline_rule.get("blocking")) if baseline_rule else bool(runtime_row.get("blocking")),
+            baseline_rule.get("points") if baseline_rule else runtime_row.get("points"),
+            bool(baseline_rule.get("usedForFairCompliance")) if baseline_rule else bool(runtime_row.get("used_for_fair_compliance")),
         )
 
     profile = resolve_profile(repository, profile_id)
@@ -207,13 +230,25 @@ def _canonical_semantics(repository: Repository, profile_id: str, cids: list[str
         severity, blocking = constraint_severity_and_blocking(profile, constraint, setting)
         weight, included = constraint_weight(profile, constraint)
         severities.append(severity)
-        dimensions.append(str(constraint.get("assessment_dimension") or runtime_row.get("assessment_dimension") or "VALIDITY"))
+        resolved_dimension = governance_runtime_dimension(
+            repository,
+            profile_id,
+            [cid],
+            preferred_runtime_dimension=baseline_dimension or None,
+        )
+        if resolved_dimension:
+            dimensions.append(resolved_dimension)
         blockings.append(blocking)
         points.append(float(weight) if included else 0.0)
         fair.append(bool(constraint.get("used_for_fair_compliance")))
 
     severity = max(severities, key=lambda s: _SEVERITY_RANK.get(str(s).upper(), -1))
-    dimension = dimensions[0] if len(set(dimensions)) == 1 else str(runtime_row.get("assessment_dimension") or dimensions[0])
+    dimension = governance_runtime_dimension(
+        repository,
+        profile_id,
+        cids,
+        preferred_runtime_dimension=baseline_dimension or None,
+    ) or (dimensions[0] if dimensions else baseline_dimension or "CONSISTENCY")
     score = max(points) if points else 0.0
     score_value: Any = int(score) if float(score).is_integer() else score
     return severity, dimension, any(blockings), score_value, any(fair)
@@ -295,21 +330,42 @@ def _coerce_java_contract(value: Any, contract_type: str | None) -> Any:
     return value
 
 
-def _current_java_parameters(repository: Repository, profile_id: str, implementation_profile_id: str) -> dict[str, dict[str, Any]]:
-    # Start from the current Java parameter contract so every hard-coded lookup
+def _current_java_parameters(
+    repository: Repository,
+    profile_id: str,
+    implementation_profile_id: str,
+    runtime_contract: dict[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
+    # Start from the actual current-Java JSON contract so every hard-coded lookup
     # remains present and type-compatible. Canonical RSR values then replace the
     # baseline values where an explicit parameter binding/transform exists.
     result: defaultdict[str, dict[str, Any]] = defaultdict(dict)
     contract_type: dict[tuple[str, str], str | None] = {}
-    for row in _runtime_rows(repository, implementation_profile_id, repository.implementation_runtime_parameters):
-        if bool(row.get("additive_metadata")):
-            continue
-        key = str(row.get("runtime_key") or "")
-        name = str(row.get("parameter_name") or "")
-        if not key or not name:
-            continue
-        result[key][name] = coerce_value(row.get("parameter_value"), str(row.get("value_type") or ""))
-        contract_type[(key, name)] = row.get("java_contract_type") or row.get("value_type")
+
+    contract_rules = ((runtime_contract or {}).get("dataQualityRemarks") or {})
+    if contract_rules:
+        for key, rule in contract_rules.items():
+            for name, value in (rule.get("constraints") or {}).items():
+                result[str(key)][str(name)] = value
+                if isinstance(value, bool):
+                    kind = "BOOLEAN"
+                elif isinstance(value, int):
+                    kind = "INTEGER"
+                elif isinstance(value, float):
+                    kind = "DECIMAL"
+                else:
+                    kind = "STRING"
+                contract_type[(str(key), str(name))] = kind
+    else:
+        for row in _runtime_rows(repository, implementation_profile_id, repository.implementation_runtime_parameters):
+            if bool(row.get("additive_metadata")):
+                continue
+            key = str(row.get("runtime_key") or "")
+            name = str(row.get("parameter_name") or "")
+            if not key or not name:
+                continue
+            result[key][name] = coerce_value(row.get("parameter_value"), str(row.get("value_type") or ""))
+            contract_type[(key, name)] = row.get("java_contract_type") or row.get("value_type")
 
     compact = _compact_canonical_parameters(repository)
     raw = _raw_parameter_rows(repository)
@@ -328,7 +384,12 @@ def _current_java_parameters(repository: Repository, profile_id: str, implementa
     return dict(result)
 
 
-def _render_current_java_pt_master(repository: Repository, profile_id: str, implementation_profile: Row) -> tuple[dict[str, Any], dict[str, Any]]:
+def _render_current_java_pt_master(
+    repository: Repository,
+    profile_id: str,
+    implementation_profile: Row,
+    runtime_contract: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """Generate the improved 1.0.0 runtime for the *current* Java code.
 
     Compatibility means the current Java DTO, hard-coded runtime keys, targets,
@@ -342,7 +403,8 @@ def _render_current_java_pt_master(repository: Repository, profile_id: str, impl
     impl_id = str(implementation_profile.get("implementation_profile_id") or "")
     messages = message_map(repository)
     constraint_bindings = _bindings_by_runtime_key(repository, profile_id, "CONSTRAINT")
-    parameters = _current_java_parameters(repository, profile_id, impl_id)
+    parameters = _current_java_parameters(repository, profile_id, impl_id, runtime_contract)
+    contract_rules = ((runtime_contract or {}).get("dataQualityRemarks") or {})
 
     remarks: dict[str, Any] = {}
     trace: dict[str, Any] = {}
@@ -363,16 +425,17 @@ def _render_current_java_pt_master(repository: Repository, profile_id: str, impl
             message = {lang: localized[lang]["message"] for lang in ("sr", "sr-cyr", "en", "pt") if lang in localized}
             message_source = "CANONICAL_RSR"
         else:
-            title, message = _fallback_localized(runtime_row, key)
+            title, message = _fallback_localized(runtime_row, key, runtime_contract)
             message_source = "LEGACY_RUNTIME_FALLBACK"
 
+        baseline_rule = contract_rules.get(key, {})
         severity, dimension, blocking, points, fair = _canonical_semantics(
-            repository, profile_id, cids, runtime_row
+            repository, profile_id, cids, runtime_row, baseline_rule
         )
         item: dict[str, Any] = {
             "title": title,
             "message": message,
-            "target": runtime_row.get("runtime_target"),
+            "target": baseline_rule.get("target") or runtime_row.get("runtime_target"),
             "severity": severity,
             "dimension": dimension,
             "blocking": blocking,
@@ -391,7 +454,7 @@ def _render_current_java_pt_master(repository: Repository, profile_id: str, impl
 
     current = {
         "minimumRequiredScore": profile.profile.get("minimum_required_score"),
-        "dimensionDefinitions": assessment_dimension_definitions(repository),
+        "dimensionDefinitions": governance_dimension_definitions(repository, runtime_contract),
         "targetWeights": _canonical_target_weights(repository, profile_id),
         "dataQualityRemarks": remarks,
     }
@@ -401,17 +464,23 @@ def _render_current_java_pt_master(repository: Repository, profile_id: str, impl
         "implementationProfileId": impl_id,
         "compatibilityMode": "CURRENT_JAVA_RSR_COMPATIBLE",
         "minimumRequiredScore": profile.profile.get("minimum_required_score"),
-        "dimensionDefinitions": assessment_dimension_definitions(repository),
+        "dimensionDefinitions": governance_dimension_definitions(repository, runtime_contract),
         "targetWeights": current["targetWeights"],
         "dataQualityRemarks": trace,
     }
     return current, enriched
 
 
-def render_pt_master(repository: Repository, profile_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
+def render_pt_master(
+    repository: Repository,
+    profile_id: str,
+    runtime_contract: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     implementation_profile = _implementation_profile(repository, profile_id)
     if implementation_profile is None:
         raise ValueError(
             "PT Master 1.0.0 generation requires an explicit Implementation Profile so current Java runtime keys/parameters are known."
         )
-    return _render_current_java_pt_master(repository, profile_id, implementation_profile)
+    return _render_current_java_pt_master(
+        repository, profile_id, implementation_profile, runtime_contract=runtime_contract
+    )

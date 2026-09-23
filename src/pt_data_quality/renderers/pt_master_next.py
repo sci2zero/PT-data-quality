@@ -14,7 +14,10 @@ from ..profile import (
     target_setting,
 )
 from ..projection import (
-    assessment_dimension_definitions,
+    governance_dimension_definitions,
+    governance_dimension_key,
+    governance_runtime_dimension,
+    primary_governance_mapping,
     constraint_parameter_rows,
     governance_by_constraint,
     message_map,
@@ -272,7 +275,11 @@ def _parameter_definitions(repository: Repository) -> dict[str, list[dict[str, A
     return result
 
 
-def render_pt_master_next(repository: Repository, profile_id: str) -> dict[str, Any]:
+def render_pt_master_next(
+    repository: Repository,
+    profile_id: str,
+    runtime_contract: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Render the future 2.0.0 PT Master configuration contract.
 
     It preserves the familiar 1.x fields while adding canonical RSR concepts
@@ -289,6 +296,7 @@ def render_pt_master_next(repository: Repository, profile_id: str) -> dict[str, 
     governance = governance_by_constraint(repository, profile_id)
     runtime_rules = _implementation_runtime_rules(repository)
     runtime_parameters = _implementation_runtime_parameters(repository)
+    contract_rules = ((runtime_contract or {}).get("dataQualityRemarks") or {})
 
     remarks: dict[str, Any] = {}
     used_keys: set[str] = set()
@@ -336,12 +344,26 @@ def render_pt_master_next(repository: Repository, profile_id: str) -> dict[str, 
         java_support = _java_support(cbs, runtime_rules, runtime_parameters, key)
         support_counts[java_support["status"]] += 1
 
+        preferred_dimension = None
+        for binding in cbs:
+            legacy_key = str(binding.get("runtime_key") or "")
+            if legacy_key and legacy_key in contract_rules:
+                preferred_dimension = contract_rules[legacy_key].get("dimension")
+                if preferred_dimension:
+                    break
+        runtime_dimension = governance_runtime_dimension(
+            repository,
+            profile_id,
+            [cid],
+            preferred_runtime_dimension=str(preferred_dimension or "") or None,
+        ) or str(preferred_dimension or "CONSISTENCY")
+
         item: dict[str, Any] = {
             "title": titles,
             "message": texts,
             "target": runtime_target,
             "severity": severity,
-            "dimension": constraint.get("assessment_dimension"),
+            "dimension": runtime_dimension,
             "blocking": blocking,
             "points": points if include_in_score else 0,
             "usedForFairCompliance": bool(constraint.get("used_for_fair_compliance")),
@@ -354,18 +376,60 @@ def render_pt_master_next(repository: Repository, profile_id: str) -> dict[str, 
         if payload:
             item["constraints"] = payload
         if mapping_rows:
+            enriched_mappings: list[dict[str, Any]] = []
+            dimension_ids: set[str] = set()
+            metric_ids: set[str] = set()
+            requirement_ids: set[str] = set()
+            for mapping in mapping_rows:
+                metric_id = str(mapping.get("metric_id") or "")
+                metric = repository.governance_metrics_by_id.get(metric_id) if metric_id else None
+                dimension_id = str(mapping.get("dimension_id") or (metric.get("dimension_id") if metric else "") or "")
+                if dimension_id:
+                    dimension_ids.add(dimension_id)
+                if metric_id:
+                    metric_ids.add(metric_id)
+                requirement_id = str(mapping.get("requirement_id") or "")
+                if requirement_id:
+                    requirement_ids.add(requirement_id)
+                enriched = {
+                    "mappingId": mapping.get("mapping_id"),
+                    "dimensionId": dimension_id or None,
+                    "metricId": metric_id or None,
+                    "requirementId": requirement_id or None,
+                    "mappingStatus": mapping.get("mapping_status"),
+                    "mappingBasis": mapping.get("mapping_basis"),
+                    "reviewRequired": bool(mapping.get("review_required")),
+                }
+                if metric:
+                    enriched["metricTitle"] = metric.get("title")
+                    enriched["sourceMetricIdentifier"] = metric.get("source_metric_identifier")
+                enriched_mappings.append(enriched)
+
+            primary = primary_governance_mapping(
+                repository,
+                profile_id,
+                cid,
+                preferred_runtime_dimension=runtime_dimension,
+            )
+            primary_dimension_id = str(primary.get("dimension_id") or "") if primary else ""
+            if primary and not primary_dimension_id and primary.get("metric_id"):
+                primary_metric = repository.governance_metrics_by_id.get(str(primary.get("metric_id")))
+                primary_dimension_id = str(primary_metric.get("dimension_id") or "") if primary_metric else ""
+
             item["governance"] = {
-                "dimensionIds": sorted({str(m.get("dimension_id")) for m in mapping_rows if m.get("dimension_id")}),
-                "metricIds": sorted({str(m.get("metric_id")) for m in mapping_rows if m.get("metric_id")}),
-                "requirementIds": sorted({str(m.get("requirement_id")) for m in mapping_rows if m.get("requirement_id")}),
+                "primaryDimensionId": primary_dimension_id or None,
+                "dimensionIds": sorted(dimension_ids),
+                "metricIds": sorted(metric_ids),
+                "requirementIds": sorted(requirement_ids),
                 "mappingStatuses": sorted({str(m.get("mapping_status")) for m in mapping_rows if m.get("mapping_status")}),
+                "mappings": enriched_mappings,
             }
         remarks[key] = item
 
     return {
         "runtimeModelVersion": "2.0.0-preview",
         "minimumRequiredScore": profile.profile.get("minimum_required_score"),
-        "dimensionDefinitions": assessment_dimension_definitions(repository),
+        "dimensionDefinitions": governance_dimension_definitions(repository, runtime_contract),
         "targetWeights": _canonical_target_weights(repository, profile_id),
         "resolverDefinitions": _resolver_definitions(repository),
         "vocabularyDefinitions": _vocabulary_definitions(repository),

@@ -17,7 +17,7 @@ from pt_data_quality.xlsx_loader import load_repository
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "source" / "rsr.xlsx"
 SCHEMA = ROOT / "schema" / "repository-schema.json"
-LEGACY = ROOT / "tests" / "fixtures" / "pt-master-legacy-1.0.0.json"
+LEGACY = ROOT / "source" / "pt-master-current-java-1.0.0.json"
 PROFILE = "PTCRIS-DATAGOV-1.0.0"
 IMPLEMENTATION_PROFILE = "PT_MASTER.CURRENT_JAVA.1.0.0"
 
@@ -29,12 +29,16 @@ class RepositoryTests(unittest.TestCase):
         cls.repo = load_repository(SOURCE, cls.schema)
         cls.legacy = load_json(LEGACY)
 
-    def test_expected_repository_size_and_v201_model(self):
-        self.assertEqual("2.0.1", self.schema["repository_schema_version"])
-        self.assertEqual("2.0.1", str(self.repo.metadata["schema_version"]))
+    def test_expected_repository_size_and_v203_model(self):
+        self.assertEqual("2.0.2", self.schema["repository_schema_version"])
+        self.assertEqual("2.0.2", str(self.repo.metadata["schema_version"]))
+        self.assertEqual("2.0.3", str(self.repo.metadata["repository_version"]))
         self.assertEqual(163, len(self.repo.validation_targets))
         self.assertEqual(445, len(self.repo.constraints))
         self.assertEqual(8, len(self.repo.assessment_dimensions))
+        self.assertEqual(7, len(self.repo.governance_dimensions))
+        self.assertEqual(45, len(self.repo.governance_metrics))
+        self.assertEqual(451, len(self.repo.governance_mappings))
         self.assertEqual(1, len(self.repo.profiles))
         self.assertEqual(1, len(self.repo.implementation_profiles))
         self.assertEqual(62, len(self.repo.implementation_target_weights))
@@ -47,7 +51,8 @@ class RepositoryTests(unittest.TestCase):
         errors = [i for i in issues if i.severity == "error"]
         self.assertEqual([], errors)
         codes = {i.code for i in issues}
-        self.assertIn("UNMAPPED_GOVERNANCE", codes)
+        self.assertNotIn("UNMAPPED_GOVERNANCE", codes)
+        self.assertIn("REVIEW_REQUIRED", codes)
         self.assertIn("PT_MASTER_RUNTIME_TARGET_WEIGHT_CONFLICT", codes)
 
     def test_profile_weights_and_behavior_come_from_canonical_profile_configuration(self):
@@ -89,11 +94,25 @@ class RepositoryTests(unittest.TestCase):
         self.assertIn("exactly 9 characters", ror_message.get("message_en"))
         self.assertFalse(ror_message.get("review_required"))
 
+    def test_governance_metrics_are_unique_and_source_identifiers_are_preserved(self):
+        metric_ids = [str(m.get("metric_id")) for m in self.repo.governance_metrics]
+        self.assertEqual(len(metric_ids), len(set(metric_ids)))
+        self.assertIn("PTCRIS-F1-01DCONSIST-03", metric_ids)
+        null_metric = self.repo.governance_metrics_by_id["PTCRIS-F1-01DCONSIST-03"]
+        self.assertEqual("PTCRIS-F1-01DCONSIST", null_metric.get("source_metric_identifier"))
+        self.assertEqual("Null values", null_metric.get("title"))
+        ambiguous = {
+            "PTCRIS-F1-01DCONSIST", "PTCRIS-F1-01DLINEAGE", "PTCRIS-F1-01DSTRUCT",
+            "PTCRIS-F1-01DQUALIT", "PTCRIS-F1-01DSEMANT", "PTCRIS-F1-01DCURREN",
+        }
+        self.assertFalse(any(str(m.get("metric_id")) in ambiguous for m in self.repo.governance_mappings))
+
     def test_implementation_profile_keeps_current_java_contract_baseline(self):
         profile = self.repo.implementation_profiles_by_id[IMPLEMENTATION_PROFILE]
         self.assertEqual(162, profile.get("runtime_rule_count"))
         self.assertEqual(62, len(self.legacy["targetWeights"]))
         self.assertEqual(162, len(self.legacy["dataQualityRemarks"]))
+        self.assertEqual(7, len(self.legacy["dimensionDefinitions"]))
         self.assertFalse(self.legacy["dataQualityRemarks"]["noOrcidPresent"]["blocking"])
         self.assertIn("src/main/resources/dataQualityAssessment/ptcris/1.0.0.json", str(profile.get("baseline_resource")))
 
@@ -107,8 +126,12 @@ class RepositoryTests(unittest.TestCase):
                 set(data),
             )
             self.assertEqual(60, data["minimumRequiredScore"])
-            self.assertEqual(8, len(data["dimensionDefinitions"]))
-            self.assertEqual({"en", "sr", "sr-cyr", "pt"}, set(data["dimensionDefinitions"]["VALIDITY"]))
+            self.assertEqual(7, len(data["dimensionDefinitions"]))
+            self.assertEqual(
+                {"ACCURACY", "CONSISTENCY", "LINEAGE", "STRUCTURAL_CONSISTENCY", "QUALITATIVE", "SEMANTIC", "CURRENCY"},
+                set(data["dimensionDefinitions"]),
+            )
+            self.assertEqual({"en", "sr", "sr-cyr", "pt"}, set(data["dimensionDefinitions"]["CONSISTENCY"]))
             self.assertGreater(len(data["targetWeights"]), len(self.legacy["targetWeights"]))
             self.assertEqual(162, len(data["dataQualityRemarks"]))
             self.assertEqual(set(self.legacy["dataQualityRemarks"]), set(data["dataQualityRemarks"]))
@@ -132,6 +155,8 @@ class RepositoryTests(unittest.TestCase):
             runtime = json.loads((Path(tmp) / "implementation" / "pt-master" / PROFILE / "1.0.0.json").read_text(encoding="utf-8"))
             self.assertNotEqual(self.legacy, runtime)
             self.assertEqual(set(self.legacy["dataQualityRemarks"]), set(runtime["dataQualityRemarks"]))
+            self.assertEqual(set(self.legacy["dimensionDefinitions"]), set(runtime["dimensionDefinitions"]))
+            self.assertTrue(all(r["dimension"] in runtime["dimensionDefinitions"] for r in runtime["dataQualityRemarks"].values()))
             for key, old_rule in self.legacy["dataQualityRemarks"].items():
                 new_rule = runtime["dataQualityRemarks"][key]
                 self.assertEqual(old_rule.get("target"), new_rule.get("target"), key)
@@ -155,8 +180,8 @@ class RepositoryTests(unittest.TestCase):
             base = Path(tmp) / "implementation" / "pt-master" / PROFILE
             future = json.loads((base / "2.0.0-preview.json").read_text(encoding="utf-8"))
             self.assertEqual("2.0.0-preview", future["runtimeModelVersion"])
-            self.assertEqual(8, len(future["dimensionDefinitions"]))
-            self.assertEqual({"en", "sr", "sr-cyr", "pt"}, set(future["dimensionDefinitions"]["VALIDITY"]))
+            self.assertEqual(7, len(future["dimensionDefinitions"]))
+            self.assertEqual({"en", "sr", "sr-cyr", "pt"}, set(future["dimensionDefinitions"]["CONSISTENCY"]))
             self.assertEqual(445, len(future["dataQualityRemarks"]))
             self.assertGreater(len(future["targetWeights"]), len(self.legacy["targetWeights"]))
             self.assertEqual(4, len(future["resolverDefinitions"]))
@@ -167,6 +192,10 @@ class RepositoryTests(unittest.TestCase):
                 future["dataQualityRemarks"]["invalidOrcidFormat"]["constraints"]["pattern"],
             )
             self.assertIn("javaSupport", future["dataQualityRemarks"]["invalidOrcidFormat"])
+            self.assertEqual("STRUCTURAL_CONSISTENCY", future["dataQualityRemarks"]["invalidOrcidFormat"]["dimension"])
+            self.assertNotIn("rsrAssessmentDimension", future["dataQualityRemarks"]["invalidOrcidFormat"])
+            self.assertFalse(any("rsrAssessmentDimension" in remark for remark in future["dataQualityRemarks"].values()))
+            self.assertIn("PTCRIS-F1-01DSTRUCT-01", future["dataQualityRemarks"]["invalidOrcidFormat"]["governance"]["metricIds"])
     def test_next_runtime_contains_expanded_entities_and_future_metadata(self):
         with tempfile.TemporaryDirectory() as tmp:
             build_repository(SOURCE, tmp, SCHEMA)
@@ -203,6 +232,7 @@ class RepositoryTests(unittest.TestCase):
             self.assertNotIn("rules", data)
             self.assertIn("assessmentDimensions", data)
             self.assertIn("metrics", data["governance"])
+            self.assertEqual(45, len(data["governance"]["metrics"]))
             self.assertEqual(1, len(data["implementationProfiles"]))
             self.assertEqual(62, len(data["implementationTargetWeights"]))
             self.assertEqual(162, len(data["implementationRuntimeRules"]))
@@ -269,6 +299,7 @@ class RepositoryTests(unittest.TestCase):
             self.assertIn("Missing baseline keys: **0**", text)
             self.assertIn("Added unsupported 1.x keys: **0**", text)
             self.assertIn("Portuguese messages: **162/162**", text)
+            self.assertIn("Runtime dimension contract compatible: **YES**", text)
 
     def test_build_is_deterministic(self):
         with tempfile.TemporaryDirectory() as a, tempfile.TemporaryDirectory() as b:

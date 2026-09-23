@@ -1,5 +1,5 @@
 {
-  "repository_schema_version": "2.0.1",
+  "repository_schema_version": "2.0.2",
   "sheets": {
     "repository_metadata": {
       "name": "Repository Metadata",
@@ -43,6 +43,10 @@
       "key_field": "metric_id",
       "required": [
         "metric_id",
+        "source_metric_identifier",
+        "source_metric_sequence",
+        "source_row",
+        "dimension_id",
         "title",
         "status"
       ]

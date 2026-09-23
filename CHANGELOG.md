@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.5 - 2026-09-23
+
+- Removed the obsolete `rsrAssessmentDimension` field from `2.0.0-preview.json`; the former operational assessment-dimension model is no longer exposed by the PT Master future runtime contract.
+- `dimension` in the future runtime remains exclusively one of the seven PTCRIS Data Governance dimensions, while governance traceability continues to retain both normalized and original source metric identifiers.
+- Added a regression test ensuring `rsrAssessmentDimension` cannot reappear in any future-runtime remark.
+
+## 0.2.4 - 2026-09-22
+
+- Updated the authoritative source to RSR repository 2.0.3 / schema 2.0.2 with normalized unique PTCRIS Governance Metric identifiers.
+- Added the developer-supplied current Java `1.0.0.json` as `source/pt-master-current-java-1.0.0.json`, used only as the 1.x implementation compatibility contract.
+- Switched PT Master runtime `dimensionDefinitions` from the former eight operational assessment dimensions to the seven PTCRIS Data Governance dimensions.
+- `1.0.0.json` still preserves all current Java runtime keys, targets and parameter names/types, while refreshing messages, scoring/behaviour, canonical values and target weights from the new RSR where safe.
+- Runtime rule dimensions are now resolved from RSR Governance Mappings, with the current Java dimension preferred only when it is one of the canonical mappings; legacy-only rules fall back to the developer contract.
+- `2.0.0-preview.json` now uses the same seven PTCRIS governance dimensions for all 445 Constraints and includes normalized unique metric IDs plus source metric identifiers in detailed governance traceability.
+- Updated schema validation, compatibility reporting, documentation and tests for Governance Metrics schema 2.0.2.
+
 ## 0.2.3 - 2026-08-25
 
 - Redefined the two PT Master runtime projections around **Java contract compatibility**, not byte-for-byte content identity.

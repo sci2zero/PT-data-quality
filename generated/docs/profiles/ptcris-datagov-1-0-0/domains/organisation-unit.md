@@ -8,7 +8,7 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Active.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.active must belong to the configured controlled vocabulary. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Active.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.active must belong to the configured controlled vocabulary. | PTCRIS-F1-01DCONSIST-04 |
 
 ## `OrganisationUnit.createDate`
 
@@ -18,7 +18,7 @@ Requirement level: `MANDATORY`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.createDate is required. | PTCRIS-F1-01DLINEAGE |
+| C.ORGANISATION_UNIT.OrganisationUnit.CreateDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.createDate is required. | PTCRIS-F1-01DLINEAGE-01 |
 
 ## `OrganisationUnit.dateDissolved`
 
@@ -28,8 +28,8 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateDissolved is later than allowed by the configured date constraints. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.dateDissolved is earlier than allowed by the configured date constraints. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateDissolved is later than allowed by the configured date constraints. | PTCRIS-F1-01DCONSIST-04 |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateDissolved.minDate | MIN_DATE | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.dateDissolved is earlier than allowed by the configured date constraints. | PTCRIS-F1-01DCONSIST-04 |
 
 ## `OrganisationUnit.dateEstablished`
 
@@ -39,8 +39,8 @@ Requirement level: `RECOMMENDED`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateEstablished is later than allowed by the configured date constraints. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.dateEstablished is recommended. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.maxDate | MAX_DATE | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.dateEstablished is later than allowed by the configured date constraints. | PTCRIS-F1-01DCONSIST-04 |
+| C.ORGANISATION_UNIT.OrganisationUnit.DateEstablished.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.dateEstablished is recommended. | PTCRIS-F1-01DCONSIST-03 |
 
 ## `OrganisationUnit.description`
 
@@ -61,10 +61,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.fundref exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.fundref must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.fundref exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.fundref does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Fundref.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.fundref must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.grid`
 
@@ -74,10 +74,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Grid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.grid exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Grid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.grid is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Grid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.grid does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Grid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.grid must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.grid exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.grid is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.grid does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Grid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.grid must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.isni`
 
@@ -87,10 +87,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Isni.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.isni exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Isni.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.isni is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Isni.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.isni does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Isni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.isni must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.isni exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.isni is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.isni does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Isni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.isni must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.lastModificationDate`
 
@@ -100,7 +100,7 @@ Requirement level: `MANDATORY`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE |
+| C.ORGANISATION_UNIT.OrganisationUnit.LastModificationDate.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.lastModificationDate is required. | PTCRIS-F1-01DLINEAGE-02 |
 
 ## `OrganisationUnit.metadataAccessLevel`
 
@@ -132,10 +132,10 @@ Requirement level: `MANDATORY`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.name exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.name is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.name is required. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Name.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.name does not match the required format. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.name exceeds the maximum allowed length. | PTCRIS-F1-01DCONSIST-02 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.name is shorter than the minimum allowed length. | PTCRIS-F1-01DCONSIST-02 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.name is required. | PTCRIS-F1-01DCONSIST-03 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Name.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.name does not match the required format. | PTCRIS-F1-01DCONSIST-02 |
 
 ## `OrganisationUnit.openAlexId`
 
@@ -145,10 +145,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.openAlexId exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.openAlexId must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.openAlexId exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.openAlexId does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.OpenAlexId.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.openAlexId must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.postalAddress`
 
@@ -167,10 +167,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ringgold exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ringgold must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ringgold exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.ringgold does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ringgold.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ringgold must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.ror`
 
@@ -180,11 +180,11 @@ Requirement level: `RECOMMENDED`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Ror.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ror exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ror.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ror is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ror.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.ror is recommended. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ror.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The ROR identifier must contain exactly 9 characters, start with 0, and be followed by eight lowercase letters or digits. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Ror.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.ror exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.ror is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.ror is recommended. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The ROR identifier must contain exactly 9 characters, start with 0, and be followed by eight lowercase letters or digits. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Ror.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.ror, isni`
 
@@ -194,8 +194,8 @@ Requirement level: `MANDATORY`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.ror, isni is required. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror, isni must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.presence | PRESENCE | COMPLETENESS | ERROR | True | 0 | A value for OrganisationUnit.ror, isni is required. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.RorIsni.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.ror, isni must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.scopusAfid`
 
@@ -205,10 +205,10 @@ Requirement level: `OPTIONAL`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.scopusAfid exceeds the maximum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid is shorter than the minimum allowed length. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid does not match the required format. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.scopusAfid must be unique within the repository. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.maxLength | MAX_LENGTH | CONSISTENCY | ERROR | True | 1.0 | The value of OrganisationUnit.scopusAfid exceeds the maximum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.minLength | MIN_LENGTH | CONSISTENCY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid is shorter than the minimum allowed length. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.pattern | REGEX | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.scopusAfid does not match the required format. | PTCRIS-F1-01DSTRUCT-01 |
+| C.ORGANISATION_UNIT.OrganisationUnit.ScopusAfid.unique | UNIQUENESS | UNIQUENESS | ERROR | True | 5.0 | The value of OrganisationUnit.scopusAfid must be unique within the repository. | PTCRIS-F1-01DSTRUCT-02 |
 
 ## `OrganisationUnit.sector`
 
@@ -218,5 +218,5 @@ Requirement level: `RECOMMENDED`
 
 | Constraint | Type | Dimension | Severity | Blocking | Weight | Message | Governance |
 |---|---|---|---|---|---:|---|---|
-| C.ORGANISATION_UNIT.OrganisationUnit.Sector.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.sector is recommended. | UNMAPPED |
-| C.ORGANISATION_UNIT.OrganisationUnit.Sector.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.sector must belong to the configured controlled vocabulary. | UNMAPPED |
+| C.ORGANISATION_UNIT.OrganisationUnit.Sector.presence | PRESENCE | COMPLETENESS | WARNING | False | 0 | A value for OrganisationUnit.sector is recommended. | PTCRIS-F1-01DSEMANT-06 |
+| C.ORGANISATION_UNIT.OrganisationUnit.Sector.vocabulary | VOCABULARY | VALIDITY | ERROR | True | 3.0 | The value of OrganisationUnit.sector must belong to the configured controlled vocabulary. | PTCRIS-F1-01DSEMANT-06 |

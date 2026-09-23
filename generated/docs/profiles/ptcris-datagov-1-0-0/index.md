@@ -11,7 +11,7 @@ Current profile migrated from the legacy constraints workbook. Constraints are r
 
 - Validation Targets: **163**
 - Constraints: **445**
-- Governance-mapped Constraints: **114** (25.62%)
+- Governance-mapped Constraints: **445** (100.0%)
 - PT Master target binding coverage: **100.0%**
 
 See the domain pages, scoring page, governance traceability and implementation coverage for details.
